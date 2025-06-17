@@ -43,25 +43,25 @@ const Login = () => {
       setUser(localStorage.getItem("name"));
     }
   }, []);
-  useEffect(() => {
-    if (!userData?.data) return; // wait if userData is not loaded
+  // useEffect(() => {
+  //   if (!userData?.data) return; // wait if userData is not loaded
 
-    const checkAndRedirect = () => {
-      if (!userData?.data?.designation) {
-        router.push("/about-yourself");
-      } else if (!userData?.data?.template) {
-        router.push("/select-template");
-      } else if (!bioData?.social_media || bioData?.social_media.length === 0) {
-        router.push("/select-platform");
-      } else if (!userData?.data?.name && !userData?.data?.bio) {
-        router.push("/profile-details");
-      } else {
-        router.push("/edit-profile");
-      }
-    };
+  //   const checkAndRedirect = () => {
+  //     if (!userData?.data?.designation) {
+  //       router.push("/about-yourself");
+  //     } else if (!userData?.data?.template) {
+  //       router.push("/select-template");
+  //     } else if (!bioData?.social_media || bioData?.social_media.length === 0) {
+  //       router.push("/select-platform");
+  //     } else if (!userData?.data?.name && !userData?.data?.bio) {
+  //       router.push("/profile-details");
+  //     } else {
+  //       router.push("/edit-profile");
+  //     }
+  //   };
 
-    checkAndRedirect();
-  }, [userData, bioData]);
+  //   checkAndRedirect();
+  // }, [userData, bioData]);
 
   const validateEmailOrPhone = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -171,8 +171,9 @@ const Login = () => {
     }
   };
 
-  const REDIRECT_URI = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:5000"
-    }/shopeasy/oauth/callback`;
+  const REDIRECT_URI = `${
+    process.env.NEXT_PUBLIC_APP_URL || "http://localhost:5000"
+  }/shopeasy/oauth/callback`;
   const AUTH_URL = process.env.NEXT_PUBLIC_ADMIN_URL || "http://localhost:3000";
 
   const handleShopeasyLogin = () => {
@@ -192,10 +193,8 @@ const Login = () => {
   return (
     <>
       <div className="w-full m-auto md:w-[60%] xl:w-[50%] text-center">
-        <h2 className="mb-3">{t('lang_welcome_back')}!</h2>
-        <p className="info-text block w-full mx-auto">
-          {t('lang_login_desc')}
-        </p>
+        <h2 className="mb-3">{t("lang_welcome_back")}!</h2>
+        <p className="info-text block w-full mx-auto">{t("lang_login_desc")}</p>
         <div className="flex w-[full] flex-col border-opacity-50 gap-4 mt-4 items-center">
           <div className="relative mb-0 w-full flex flex-col">
             <input
@@ -246,7 +245,7 @@ const Login = () => {
                   className="mt-4 font-medium underline hover:text-[#539568] duration-150"
                   onClick={handleForgetPassword}
                 >
-                  {t('lang_forget_pwd')}?
+                  {t("lang_forget_pwd")}?
                 </Link>
               </>
             )}
@@ -257,7 +256,7 @@ const Login = () => {
             onClick={handleEmailLogin}
             className="w-full mx-auto md:w-[50%] bg-green-400 hover:bg-[#ebff57] hover:text-[#000] text-white font-medium py-2 px-8 rounded-full shadow-md transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-400 disabled:hover:text-white items-center flex justify-center"
           >
-            {t('lang_continue')} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
+            {t("lang_continue")} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
           </button>
           <span className="w-full capitalize font-medium">OR</span>
           <button
@@ -275,7 +274,7 @@ const Login = () => {
             >
               <path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z" />
             </svg>
-            {t('lang_login_with_google')}
+            {t("lang_login_with_google")}
           </button>
           <button
             type="button"
@@ -304,16 +303,16 @@ const Login = () => {
                 </clipPath>
               </defs>
             </svg>
-            {t('lang_login_with_shopeasy')}
+            {t("lang_login_with_shopeasy")}
           </button>
         </div>
         <p className="info-text text-sm mt-4">
-          {t('lang_dont_have_an_account')}
+          {t("lang_dont_have_an_account")}&nbsp;
           <Link
             href="/register"
             className="font-medium underline hover:text-[#539568] duration-150"
           >
-            {t('lang_sign_up')}
+            {t("lang_sign_up")}
           </Link>
         </p>
       </div>

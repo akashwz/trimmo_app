@@ -1,6 +1,5 @@
 "use client";
 import Header from "@/componants/Bio/lending/Header";
-import "../../../app/bio/bio.css";
 import HeroSection from "@/componants/Bio/lending/HeroSection";
 import Services from "@/componants/Bio/lending/Services";
 import Cms1 from "@/componants/Bio/lending/Cms1";

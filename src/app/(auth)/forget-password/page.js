@@ -59,10 +59,8 @@ const Page = () => {
 
   return (
     <div className="w-full m-auto md:w-[60%] xl:w-[50%] text-center">
-      <h2 className="mb-3">{t('lang_reset_your_passwrod')}</h2>
-      <p className="info-text block w-full mx-auto">
-        {t('lang_reset_pwd_desc')}
-      </p>
+      <h2 className="mb-3">{t("lang_reset_your_passwrod")}</h2>
+      <p className="info-text block w-full mx-auto">{t("lang_reset_pwd_desc")}</p>
       <div className="flex w-full flex-col border-opacity-50 gap-4 mt-4 items-center justify-center">
         <div className="relative mb-4 w-[50%] flex flex-col">
           <input
@@ -117,18 +115,18 @@ const Page = () => {
           onClick={handleForgetPassword}
           disabled={!newPassword || !confirmPassword || loader}
         >
-          {t('lang_reset_pwd')} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
+          {t("lang_reset_pwd")} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
         </button>
       </div>
 
       <p className="info-text block w-full mt-4">
-        {t('lang_back_to')}
+        {t("lang_back_to")}&nbsp;
         <button
           type="button"
           onClick={() => router.push("/login")}
           className="font-medium underline hover:text-[#539568] duration-150"
         >
-          {t('lang_login')}
+          {t("lang_login")}
         </button>
       </p>
     </div>

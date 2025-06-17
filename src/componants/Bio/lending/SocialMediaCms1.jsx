@@ -1,5 +1,4 @@
-import { gsap } from "gsap";
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import IconCloud from "../Animation/IconCloud";
 import { t } from "i18next";
 const SocialMediaCms1 = () => {
@@ -9,13 +8,13 @@ const SocialMediaCms1 = () => {
     "facebook",
     "spotify",
     "snapchat",
-    "linkedIn",
-    "pintrest",
-    "twitter",
-    "whatsApp",
+    "pinterest",
+    "whatsapp",
     "telegram",
-    "gitHub",
-    "tikTok",
+    "github",
+    "tiktok",
+    // "linkedin",
+    // "twitter",
   ];
 
   return (

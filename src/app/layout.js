@@ -1,71 +1,10 @@
 "use client";
 
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import "./globals.css";
 import { persistor, store } from "@/redux/store";
-import { Toaster } from "react-hot-toast";
 import { PersistGate } from "redux-persist/integration/react";
-import { useEffect } from "react";
-import { getBio, getUser } from "@/redux/Action/auth.action";
-import { getCookie } from "cookies-next/client";
 import "../../public/i18n";
-import { usePathname } from "next/navigation";
-
-function RootComponent({ children }) {
-  const dispatch = useDispatch();
-  const { userData } = useSelector((state) => state?.authReducer);
-  const checkToken = getCookie("token");
-  const location = usePathname();
-
-  useEffect(() => {
-    if (checkToken) {
-      dispatch(getUser());
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (userData && location === "/") {
-      dispatch(getBio(userData?.data?.username));
-    }
-  }, [userData]);
-
-  useEffect(() => {
-    const canonicalUrl = `${window.location.origin}${location}`;
-
-    const createTagIfNotExists = (selector, tagName, attributes) => {
-      let tag = document.querySelector(selector);
-      if ((!tag || tag.dataset.pathname !== location) && location !== "/") {
-        if (tag) tag.remove(); // Remove outdated tag for previous pathname
-
-        tag = document.createElement(tagName);
-        Object.entries(attributes).forEach(([key, value]) => tag.setAttribute(key, value));
-        tag.dataset.pathname = location; // Store pathname to track updates
-        document.head.appendChild(tag);
-      }
-    };
-
-    // Canonical Link
-    createTagIfNotExists("link[rel='canonical']", "link", {
-      rel: "canonical",
-      href: canonicalUrl,
-    });
-  }, [location.pathname]);
-  return (
-    <>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-        toastOptions={{
-          style: {
-            fontSize: "14px",
-          },
-        }}
-      />
-      {children}
-    </>
-  );
-}
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -122,7 +61,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <RootComponent>{children}</RootComponent>
+            {children}
           </PersistGate>
         </Provider>
       </body>

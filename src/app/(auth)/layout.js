@@ -1,9 +1,9 @@
 "use client";
 
-import { Backdrop, CircularProgress } from "@mui/material";
+// import { Backdrop, CircularProgress } from "@mui/material";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 export default function RootLayout({ children }) {
   const router = useRouter();

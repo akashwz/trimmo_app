@@ -3,27 +3,27 @@
 @font-face {
   font-family: "PolySans Median Wide";
   src: url("../../../public/fonts/PolySans-Median-Wide.eot");
-  src: url("../../../public/fonts/PolySans-Median-Wide.eot") format("embedded-opentype"),
-    url("../../../public/fonts/PolySans-Median-Wide.woff2") format("woff2"),
-    url("../../../public/fonts/PolySans-Median-Wide.woff") format("woff"),
-    url("../../../public/fonts/PolySans-Median-Wide.ttf") format("truetype");
-  font-weight: bolder;
+  src: url("../../../public/fonts/PolySans-Median-Wide.eot")format("embedded-opentype"),
+    url("../../../public/fonts/PolySans-Median-Wide.woff2")format("woff2"),
+    url("../../../public/fonts/PolySans-Median-Wide.woff")format("woff"),
+    url("../../../public/fonts/PolySans-Median-Wide.ttf")format("truetype");
+  font-weight: bolder
 }
 
 * {
   box-sizing: border-box;
-  margin: 0;
+  /* margin: 0; */
   line-height: 140%;
 }
 
 :root {
-  --primary-color: #29292b;
-  --secondary-color: #f1f0e6;
+  --primary-color: #29292B;
+  --secondary-color:#F1F0E6;
   --primary-font: "PolySans Median Wide", Arial, Helvetica, sans-serif;
   --secondary-font: "Rubik", Arial, Helvetica, sans-serif;
   --theme-font: "";
 }
-body {
+body{
   background-color: var(--secondary-color);
   color: var(--primary-color);
   font-family: var(--secondary-font);
@@ -61,7 +61,7 @@ h6 {
 .themeText_font h6 {
   font-family: var(--theme-text-font);
 }
-header {
+header{
   background-color: var(--primary-color);
   border-radius: 50px;
   height: 80px;
@@ -108,7 +108,7 @@ header ul li a:hover {
   padding: 14px 37px;
   font-size: 14px;
   font-weight: 600;
-  background-color: #26d367;
+  background-color: #26D367;
   border-radius: 30px;
   border: 1px solid transparent;
   color: #fff;
@@ -240,7 +240,7 @@ h1 {
 }
 
 .grow::placeholder {
-  color: #f1f0e6;
+  color: #F1F0E6;
 }
 
 /* .services h3{
@@ -280,7 +280,7 @@ h1 {
   border-bottom: 2px solid rgb(41, 41, 43, 10%);
 }
 
-.accordion button[aria-expanded="true"] + .accordion-content {
+.accordion button[aria-expanded="true"]+.accordion-content {
   opacity: 1;
   max-height: 20rem;
   transition: all 0.3s linear;
@@ -299,7 +299,7 @@ h1 {
 .accordion .accordion-content p {
   margin: 0.5em 0 1.5em 0;
   font-size: 18px;
-  color: #29292b !important;
+  color: #29292B !important;
 }
 
 h2 {
@@ -338,7 +338,7 @@ h2 {
   color: #fff;
   font-weight: 400;
   width: fit-content;
-  background-color: #26d367;
+  background-color: #26D367;
 }
 
 .btn-green.copy-url {
@@ -364,7 +364,7 @@ h2 {
 }
 
 .theme-1-preview {
-  background-image: url("../../../public/images/bio/theme-bg.jpg");
+  background-image: url('../../../public/images/bio/theme-bg.jpg');
   background-position: center center;
   /* width: 70%; */
   height: 100%;
@@ -376,7 +376,7 @@ h2 {
 }
 
 .theme-1-preview::after {
-  content: "";
+  content: '';
   width: 100%;
   height: 100%;
   position: absolute;
@@ -388,7 +388,7 @@ h2 {
 }
 
 .theme-1::after {
-  content: "";
+  content: '';
   width: 100%;
   height: 100%;
   position: absolute;
@@ -511,7 +511,7 @@ h2 {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width:1024px) {
   header {
     height: 65px;
   }
@@ -557,9 +557,10 @@ h2 {
   .accordion .accordion-content p {
     font-size: 16px;
   }
+
 }
 
-@media (max-width: 430px) {
+@media (max-width:430px) {
   header {
     height: 55px;
   }
@@ -614,7 +615,7 @@ h2 {
 }
 
 .containe-font {
-  font-family: "PolySans Median Wide";
+  font-family: 'PolySans Median Wide';
 }
 
 .skeleton-loader {
@@ -837,51 +838,52 @@ input[type="radio"]:checked {
     max-width: 800px !important;
   } */
 
-.wavy-button {
-  @apply bg-black text-white font-semibold py-3 px-6 text-center;
-  position: relative;
-  display: inline-block;
-  padding: 12px 24px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  /* color: white; */
-  border-radius: 12px;
-}
 
-.wavy-button::before,
-.wavy-button::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 10px;
-  background-size: 20px 10px;
-  background-repeat: repeat-x;
-}
+  .wavy-button {
+    @apply bg-black text-white font-semibold py-3 px-6 text-center;
+    position: relative;
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    /* color: white; */
+    border-radius: 12px;
+  }
+  
+  .wavy-button::before,
+  .wavy-button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background-size: 20px 10px;
+    background-repeat: repeat-x;
+  }
+  
+  .wavy-button::before {
+    top: -4px;
+    background-image: radial-gradient(circle at 10px 17px, black 10px, white 10px);
+  }
+  
+  .wavy-button::after {
+    bottom: -4px;
+    background-image: radial-gradient(circle at 10px -7px, black 10px, white 10px);
+  }
 
-.wavy-button::before {
-  top: -4px;
-  background-image: radial-gradient(circle at 10px 17px, black 10px, white 10px);
-}
+  .css-jineix-MuiButtonBase-root-MuiAccordionSummary-root {
+    padding-left: 26px !important;
+    padding-right: 26px !important;
+  }
 
-.wavy-button::after {
-  bottom: -4px;
-  background-image: radial-gradient(circle at 10px -7px, black 10px, white 10px);
-}
+  .css-1lj39kh-MuiAccordionDetails-root {
+    padding-left: 26px !important;
+    padding-right: 26px !important;
+  }
 
-.css-jineix-MuiButtonBase-root-MuiAccordionSummary-root {
-  padding-left: 26px !important;
-  padding-right: 26px !important;
-}
-
-.css-1lj39kh-MuiAccordionDetails-root {
-  padding-left: 26px !important;
-  padding-right: 26px !important;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -891,3 +893,6 @@ input[type="number"]::-webkit-outer-spin-button {
     transform: rotate(360deg);
   }
 }
+
+
+

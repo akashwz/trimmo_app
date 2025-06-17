@@ -43,7 +43,7 @@ const Page = () => {
 
   return (
     <div className="w-full m-auto md:w-[60%] xl:w-[50%] text-center">
-      <h2 className="mb-3">{t('lang_forget_pwd')}!</h2>
+      <h2 className="mb-3">{t("lang_forget_pwd")}!</h2>
       {/* <p className="info-text block w-full mx-auto">
                 Access your tools and resources to enhance your productivity.
                 Please log in to continue.
@@ -72,16 +72,16 @@ const Page = () => {
           onClick={handleEmailLogin}
           className="w-full mx-auto md:w-[50%] bg-green-400 hover:bg-[#ebff57] hover:text-[#000] text-white font-medium py-2 px-8 rounded-full shadow-md transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-400 disabled:hover:text-white items-center flex justify-center"
         >
-          {t('lang_continue')} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
+          {t("lang_continue")} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
         </button>
         <p className="info-text block w-full mt-4">
-          {t('lang_already_have_an_account')}
+          {t("lang_already_have_an_account")}&nbsp;
           <button
             type="button"
             onClick={() => router.push("/login")}
             className="font-medium underline hover:text-[#539568] duration-150"
           >
-            {t('lang_login')}
+            {t("lang_login")}
           </button>
         </p>
       </div>

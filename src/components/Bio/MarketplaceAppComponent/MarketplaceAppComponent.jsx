@@ -1,8 +1,8 @@
 "use client";
 
 import API from "@/api";
-import Footer from "@/components/lending/Footer";
-import Header from "@/components/lending/Header";
+import Footer from "@/components/Bio/lending/Footer";
+import Header from "@/components/Bio/lending/Header";
 import React, { useEffect, useState } from "react";
 
 const MarketplaceAppComponent = ({ params }) => {
@@ -46,12 +46,12 @@ const MarketplaceAppComponent = ({ params }) => {
   return (
     <>
       <div className="min-h-screen flex flex-col bg-gray-100">
-        <header className="rounded-[15px] relative w-full h-80 bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center flex-col gap-4">
+        <div className="rounded-b-[15px] rounded-t-none relative w-full h-80 bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center flex-col gap-4">
           <Header />
           <div className="w-full text-center mt-5">
-            <h1 className="text-4xl font-bold">All Link Apps</h1>
+            <h1 className="!text-4xl font-bold">All Link Apps</h1>
           </div>
-        </header>
+        </div>
 
         <main className="flex-1 w-full max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-xl mt-[-50px] relative mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
       <div className="logo w-full">
         <Image
           onClick={() => router.push("/")}
-          src="/images/trimmo-black-logo.svg"
+          src="/images/bio/trimmo-black-logo.svg"
           className={`max-w-[150px] relative md:max-w-full cursor-pointer`}
           height={200}
           width={200}

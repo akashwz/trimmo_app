@@ -1,8 +1,8 @@
 "use client";
 
 import API from "@/api";
-import Footer from "@/components/lending/Footer";
-import Header from "@/components/lending/Header";
+import Footer from "@/components/Bio/lending/Footer";
+import Header from "@/components/Bio/lending/Header";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
@@ -41,7 +41,8 @@ const CollectionPageComponent = ({ params }) => {
     };
   }, [slug]);
 
-  if (loading) return <div className="flex justify-center items-center h-screen text-lg">Loading...</div>;
+  if (loading)
+    return <div className="flex justify-center items-center h-screen text-lg">Loading...</div>;
   if (error) return <div className="text-red-500 text-center mt-10">{error}</div>;
 
   const defaultSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-patch-question" viewBox="0 0 16 16">
@@ -53,12 +54,12 @@ const CollectionPageComponent = ({ params }) => {
   return (
     <>
       <div className="min-h-screen flex flex-col bg-gray-100">
-        <header className="rounded-[15px] relative w-full h-80 bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center">
+        <div className="rounded-b-[15px] rounded-t-none relative w-full h-80 bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center">
           <div className="text-center w-full mt-5">
             <Header />
-            <h1 className="text-4xl font-bold my-8">{categoriesData?.title}</h1>
+            <h1 className="!text-4xl font-bold my-8">{categoriesData?.title}</h1>
           </div>
-        </header>
+        </div>
 
         <main className="flex-1 w-full max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-xl mt-[-50px] relative mb-8">
           {loading && (
@@ -70,32 +71,66 @@ const CollectionPageComponent = ({ params }) => {
             </div>
           )}
 
-          {error && <div className="text-red-600 text-center py-4 bg-red-100 rounded-lg">{error}</div>}
+          {error && (
+            <div className="text-red-600 text-center py-4 bg-red-100 rounded-lg">{error}</div>
+          )}
 
           {categoriesData && (
             <>
               <nav className="flex max-w-3xl mx-auto justify-center" aria-label="Breadcrumb">
                 <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                   <li className="inline-flex items-center">
-                    <a href={`/help`} className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a
+                      href={`/bio/help`}
+                      className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
+                    >
                       All Collections
                     </a>
                   </li>
                   <li className="inline-flex items-center">
-                    <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                    <svg
+                      class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 6 10"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m1 9 4-4-4-4"
+                      />
                     </svg>
-                    <a href={`/help/collection/${categoriesData?.slug_name}`} className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a
+                      href={`/bio/help/collection/${categoriesData?.slug_name}`}
+                      className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
+                    >
                       {categoriesData?.title}
                     </a>
                   </li>
                   {categoriesData?.sub_category?.length === 1 && (
                     <li aria-current="page">
                       <div className="flex items-center">
-                        <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                        <svg
+                          className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 6 10"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m1 9 4-4-4-4"
+                          />
                         </svg>
-                        <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">{categoriesData?.sub_category[0]?.title}</span>
+                        <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                          {categoriesData?.sub_category[0]?.title}
+                        </span>
                       </div>
                     </li>
                   )}
@@ -112,8 +147,16 @@ const CollectionPageComponent = ({ params }) => {
                     <div dangerouslySetInnerHTML={{ __html: defaultSvg }} />
                   </div>
                 )}
-                <h1 className="text-2xl font-bold text-gray-800">{categoriesData?.sub_category?.length === 1 ? categoriesData?.sub_category[0]?.title : categoriesData?.title}</h1>
-                <p className="text-gray-600 mt-2">{categoriesData?.sub_category?.length === 1 ? categoriesData?.sub_category[0]?.description : categoriesData?.description}</p>
+                <h1 className="text-2xl font-bold text-gray-800">
+                  {categoriesData?.sub_category?.length === 1
+                    ? categoriesData?.sub_category[0]?.title
+                    : categoriesData?.title}
+                </h1>
+                <p className="text-gray-600 mt-2">
+                  {categoriesData?.sub_category?.length === 1
+                    ? categoriesData?.sub_category[0]?.description
+                    : categoriesData?.description}
+                </p>
                 <p className="text-gray-600 mt-2">{categoriesData?.articles} articles</p>
               </div>
               <div className="max-w-3xl mx-auto pb-10">
@@ -121,15 +164,25 @@ const CollectionPageComponent = ({ params }) => {
                   ? categoriesData?.sub_category?.map(
                       (category) =>
                         category?.articles?.length > 0 && (
-                          <div className="bg-white shadow-md rounded-lg border p-6 mt-4" key={category?._id}>
+                          <div
+                            className="bg-white shadow-md rounded-lg border p-6 mt-4"
+                            key={category?._id}
+                          >
                             {/* <h3 className="text-lg font-semibold text-gray-800">{category?.title}</h3> */}
-                            <a href={`/help/collection/${category?.slug_name}`} class="ms-1 text-lg font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                            <a
+                              href={`/help/collection/${category?.slug_name}`}
+                              class="ms-1 text-lg font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
+                            >
                               {category?.title}
                             </a>
 
                             <ul className="mt-2 space-y-3">
                               {category?.articles?.map((article) => (
-                                <Link href={`/help/articles/${article?.slug_name}`} key={article?._id} className="flex p-3 rounded-lg justify-between items-center text-gray-700 hover:text-[#9333ea] cursor-pointer hover:bg-[#f3e8ff]">
+                                <Link
+                                  href={`/bio/help/articles/${article?.slug_name}`}
+                                  key={article?._id}
+                                  className="flex p-3 rounded-lg justify-between items-center text-gray-700 hover:text-[#9333ea] cursor-pointer hover:bg-[#f3e8ff]"
+                                >
                                   {article?.title}
                                   <span className="text-gray-700 hover:text-[#9333ea]">&gt;</span>
                                 </Link>
@@ -139,7 +192,11 @@ const CollectionPageComponent = ({ params }) => {
                         ),
                     )
                   : articleData?.map((article) => (
-                      <Link href={`/help/articles/${article?.slug_name}`} key={article?._id} className="flex p-3 rounded-lg justify-between items-center text-gray-700 hover:text-[#9333ea] cursor-pointer hover:bg-[#f3e8ff]">
+                      <Link
+                        href={`/bio/help/articles/${article?.slug_name}`}
+                        key={article?._id}
+                        className="flex p-3 rounded-lg justify-between items-center text-gray-700 hover:text-[#9333ea] cursor-pointer hover:bg-[#f3e8ff]"
+                      >
                         {article?.title}
                         <span className="text-gray-700 hover:text-[#9333ea]">&gt;</span>
                       </Link>

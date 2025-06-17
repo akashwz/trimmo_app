@@ -1,16 +1,16 @@
 "use client";
 
 import API from "@/api";
-import ConfirmationPopUp from "@/components/confirmation-popup/ConfirmationPopUp";
-import EditBio from "@/components/edit-bio/EditBio";
-import EditLinkDetailsPopUp from "@/components/EditPopUp/EditLinkDetailsPopUp";
-import EditWidgetPopUp from "@/components/EditPopUp/EditWidgetPopUp";
-import LayoutSetting from "@/components/LayoutSetting/LayoutSetting";
-import ProfileViewTheme from "@/components/profile-preview/ProfileViewTheme";
-import SelectPlatformPopup from "@/components/SelectPlatformPopup/SelectPlatformPopup";
-import SocialShare from "@/components/SocialShare/SocialShare";
-import ThumbnailSetting from "@/components/ThumbnailSetting/ThumbnailSetting";
-import WidgetPopUp from "@/components/WidgetPopUp/WidgetPopUp";
+import ConfirmationPopUp from "@/components/Bio/confirmation-popup/ConfirmationPopUp";
+import EditBio from "@/components/Bio/edit-bio/EditBio";
+import EditLinkDetailsPopUp from "@/components/Bio/EditPopUp/EditLinkDetailsPopUp";
+import EditWidgetPopUp from "@/components/Bio/EditPopUp/EditWidgetPopUp";
+import LayoutSetting from "@/components/Bio/LayoutSetting/LayoutSetting";
+import ProfileViewTheme from "@/components/Bio/profile-preview/ProfileViewTheme";
+import SelectPlatformPopup from "@/components/Bio/SelectPlatformPopup/SelectPlatformPopup";
+import SocialShare from "@/components/Bio/SocialShare/SocialShare";
+import ThumbnailSetting from "@/components/Bio/ThumbnailSetting/ThumbnailSetting";
+import WidgetPopUp from "@/components/Bio/WidgetPopUp/WidgetPopUp";
 import ToastNotification from "@/controller/ToastNotification";
 import { Transition } from "@/controller/Transitions";
 import {

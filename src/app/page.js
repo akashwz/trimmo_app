@@ -1,15 +1,15 @@
-import Aboutus from "@/componants/Landing/Aboutus";
-import CaseStudy1 from "@/componants/Landing/CaseStudy1";
-import CaseStudy2 from "@/componants/Landing/CaseStudy2";
-import CaseStudy3 from "@/componants/Landing/CaseStudy3";
-import Counter from "@/componants/Landing/Counter";
-import Faqs from "@/componants/Landing/Faqs";
-import Footer from "@/componants/Landing/Footer";
-import Header from "@/componants/Landing/Header";
-import HeroSection from "@/componants/Landing/HeroSection";
-import JoinUs from "@/componants/Landing/JoinUs";
-import Services from "@/componants/Landing/Services";
-import Testimonial from "@/componants/Landing/Testimonial";
+import Aboutus from "@/components/Landing/Aboutus";
+import CaseStudy1 from "@/components/Landing/CaseStudy1";
+import CaseStudy2 from "@/components/Landing/CaseStudy2";
+import CaseStudy3 from "@/components/Landing/CaseStudy3";
+import Counter from "@/components/Landing/Counter";
+import Faqs from "@/components/Landing/Faqs";
+import Footer from "@/components/Landing/Footer";
+import Header from "@/components/Landing/Header";
+import HeroSection from "@/components/Landing/HeroSection";
+import JoinUs from "@/components/Landing/JoinUs";
+import Services from "@/components/Landing/Services";
+import Testimonial from "@/components/Landing/Testimonial";
 import TrimmoAppProvider from "./provider/TrimmoAppProvider";
 
 export default function Home() {

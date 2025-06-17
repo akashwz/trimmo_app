@@ -7,8 +7,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import { useEffect } from "react";
 import { getBio, getUser } from "@/redux/Action/auth.action";
 import { getCookie } from "cookies-next/client";
-import "./bio.css";
 import { usePathname } from "next/navigation";
+import "./bio.css";
 
 function RootComponent({ children }) {
   const dispatch = useDispatch();

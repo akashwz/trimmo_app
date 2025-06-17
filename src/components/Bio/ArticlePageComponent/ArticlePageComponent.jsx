@@ -1,8 +1,8 @@
 "use client";
 
 import API from "@/api";
-import Footer from "@/components/lending/Footer";
-import Header from "@/components/lending/Header";
+import Footer from "@/components/Bio/lending/Footer";
+import Header from "@/components/Bio/lending/Header";
 import moment from "moment";
 import React, { useEffect, useState, useRef } from "react";
 
@@ -120,8 +120,10 @@ const ArticlePageComponent = ({ params }) => {
         <div className="text-center w-full mt-5">
           <Header />
           <div className="my-8">
-            <h1 className="text-4xl font-bold">{articleData?.title || "Article Title"}</h1>
-            <p className="text-sm text-gray-200 mt-2">Published on: {formatDateRelative(articleData?.createdAt) || "N/A"}</p>
+            <h1 className="!text-4xl font-bold">{articleData?.title || "Article Title"}</h1>
+            <p className="text-sm text-gray-200 mt-2">
+              Published on: {formatDateRelative(articleData?.createdAt) || "N/A"}
+            </p>
           </div>
         </div>
       </header>
@@ -136,43 +138,92 @@ const ArticlePageComponent = ({ params }) => {
           </div>
         )}
 
-        {error && <div className="text-red-600 text-center py-4 bg-red-100 rounded-lg">{error}</div>}
+        {error && (
+          <div className="text-red-600 text-center py-4 bg-red-100 rounded-lg">{error}</div>
+        )}
 
         {articleData && (
           <>
             <nav className="flex max-w-3xl mx-auto justify-center" aria-label="Breadcrumb">
               <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li className="inline-flex items-center">
-                  <a href={`/help`} className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                  <a
+                    href={`/bio/help`}
+                    className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
+                  >
                     All Collections
                   </a>
                 </li>
                 <li>
                   <div className="flex items-center">
-                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
+                    <svg
+                      className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 6 10"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 9 4-4-4-4"
+                      />
                     </svg>
-                    <a href={`/help/collection/${articleData?.category?.parent_category?.slug_name}`} className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                    <a
+                      href={`/bio/help/collection/${articleData?.category?.parent_category?.slug_name}`}
+                      className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
+                    >
                       {articleData?.category?.parent_category?.title}
                     </a>
                   </div>
                 </li>
                 <li>
                   <div className="flex items-center">
-                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
+                    <svg
+                      className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 6 10"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 9 4-4-4-4"
+                      />
                     </svg>
-                    <a href={`/help/collection/${articleData?.category?.slug_name}`} className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                    <a
+                      href={`/bio/help/collection/${articleData?.category?.slug_name}`}
+                      className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
+                    >
                       {articleData?.category?.title}
                     </a>
                   </div>
                 </li>
                 <li aria-current="page">
                   <div className="flex items-center">
-                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
+                    <svg
+                      className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 6 10"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m1 9 4-4-4-4"
+                      />
                     </svg>
-                    <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">{articleData?.title}</span>
+                    <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                      {articleData?.title}
+                    </span>
                   </div>
                 </li>
               </ol>
@@ -184,7 +235,10 @@ const ArticlePageComponent = ({ params }) => {
                 <ul className="list-disc pl-4">
                   {headings.map((h) => (
                     <li key={h.id}>
-                      <button onClick={() => handleScrollTo(h.id)} className="text-blue-600 hover:underline">
+                      <button
+                        onClick={() => handleScrollTo(h.id)}
+                        className="text-blue-600 hover:underline"
+                      >
                         {h.text}
                       </button>
                     </li>
@@ -193,7 +247,11 @@ const ArticlePageComponent = ({ params }) => {
               </div>
             )}
 
-            <div ref={contentRef} className="prose prose-lg text-gray-700 leading-relaxed mt-6" dangerouslySetInnerHTML={{ __html: articleData?.long_description }} />
+            <div
+              ref={contentRef}
+              className="prose prose-lg text-gray-700 leading-relaxed mt-6"
+              dangerouslySetInnerHTML={{ __html: articleData?.long_description }}
+            />
           </>
         )}
       </main>

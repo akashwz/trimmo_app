@@ -1,19 +1,20 @@
 "use client";
-import Header from "@/componants/Bio/lending/Header";
-import HeroSection from "@/componants/Bio/lending/HeroSection";
-import Services from "@/componants/Bio/lending/Services";
-import Cms1 from "@/componants/Bio/lending/Cms1";
-import Socialmedia from "@/componants/Bio/lending/Socialmedia";
-import Faqs from "@/componants/Bio/lending/Faqs";
-import ImageSlider from "@/componants/Bio/lending/imageSlider";
-import Testimonials from "@/componants/Bio/lending/Testimonials";
-import Footer from "@/componants/Bio/lending/Footer";
+import Header from "@/components/Bio/lending/Header";
+import HeroSection from "@/components/Bio/lending/HeroSection";
+import Services from "@/components/Bio/lending/Services";
+import Cms1 from "@/components/Bio/lending/Cms1";
+import Socialmedia from "@/components/Bio/lending/Socialmedia";
+import Faqs from "@/components/Bio/lending/Faqs";
+import ImageSlider from "@/components/Bio/lending/imageSlider";
+import Testimonials from "@/components/Bio/lending/Testimonials";
+import Footer from "@/components/Bio/lending/Footer";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import SocialMediaCms1 from "@/componants/Bio/lending/SocialMediaCms1";
+import SocialMediaCms1 from "@/components/Bio/lending/SocialMediaCms1";
 import SocialMediaCms2 from "../lending/SocialMediaCms2";
 import JoinCommunity from "../lending/JoinCommunity";
+
 export default function Home() {
   const router = useRouter();
   // const { userData } = useSelector((state) => state?.authReducer || {});

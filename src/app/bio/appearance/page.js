@@ -1,14 +1,14 @@
 "use client";
 
 import API from "@/api";
-import Background from "@/components/appearance-theme/Background";
-import Button from "@/components/appearance-theme/Button";
-import ButtonSocialMedia from "@/components/appearance-theme/ButtonSocialMedia";
-import CustomizeTheme from "@/components/appearance-theme/CustomizeTheme";
-import Profile from "@/components/appearance-theme/Profile";
-import ThemeSelect from "@/components/appearance-theme/ThemeSelect";
-import TypographyTheme from "@/components/appearance-theme/TypographyTheme";
-import ProfileViewTheme from "@/components/profile-preview/ProfileViewTheme";
+import Background from "@/components/Bio/appearance-theme/Background";
+import Button from "@/components/Bio/appearance-theme/Button";
+import ButtonSocialMedia from "@/components/Bio/appearance-theme/ButtonSocialMedia";
+import CustomizeTheme from "@/components/Bio/appearance-theme/CustomizeTheme";
+import Profile from "@/components/Bio/appearance-theme/Profile";
+import ThemeSelect from "@/components/Bio/appearance-theme/ThemeSelect";
+import TypographyTheme from "@/components/Bio/appearance-theme/TypographyTheme";
+import ProfileViewTheme from "@/components/Bio/profile-preview/ProfileViewTheme";
 import ToastNotification from "@/controller/ToastNotification";
 import { UPDATE_APPERANCE, UPDATE_APPERANCE_THEME } from "@/redux/action.type";
 import { getSingleThemeData } from "@/redux/Action/appearance.action";

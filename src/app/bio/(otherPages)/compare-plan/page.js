@@ -1,5 +1,5 @@
-import ComparePlanHero from "@/components/OtherPages/ComparePlanHero";
-import FaqSection from "@/components/OtherPages/FaqSection";
+import ComparePlanHero from "@/components/Bio/OtherPages/ComparePlanHero";
+import FaqSection from "@/components/Bio/OtherPages/FaqSection";
 import { getPageMetadata } from "@/controller/metadata";
 import { CheckLg, Gear, Hash, X } from "react-bootstrap-icons";
 

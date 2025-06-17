@@ -6,129 +6,129 @@ const Footer = () => {
   const productsArray = [
     {
       link: `${t("lang_the_trimmo_blog")}`,
-      redirect: "/help",
+      redirect: "/bio/help",
       target: `_self`,
     },
     // {
     //   link: `Engineering Blog`,
-    //   redirect: "/",
+    //   redirect: "/bio/",
     //   target: `_self`,
     // },
     {
       link: `${t("lang_marketplace")}`,
-      redirect: "/marketplaces",
+      redirect: "/bio/marketplaces",
       target: `_self`,
     },
     {
       link: `${t("lang_what_new")}`,
-      redirect: "/",
+      redirect: "/bio/",
       target: `_self`,
     },
     {
       link: `${t("lang_about")}`,
-      redirect: "/about",
+      redirect: "/bio/about",
       target: `_self`,
     },
     // {
     //   link: `Press`,
-    //   redirect: "/",
+    //   redirect: "/bio/",
     //   target: `_self`,
     // },
 
     {
       link: `${t("lang_careers")}`,
-      redirect: "/",
+      redirect: "/bio/",
       target: `_self`,
     },
   ];
   const shopeasyArray = [
     {
       link: `${t("lang_trimmo_for_enterprise")}`,
-      redirect: "/",
+      redirect: "/bio/",
       target: `_self`,
     },
     {
       link: `${t("lang_creator_report")}`,
-      redirect: "/",
+      redirect: "/bio/",
       target: `_self`,
     },
     {
       link: `${t("lang_charities")}`,
-      redirect: "/",
+      redirect: "/bio/",
       target: `_self`,
     },
     {
       link: `${t("lang_what_trending")}`,
-      redirect: "/",
+      redirect: "/bio/",
       target: `_self`,
     },
     {
       link: `${t("lang_creator_profile_directory")}`,
-      redirect: "/",
+      redirect: "/bio/",
       target: `_self`,
     },
     {
       link: `${t("lang_explore_templates")}`,
-      redirect: "/",
+      redirect: "/bio/",
       target: `_self`,
     },
   ];
   const developerArray = [
     {
       link: `${t("lang_help_topics")}`,
-      redirect: "/help",
+      redirect: "/bio/help",
       target: `_self`,
     },
     {
       link: `${t("lang_getting_started")}`,
-      redirect: "/register",
+      redirect: "/bio/register",
       target: `_self`,
     },
     // {
     //   link: `Trimmo Pro`,
-    //   redirect: "/",
+    //   redirect: "/bio/",
     //   target: `_self`,
     // },
     {
       link: `${t("lang_features_how_tos")}`,
-      redirect: "/advanced-features",
+      redirect: "/bio/advanced-features",
       target: `_self`,
     },
     // {
     //   link: `FAQs`,
-    //   redirect: "/",
+    //   redirect: "/bio/",
     //   target: `_self`,
     // },
     // {
     //   link: `Report a Violation`,
-    //   redirect: "/",
+    //   redirect: "/bio/",
     //   target: `_self`,
     // },
   ];
   const supportArray = [
     // {
     //   link: `Terms & Conditions`,
-    //   redirect: "/",
+    //   redirect: "/bio/",
     //   target: `_blank`,
     // },
     {
       link: `${t("lang_privacy_notice")}`,
-      redirect: "/privacy-policy",
+      redirect: "/bio/privacy-policy",
       target: `_blank`,
     },
     // {
     //   link: `Cookie Notice`,
-    //   redirect: "/",
+    //   redirect: "/bio/",
     //   target: `_self`,
     // },
     // {
     //   link: `Trust Center`,
-    //   redirect: "/",
+    //   redirect: "/bio/",
     //   target: `_self`,
     // },
     // {
     //   link: `Cookie Preferences`,
-    //   redirect: "/",
+    //   redirect: "/bio/",
     //   target: `_self`,
     // },
   ];

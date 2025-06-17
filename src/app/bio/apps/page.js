@@ -1,6 +1,6 @@
 "use client";
 
-import ConfirmationPopUp from "@/components/confirmation-popup/ConfirmationPopUp";
+import ConfirmationPopUp from "@/components/Bio/confirmation-popup/ConfirmationPopUp";
 import {
   deleteAuthorizedApp,
   getAllPlateform,

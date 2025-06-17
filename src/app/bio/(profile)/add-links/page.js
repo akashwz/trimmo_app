@@ -53,7 +53,7 @@ const AddLinks = () => {
           return (
             <div key={index} className="flex items-start mt-5 lg:mt-8 w-full gap-2">
               <Image
-                src={`/images/${elem?.name}.svg`}
+                src={`/images/bio/${elem?.name}.svg`}
                 height={50}
                 width={50}
                 alt={elem?.name}

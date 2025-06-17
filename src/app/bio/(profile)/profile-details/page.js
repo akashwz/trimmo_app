@@ -1,7 +1,7 @@
 "use client";
 
 import API from "@/api";
-import ProfileViewTheme from "@/components/profile-preview/ProfileViewTheme";
+import ProfileViewTheme from "@/components/Bio/profile-preview/ProfileViewTheme";
 import ToastNotification from "@/controller/ToastNotification";
 import { editUser, getBio } from "@/redux/Action/auth.action";
 import { CircularProgress, Skeleton } from "@mui/material";

@@ -1,5 +1,5 @@
 import API from "@/api";
-import User from "@/components/UserProfileComponent/UserProfileComponent";
+import User from "@/components/Bio/UserProfileComponent/UserProfileComponent";
 
 export async function generateMetadata({ params }) {
   const { user } = await params; // No need to await params

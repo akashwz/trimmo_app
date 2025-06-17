@@ -1,4 +1,4 @@
-import Home from "@/componants/Bio/HomePage/HomePage";
+import Home from "@/components/Bio/HomePage/HomePage";
 import React from "react";
 
 //add meta data

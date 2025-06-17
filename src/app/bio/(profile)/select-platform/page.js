@@ -1,6 +1,6 @@
 "use client";
 
-import ProfileViewTheme from "@/components/profile-preview/ProfileViewTheme";
+import ProfileViewTheme from "@/components/Bio/profile-preview/ProfileViewTheme";
 import { addBio, getAllPlateform } from "@/redux/Action/auth.action";
 import { CircularProgress } from "@mui/material";
 import Image from "next/image";

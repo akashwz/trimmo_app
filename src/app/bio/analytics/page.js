@@ -1,6 +1,6 @@
 "use client";
 
-import AnalyticsPanel from "@/components/analytics/AnalyticsPanel";
+import AnalyticsPanel from "@/components/Bio/analytics/AnalyticsPanel";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -9,10 +9,10 @@ import {
   viewAnalytics,
   viewAnalyticsIds,
 } from "@/redux/Action/analytics.action";
-import Timeline from "@/components/analytics/Timeline";
+import Timeline from "@/components/Bio/analytics/Timeline";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import ContentPanel from "@/components/analytics/ContentPanel";
+import ContentPanel from "@/components/Bio/analytics/ContentPanel";
 
 const Analytics = () => {
   const dispatch = useDispatch();

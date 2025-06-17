@@ -1,6 +1,6 @@
 "use client";
 
-import Sidebar from "@/components/edit-profile/Sidebar";
+import Sidebar from "@/components/Bio/edit-profile/Sidebar";
 import { Backdrop, CircularProgress } from "@mui/material";
 import { useSelector } from "react-redux";
 

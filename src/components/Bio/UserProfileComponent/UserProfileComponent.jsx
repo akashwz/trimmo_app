@@ -1,10 +1,10 @@
 "use client";
 
 import API from "@/api";
-import LinksButton from "@/components/LinksButton/LinksButton";
-import ThumbView from "@/components/LinksButton/ThumbView";
-import SocialShare from "@/components/SocialShare/SocialShare";
-import SvgSection from "@/components/SvgSection/SvgSection";
+import LinksButton from "@/components/Bio/LinksButton/LinksButton";
+import ThumbView from "@/components/Bio/LinksButton/ThumbView";
+import SocialShare from "@/components/Bio/SocialShare/SocialShare";
+import SvgSection from "@/components/Bio/SvgSection/SvgSection";
 import { Transition } from "@/controller/Transitions";
 import { GET_BIO } from "@/redux/action.type";
 import { clearBio, getAnalytics } from "@/redux/Action/auth.action";

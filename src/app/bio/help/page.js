@@ -1,8 +1,8 @@
 "use client";
 
 import API from "@/api";
-import Footer from "@/components/lending/Footer";
-import Header from "@/components/lending/Header";
+import Footer from "@/components/Bio/lending/Footer";
+import Header from "@/components/Bio/lending/Header";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -87,7 +87,7 @@ const HelpCenter = () => {
   return (
     <>
       <div className="min-h-screen flex flex-col bg-gray-100">
-        <header className="rounded-[15px] relative w-full h-80 bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center flex-col gap-4">
+        <div className="rounded-b-[15px] rounded-t-none relative w-full h-80 bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center flex-col gap-4">
           <Header />
           <div className="text-center w-full mt-5">
             <h1 className="text-4xl font-bold">How can we help you?</h1>
@@ -104,7 +104,7 @@ const HelpCenter = () => {
               placeholder="Search for articles..."
               value={searchValue}
               onChange={handleChange}
-              className="w-full pl-10 pr-4 py-2 rounded-lg bg-white/20 text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-white/50 group-focus:text-white peer"
+              className="w-full pl-10 pr-4 py-2 rounded-lg bg-white/20 !text-white !placeholder-white focus:outline-none focus:ring-2 focus:ring-white/50 group-focus:text-white peer"
             />
             {loading && <p className="text-white">Loading...</p>}
 
@@ -129,7 +129,7 @@ const HelpCenter = () => {
               </ul>
             )}
           </div>
-        </header>
+        </div>
 
         <main className="mb-8 flex-1 w-full max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-xl mt-[-50px] relative">
           <div className="max-w-6xl mx-auto px-4 py-10">

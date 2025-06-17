@@ -1,5 +1,5 @@
 import API from "@/api";
-import CollectionPageComponent from "@/components/CollectionPageComponent/CollectionPageComponent";
+import CollectionPageComponent from "@/components/Bio/CollectionPageComponent/CollectionPageComponent";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params; // No need for `await` here, params is already available

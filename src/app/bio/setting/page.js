@@ -1,7 +1,7 @@
 "use client";
 
 import API from "@/api";
-import AccountSetting from "@/components/AccountSetting/AccountSetting";
+import AccountSetting from "@/components/Bio/AccountSetting/AccountSetting";
 import { UPDATE_APPERANCE, UPDATE_APPERANCE_THEME } from "@/redux/action.type";
 import { getBio } from "@/redux/Action/auth.action";
 import { useEffect, useState } from "react";

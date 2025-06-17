@@ -1,4 +1,7 @@
-@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
   font-family: "PolySans Median Wide";
@@ -12,7 +15,7 @@
 
 * {
   box-sizing: border-box;
-  /* margin: 0; */
+  margin: 0;
   line-height: 140%;
 }
 

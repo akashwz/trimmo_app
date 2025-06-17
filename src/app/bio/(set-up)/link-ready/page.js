@@ -1,7 +1,7 @@
 "use client";
 
-import ConfettiComponent from "@/components/confetti/Confetti";
-import SocialShare from "@/components/SocialShare/SocialShare";
+import ConfettiComponent from "@/components/Bio/confetti/Confetti";
+import SocialShare from "@/components/Bio/SocialShare/SocialShare";
 import { getSingleThemeData } from "@/redux/Action/appearance.action";
 import { CircularProgress } from "@mui/material";
 import { t } from "i18next";

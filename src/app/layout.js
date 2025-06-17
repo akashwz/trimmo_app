@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
           data-key="/lInGXSxGb9R5Z7ZFtk8Cg"
           async
         ></script>
-
+        <script src="https://cdn.tailwindcss.com"></script>
         {/* Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />

@@ -1,5 +1,5 @@
 import API from "@/api";
-import MarketplaceAppComponent from "@/components/MarketplaceAppComponent/MarketplaceAppComponent";
+import MarketplaceAppComponent from "@/components/Bio/MarketplaceAppComponent/MarketplaceAppComponent";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params; // No need for `await` here, params is already available

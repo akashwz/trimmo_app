@@ -170,7 +170,7 @@ const CollectionPageComponent = ({ params }) => {
                           >
                             {/* <h3 className="text-lg font-semibold text-gray-800">{category?.title}</h3> */}
                             <a
-                              href={`/help/collection/${category?.slug_name}`}
+                              href={`/bio/help/collection/${category?.slug_name}`}
                               class="ms-1 text-lg font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
                             >
                               {category?.title}

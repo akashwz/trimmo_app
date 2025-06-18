@@ -1,5 +1,6 @@
 "use client";
 
+import "./bio.css";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { persistor, store } from "@/redux/store";
 import { Toaster } from "react-hot-toast";
@@ -8,7 +9,6 @@ import { useEffect } from "react";
 import { getBio, getUser } from "@/redux/Action/auth.action";
 import { getCookie } from "cookies-next/client";
 import { usePathname } from "next/navigation";
-import "./bio.css";
 
 function RootComponent({ children }) {
   const dispatch = useDispatch();

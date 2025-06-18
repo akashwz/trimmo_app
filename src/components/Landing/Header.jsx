@@ -12,18 +12,18 @@ const Header = () => {
         </div>
         <ul className="flex header-links flex-col gap-1">
           <li>
-            <a href="#">Trimmo.short Link</a>
+            <a href="/link">Trimmo.short Link</a>
           </li>
           <li>
-            <a href="#">Trimmo.chat</a>
+            <a href="/chat">Trimmo.chat</a>
           </li>
           <li>
-            <a href="#">Trimmo.bio</a>
+            <a href="/bio">Trimmo.bio</a>
           </li>
         </ul>
         <ul className="flex items-center gap-2">
           <li>
-            <a href="#" className="me-2">
+            <a href="/login" className="me-2">
               Log in
             </a>
           </li>
@@ -31,7 +31,9 @@ const Header = () => {
             <button className="btn-outline">Get a Quote</button>
           </li>
           <li>
-            <button className="btn">Sign up Free</button>
+            <a href="/login" className="btn">
+              Sign up Free
+            </a>
           </li>
         </ul>
       </div>

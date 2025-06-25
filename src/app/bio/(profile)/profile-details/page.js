@@ -26,9 +26,9 @@ const ProfileDetails = () => {
 
   useEffect(() => {
     if (userData?.data?.name && userData?.data?.bio) {
-      router.push("/edit-profile");
+      router.push("/bio/edit-profile");
     }
-    // dispatch(getBio(userData?.data?.username));
+    dispatch(getBio(userData?.data?.username));
   }, []);
 
   const handleImageCover = async (file) => {
@@ -141,7 +141,7 @@ const ProfileDetails = () => {
             } w-full bg-green-400 hover:bg-[#ebff57] hover:text-[#000] text-white cursor-pointer disabled:cursor-not-allowed disabled:hover:bg-green-400 disabled:hover:text-white font-medium py-2 px-8 rounded-full shadow-md transition-all duration-200 ease-in-out mt-5 items-center flex justify-center`}
             onClick={() => {
               dispatch(editUser(userDetails));
-              router.push("/link-ready");
+              router.push("/bio/link-ready");
             }}
           >
             Continue &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
@@ -149,9 +149,9 @@ const ProfileDetails = () => {
         </div>
 
         {/* Right Column: Theme Preview */}
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center w-full h-full">
           <ProfileViewTheme
-            changeAppearanceData={bioData?.customize_theme}
+            changeAppearanceData={userData?.data?.customize_theme}
             socialMedia={bioData?.social_media}
             userData={userData}
             activeTabPreview={"Links"}

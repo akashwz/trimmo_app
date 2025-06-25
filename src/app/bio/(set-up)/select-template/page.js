@@ -20,7 +20,7 @@ const SelectTemplate = () => {
 
   useEffect(() => {
     if (userData?.data?.template) {
-      router.push("/edit-profile");
+      router.push("/bio/edit-profile");
     } else {
       fetchTheme();
     }
@@ -56,8 +56,8 @@ const SelectTemplate = () => {
   return (
     <div className="w-full flex items-center justify-center overflow-auto m-auto md:w-[60%] xl:w-[50%] text-center">
       <div>
-        <h2 className="mb-0 lg:mb-3">{t('lang_welcome_to_trimmo')}</h2>
-        <p className="info-text block">{t('lang_trimmo_theme_desc')}</p>
+        <h2 className="mb-0 lg:mb-3">{t("lang_welcome_to_trimmo")}</h2>
+        <p className="info-text block">{t("lang_trimmo_theme_desc")}</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
           {imageData.map((image, index) => (
             <div
@@ -95,7 +95,7 @@ const SelectTemplate = () => {
         <button
           type="button"
           onClick={() => {
-            router.push("/select-platform"),
+            router.push("/bio/select-platform"),
               dispatch(
                 editUser({
                   template: selectedCard,
@@ -106,7 +106,7 @@ const SelectTemplate = () => {
           disabled={selectedCard === null || loader}
           className="w-full mx-auto bg-green-400 hover:bg-[#ebff57] hover:text-[#000] text-white font-medium py-2 px-8 rounded-full shadow-md transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-400 disabled:hover:text-white items-center flex justify-center"
         >
-          {t('lang_continue')} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
+          {t("lang_continue")} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
         </button>
       </div>
     </div>

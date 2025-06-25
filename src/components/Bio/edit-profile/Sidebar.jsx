@@ -21,16 +21,16 @@ const Sidebar = () => {
   );
 
   const menuItems = [
-    { href: "/edit-profile", label: "Link", icon: <Link45deg className="w-6 h-6" /> },
-    { href: "/appearance", label: "Appearance", icon: <AppearanceIcon /> },
-    { href: "/analytics", label: "Analytics", icon: <AnalyticsIcon /> },
-    { href: "/setting", label: "Settings", icon: <SettingsIcon /> },
+    { href: "/bio/edit-profile", label: "Link", icon: <Link45deg className="w-6 h-6" /> },
+    { href: "/bio/appearance", label: "Appearance", icon: <AppearanceIcon /> },
+    { href: "/bio/analytics", label: "Analytics", icon: <AnalyticsIcon /> },
+    { href: "/bio/setting", label: "Settings", icon: <SettingsIcon /> },
     hasNewsletterAccess && {
-      href: "/newslatter",
+      href: "/bio/newslatter",
       label: "Newsletters",
       icon: <Newslatter />,
     },
-    { href: "/apps", label: "Apps", icon: <AppsIcon /> },
+    { href: "/bio/apps", label: "Apps", icon: <AppsIcon /> },
   ].filter(Boolean);
 
   const dispatch = useDispatch();

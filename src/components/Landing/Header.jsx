@@ -31,7 +31,7 @@ const Header = () => {
             <button className="btn-outline">Get a Quote</button>
           </li>
           <li>
-            <a href="/login" className="btn">
+            <a href="/register" className="btn">
               Sign up Free
             </a>
           </li>

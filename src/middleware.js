@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 export async function middleware(req) {
   const token = req.cookies.get("token");
-  console.log(token, "token");
   if (!token) {
     return NextResponse.redirect(new URL("/", req.url));
   }

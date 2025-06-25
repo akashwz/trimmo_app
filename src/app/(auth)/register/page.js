@@ -50,13 +50,13 @@ const Register = () => {
   const [userNameErrorContent, setUserNameErrorContent] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const checkToken = getCookie("token");
-  useEffect(() => {
-    if (checkToken) {
-      router.push("/edit-profile");
-    }
-    inputRef.current.focus();
-  }, []);
+  // const checkToken = getCookie("token");
+  // useEffect(() => {
+  //   if (checkToken) {
+  //     router.push("/edit-profile");
+  //   }
+  //   inputRef.current.focus();
+  // }, []);
   useEffect(() => {
     passwordRef?.current?.focus();
   }, [isValid]);
@@ -204,10 +204,8 @@ const Register = () => {
   const user = localStorage.getItem("username");
   const mongodbId = getCookie("mongodb_id");
   useEffect(() => {
-    if (userData?.data?.profile) {
-      router.push("/edit-profile");
-    } else if (userData?.data?.token) {
-      router.push("/about-yourself");
+    if (userData?.data?.token) {
+      router.push("/dashboard");
     }
   }, [userData]);
 
@@ -242,10 +240,8 @@ const Register = () => {
 
   return (
     <div className="w-full md:w-[60%] mx-auto xl:w-[50%] text-center">
-      <h2 className="mb-3">{t('lang_welcome_to_trimmo')}</h2>
-      <p className="text-sm info-text block">
-        {t('lang_register_desc')}
-      </p>
+      <h2 className="mb-3">{t("lang_welcome_to_trimmo")}</h2>
+      <p className="text-sm info-text block">{t("lang_register_desc")}</p>
       <div className="w-full md:w-[50%] mx-auto mt-5 mb-4">
         <input
           type="text"
@@ -266,7 +262,7 @@ const Register = () => {
 
         {!userNameError && userName?.length > 0 && loading && (
           <p className="w-full flex mx-auto text-sm text-left mt-0.5 text-blue-500">
-            {t('lang_checking_availability')}...
+            {t("lang_checking_availability")}...
           </p>
         )}
         {/* 
@@ -357,7 +353,7 @@ const Register = () => {
           onClick={handleDataSubmit}
           className="w-full mx-auto md:w-[50%] bg-green-400 hover:bg-[#ebff57] hover:text-[#000] text-white font-medium py-2 px-8 rounded-full shadow-md transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-400 disabled:hover:text-white items-center flex justify-center"
         >
-          {t('lang_continue')} &nbsp;{loader && <CircularProgress color="inherit" size={20} />}
+          {t("lang_continue")} &nbsp;{loader && <CircularProgress color="inherit" size={20} />}
         </button>
         <span className="w-full capitalize font-medium mt-2">OR</span>
         <button
@@ -375,7 +371,7 @@ const Register = () => {
           >
             <path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z" />
           </svg>
-          {t('lang_sign_up_with_google')}
+          {t("lang_sign_up_with_google")}
         </button>
         <button
           type="button"
@@ -404,18 +400,18 @@ const Register = () => {
               </clipPath>
             </defs>
           </svg>
-          {t('lang_sign_up_with_shopeasy')}
+          {t("lang_sign_up_with_shopeasy")}
         </button>
       </div>
 
       <p className="info-text block w-full mt-4">
-        {t('lang_already_have_an_account')}
+        {t("lang_already_have_an_account")}
         <button
           type="button"
           onClick={() => router.push("/login")}
           className="font-medium underline hover:text-[#539568] duration-150"
         >
-          {t('lang_login')}
+          {t("lang_login")}
         </button>
       </p>
     </div>

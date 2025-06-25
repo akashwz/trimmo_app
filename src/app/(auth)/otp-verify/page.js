@@ -64,7 +64,7 @@ const OtpVerify = () => {
     if (getCookie("forgetPassword") === "true") {
       router.push("/forget-password");
     } else if (otpVerify?.success === true) {
-      router.push("/about-yourself");
+      router.push("/dashboard");
     }
   };
 

@@ -271,7 +271,7 @@ const ProfileViewTheme = ({
                           borderBottomRightRadius: `${changeAppearanceData?.profile_radius_right}px`,
                         }}
                       >
-                        {userData?.data?.name?.charAt(0)}
+                        {userData?.data?.name?.charAt(0) ?? userData?.data?.username?.charAt(0)}
                       </div>
                     )}
                   </div>
@@ -324,9 +324,9 @@ const ProfileViewTheme = ({
                         : "normal",
                     }}
                   >
-                    {userData?.data?.name}&nbsp;
+                    {userData?.data?.name ?? userData?.data?.username}&nbsp;
                     {userData?.data?.blue_tick === true ? (
-                      <img src="./images/bio/verified-account.svg" alt="blue-tick" />
+                      <img src="/images/bio/verified-account.svg" alt="blue-tick" />
                     ) : (
                       ""
                     )}

@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 
 function RootComponent({ children }) {
   const dispatch = useDispatch();
-  const { userData } = useSelector((state) => state?.authReducer);
+  // const { userData } = useSelector((state) => state?.authReducer);
   const checkToken = getCookie("token");
   const location = usePathname();
 
@@ -22,11 +22,11 @@ function RootComponent({ children }) {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    if (userData && location === "/") {
-      dispatch(getBio(userData?.data?.username));
-    }
-  }, [userData]);
+  // useEffect(() => {
+  //   if (userData) {
+  //     dispatch(getBio(userData?.data?.username));
+  //   }
+  // }, [userData]);
 
   useEffect(() => {
     const canonicalUrl = `${window.location.origin}${location}`;

@@ -3,10 +3,12 @@ import { getCookie } from "cookies-next";
 import { t } from "i18next";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Header = () => {
+  const token = getCookie("token");
   const [menuOpen, setMenuOpen] = useState(false);
   const [isProductMenuOpen, setIsProductMenuOpen] = useState(false);
   const [isResourcesMenuOpen, setIsResourcesMenuOpen] = useState(false);
@@ -38,6 +40,16 @@ const Header = () => {
   };
 
   const { userData } = useSelector((state) => state?.authReducer || {});
+  const router = useRouter();
+
+  const mainLink = useMemo(() => {
+    if (!token) return "/login";
+    return userData?.data?.template ? "/bio/edit-profile" : "/bio/about-yourself";
+  }, [token, userData]);
+  const handleClick = (e) => {
+    e.stopPropagation();
+    window.location.href = mainLink;
+  };
 
   return (
     <header className="ps-3 lg:ps-6 sticky top-6 z-50 pe-3 lg:pe-4">
@@ -53,10 +65,7 @@ const Header = () => {
             onBlur={handleMouseLeave}
             onClick={handleProductClick}
           >
-            <Link
-              href="/"
-              className="flex items-center gap-1 focus:outline-none hover:text-black-600"
-            >
+            <button className="flex items-center gap-1 focus:outline-none hover:text-black-600">
               {t("lang_product")}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -66,7 +75,7 @@ const Header = () => {
                   d="M19 9l-7 7-7-7"
                 />
               </svg>
-            </Link>
+            </button>
 
             {/* Dropdown menu */}
             {isProductMenuOpen && (
@@ -75,28 +84,37 @@ const Header = () => {
                 onMouseLeave={handleMouseLeave}
               >
                 <li className="flex justify-start w-full">
-                  <Link
-                    href="/link-in-bio"
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = "/bio";
+                    }}
                     className="px-4 py-2 text-black hover:text-black hover:bg-gray-100"
                   >
                     {t("lang_link_in_bio")}
-                  </Link>
+                  </button>
                 </li>
                 <li className="flex justify-start w-full">
-                  <Link
-                    href="/shorten-links-qr"
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = "/link";
+                    }}
                     className="px-4 py-2 text-black hover:text-black hover:bg-gray-100"
                   >
                     {t("lang_shorten_links_QR")}
-                  </Link>
+                  </button>
                 </li>
                 <li className="flex justify-start w-full">
-                  <Link
-                    href="/all-in-one-chat"
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = "/chat";
+                    }}
                     className="px-4 py-2 text-black hover:text-black hover:bg-gray-100"
                   >
                     {t("lang_all_in_one_chat")}
-                  </Link>
+                  </button>
                 </li>
               </ul>
             )}
@@ -108,10 +126,7 @@ const Header = () => {
             onBlur={handleMouseResourceLeave}
             onClick={handleResourceClick}
           >
-            <Link
-              href="/"
-              className="flex items-center gap-1 focus:outline-none hover:text-black-600"
-            >
+            <button className="flex items-center gap-1 focus:outline-none hover:text-black-600">
               {t("lang_resources")}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -121,7 +136,7 @@ const Header = () => {
                   d="M19 9l-7 7-7-7"
                 />
               </svg>
-            </Link>
+            </button>
 
             {isResourcesMenuOpen && (
               <ul
@@ -129,26 +144,41 @@ const Header = () => {
                 onMouseLeave={handleMouseResourceLeave}
               >
                 <li className="flex justify-start w-full">
-                  <Link
-                    href="/help"
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.location.href = "/bio/help";
+                    }}
                     className="px-4 py-2 text-black hover:text-black hover:bg-gray-100"
                   >
                     {t("lang_read_our_blog")}
-                  </Link>
+                  </button>
                 </li>
               </ul>
             )}
           </li>
 
           <li>
-            <Link href="/marketplaces" className="hover:text-black-600">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                window.location.href = "/bio/marketplaces";
+              }}
+              className="hover:text-black-600"
+            >
               {t("lang_marketplace")}
-            </Link>
+            </button>
           </li>
           <li>
-            <Link href="/pricing" className="hover:text-black-600">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                window.location.href = "/bio/pricing";
+              }}
+              className="hover:text-black-600"
+            >
               {t("lang_pricing_plan")}
-            </Link>
+            </button>
           </li>
         </ul>
       </nav>
@@ -156,16 +186,26 @@ const Header = () => {
       <div className="relative">
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-2">
-          <Link
-            href={getCookie("token") ? "/edit-profile" : "/login"}
+          <button
+            onClick={handleClick}
             className="btn-outline hover:border-[#ebff57] hover:text-[#ebff57]"
           >
-            {getCookie("token") ? `${t("lang_my_account")}` : `${t("lang_login")}`}
-          </Link>
-          {!getCookie("token") && (
-            <Link href="/register" className="btn hover:bg-[#ebff57] hover:text-[#000]">
+            {token
+              ? userData?.data?.template
+                ? t("lang_my_account")
+                : t("lang_getting_started")
+              : t("lang_login")}
+          </button>
+          {!token && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                window.location.href = "/register";
+              }}
+              className="btn hover:bg-[#ebff57] hover:text-[#000]"
+            >
               {t("lang_sign_up")}
-            </Link>
+            </button>
           )}
         </div>
 

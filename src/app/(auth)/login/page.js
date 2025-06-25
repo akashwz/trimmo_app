@@ -102,31 +102,41 @@ const Login = () => {
   };
 
   const handleEmailLogin = async () => {
-    const loginData = await dispatch(emailLogin({ identifier: email || Phone, password }));
-    if (loginData?.username) {
-      try {
-        const apiCall = await API({
-          url: `/bio/${loginData?.username}`,
-          method: "get",
-        });
-
-        if (apiCall?.data?.data?.username) {
-          dispatch({
-            type: GET_BIO,
-            payload: apiCall?.data?.data,
-          });
-          dispatch({
-            type: AUTH,
-            payload: apiCall?.data,
-          });
+    try {
+      const loginData = await dispatch(emailLogin({ identifier: email || Phone, password }));
+      if (loginData) {
+        if (loginData?.template) {
+          localStorage.setItem("selectedCard", JSON.stringify(loginData?.template));
         }
-        if (apiCall?.data?.data?.template) {
-          localStorage.setItem("selectedCard", JSON.stringify(apiCall?.data?.data?.template));
-        }
-      } catch (error) {
-        dispatch(clearBio());
-        router.push("/");
+        router.push("/bio");
       }
+      // if (loginData?.username) {
+      //   try {
+      //     const apiCall = await API({
+      //       url: `/bio/${loginData?.username}`,
+      //       method: "get",
+      //     });
+
+      //     if (apiCall?.data?.data?.username) {
+      //       dispatch({
+      //         type: GET_BIO,
+      //         payload: apiCall?.data?.data,
+      //       });
+      //       dispatch({
+      //         type: AUTH,
+      //         payload: apiCall?.data,
+      //       });
+      //     }
+      //     if (apiCall?.data?.data?.template) {
+      //       localStorage.setItem("selectedCard", JSON.stringify(apiCall?.data?.data?.template));
+      //     }
+      //   } catch (error) {
+      //     dispatch(clearBio());
+      //     router.push("/");
+      //   }
+      // }
+    } catch (error) {
+      ToastNotification.error(error);
     }
   };
 
@@ -139,26 +149,32 @@ const Login = () => {
         mongodb_id: mongodbId,
       };
       const loginData = await dispatch(socialLogin(socialData));
-      if (loginData?.username) {
-        try {
-          const apiCall = await API({
-            url: `/bio/${loginData?.username}`,
-            method: "get",
-          });
-          if (apiCall?.data?.data?.username) {
-            dispatch({
-              type: GET_BIO,
-              payload: apiCall?.data?.data,
-            });
-          }
-          if (apiCall?.data?.data?.template) {
-            localStorage.setItem("selectedCard", JSON.stringify(apiCall?.data?.data?.template));
-          }
-        } catch (error) {
-          dispatch(clearBio());
-          router.push("/");
+      if (loginData) {
+        if (loginData?.template) {
+          localStorage.setItem("selectedCard", JSON.stringify(loginData?.template));
         }
+        router.push("/bio");
       }
+      // if (loginData?.username) {
+      //   try {
+      //     const apiCall = await API({
+      //       url: `/bio/${loginData?.username}`,
+      //       method: "get",
+      //     });
+      //     if (apiCall?.data?.data?.username) {
+      //       dispatch({
+      //         type: GET_BIO,
+      //         payload: apiCall?.data?.data,
+      //       });
+      //     }
+      //     if (apiCall?.data?.data?.template) {
+      //       localStorage.setItem("selectedCard", JSON.stringify(apiCall?.data?.data?.template));
+      //     }
+      //   } catch (error) {
+      //     dispatch(clearBio());
+      //     router.push("/");
+      //   }
+      // }
     } catch (error) {
       ToastNotification.error(error);
     }

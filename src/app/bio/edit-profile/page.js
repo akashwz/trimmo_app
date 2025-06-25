@@ -208,9 +208,9 @@ const EditProfile = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   apperanceDataGet();
-  // }, []);
+  useEffect(() => {
+    apperanceDataGet();
+  }, []);
 
   const apperanceDataGet = async () => {
     try {

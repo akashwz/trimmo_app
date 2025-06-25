@@ -54,12 +54,12 @@ const LinkReady = () => {
   };
 
   return (
-    <div className=" w-full lg:flex overflow-hidden m-auto 2xl:me-auto 2xl:w-[70%] text-center items-center flex-col">
+    <div className="mt-[10%] w-full lg:flex overflow-hidden m-auto 2xl:me-auto 2xl:w-[70%] text-center items-center flex-col">
       <div className="text-center overflow-hidden">
         <ConfettiComponent runConfetti={showConfetti} />
       </div>
-      <h3 className="mb-2 text-xl md:text-3xl">{t('lang_your_trimmo_bio_is_ready')}</h3>
-      <p className="info-text block">{t('lang_it_time_to_share_it_with_the_world')}</p>
+      <h3 className="mb-2 text-xl md:text-3xl">{t("lang_your_trimmo_bio_is_ready")}</h3>
+      <p className="info-text block">{t("lang_it_time_to_share_it_with_the_world")}</p>
       <img
         src={`${imageData}`}
         height={500}
@@ -73,14 +73,15 @@ const LinkReady = () => {
           className="w-auto bg-green-400 hover:bg-[#ebff57] hover:text-[#000] text-white font-medium py-2 px-4 md:px-8 rounded-full shadow-md text-sm md:text-base transition-all duration-200 ease-in-out mt-2"
           onClick={() => setShowSharePopup(true)}
         >
-          {t('lang_share_your_Bio')}
+          {t("lang_share_your_Bio")}
         </button>
         <button
           type="button"
           className="w-auto bg-transparent hover:bg-black text-black hover:text-white border-2 border-black font-medium py-2 text-sm md:text-base px-4 md:px-8 rounded-full shadow-md transition-all duration-200 ease-in-out mt-2 items-center flex justify-center"
-          onClick={() => router.push("/edit-profile")}
+          onClick={() => router.push("/bio/edit-profile")}
         >
-          {t('lang_continue_editing')} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
+          {t("lang_continue_editing")} &nbsp;{" "}
+          {loader && <CircularProgress color="inherit" size={20} />}
         </button>
       </div>
       <SocialShare

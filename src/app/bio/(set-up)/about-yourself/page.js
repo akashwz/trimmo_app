@@ -19,13 +19,13 @@ const AboutYourSelf = ({ params }) => {
 
   useEffect(() => {
     if (userData?.data?.designation) {
-      router.push("/edit-profile");
+      router.push("/bio/edit-profile");
     }
   }, []);
   useEffect(() => {
     if (editData?.data?.is_verified) {
       dispatch(clearEditData());
-      router.push("/select-template");
+      router.push("/bio/select-template");
     }
   }, [editData, dispatch, router]);
 

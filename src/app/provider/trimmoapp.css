@@ -75,6 +75,7 @@ header ul li a:hover {
   border: 1px solid #000;
   transition: all 0.3s;
   color: #fff;
+  align-content: center;
 }
 .btn-white {
   background-color: white;

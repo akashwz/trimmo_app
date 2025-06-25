@@ -63,11 +63,11 @@ const SelectPlateForm = () => {
     if (bioData?.social_media?.length > 0) {
       // setPlatform(bioData?.social_media);
       setSocialMedia(bioData?.social_media);
-      router.push("/edit-profile");
+      router.push("/bio/edit-profile");
     }
     if (bioData?.user) {
       setSocialMedia([]);
-      router?.push("/profile-details");
+      router?.push("/bio/profile-details");
     }
   }, [bioData]);
 

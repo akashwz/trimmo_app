@@ -13,12 +13,12 @@ import {
 } from "react-bootstrap-icons";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBlogs } from "@/store/slices/blogSlice";
+import { getAllBlogs } from "@/redux/slices/blogSlice";
 
 export default function LandingPage() {
   const dispatch = useDispatch();
-  const blogData = useSelector((state) => state.blogSlice.blogData);
-
+  const { blogData } = useSelector((state) => state?.blogSlice);
+  console.log(blogData, "blogData");
   useEffect(() => {
     dispatch(getAllBlogs({ page: 1, limit: 3 }));
   }, []);
@@ -58,15 +58,14 @@ export default function LandingPage() {
                   Build Stronger Digital Connections
                 </h1>
                 <p className="mb-8 leading-relaxed text-xl">
-                  Use our URL shortener, QR Codes, and landing pages to engage
-                  your audience and connect them to the right information.
-                  Build, edit, and track everything inside the Bitly Connections
-                  Platform.
+                  Use our URL shortener, QR Codes, and landing pages to engage your audience and
+                  connect them to the right information. Build, edit, and track everything inside
+                  the Bitly Connections Platform.
                 </p>
                 <div className="flex justify-center">
                   <button className="inline-flex items-center text-primarycolor bg-yellowish hover:bg-[#d6f66c] px-7 py-2.5 border-0 focus:outline-none rounded text-sm font-medium">
                     <Image
-                      src="/images/link.svg"
+                      src="/images/link/link.svg"
                       width={28}
                       height={28}
                       alt="Link Icon"
@@ -84,9 +83,7 @@ export default function LandingPage() {
           </section>
 
           <section className=" mt-5 mb-5 lg:mb-24 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8 text-primarycolor bg-yellowish w-[90%] lg:w-[50%]">
-            <h2 className="font-semibold text-2xl font-montserrat">
-              Shorten a long link
-            </h2>
+            <h2 className="font-semibold text-2xl font-montserrat">Shorten a long link</h2>
             <p className="text-lg lg:text-lg font-medium font-montserrat mt-10 mb-2">
               Paste the URL to be shortened
             </p>
@@ -104,9 +101,7 @@ export default function LandingPage() {
                     type="button"
                     className="group inline-block rounded-lg bg-primarycolor px-5 py-3 text-sm font-medium text-white "
                   >
-                    <span className="inline-block group-hover:scale-105">
-                      Shorten URL
-                    </span>
+                    <span className="inline-block group-hover:scale-105">Shorten URL</span>
                   </button>
                 </span>
               </div>
@@ -136,9 +131,8 @@ export default function LandingPage() {
               The Trimmo Connections Platform
             </h1>
             <p className="mb-8 leading-relaxed font-normal text-secondarycolor text-[20px]">
-              Get all the essentials for fostering brand relationships, handling
-              links and QR Codes, and engaging audiences across all channels,
-              all within one comprehensive platform.
+              Get all the essentials for fostering brand relationships, handling links and QR Codes,
+              and engaging audiences across all channels, all within one comprehensive platform.
             </p>
           </div>
 
@@ -153,23 +147,17 @@ export default function LandingPage() {
                       URL Shortener
                     </h2>
                     <p className="text-sm leading-6 text-secondarycolor mt-4 text-center">
-                      Simplify long, clunky URLs and turn them into short,
-                      branded links that make an impact. Track clicks,
-                      engagement, and performance in real time.
+                      Simplify long, clunky URLs and turn them into short, branded links that make
+                      an impact. Track clicks, engagement, and performance in real time.
                     </p>
 
                     <div className="h-16 w-16 absolute -top-[65%] sm:-top-[95%] md:-top-[60%] lg:-top-[95%] bg-[#F5F5F5]  rounded-full border-2 border-[#FFFFFF] border-spacing-3 p-3 text-primarycolor transition hover:text-white flex items-center justify-center">
-                      <Image
-                        src={"/images/link.svg"}
-                        width={30}
-                        height={30}
-                        alt="no image"
-                      />
+                      <Image src={"/images/link/link.svg"} width={30} height={30} alt="no image" />
                     </div>
                   </div>
                   <div className="flex justify-center gap-5 min-w-[40%] items-center  ">
                     <Image
-                      src={"/images/shortenLink.svg"}
+                      src={"/images/link/shortenLink.svg"}
                       width={300}
                       height={300}
                       alt="no image"
@@ -197,13 +185,10 @@ export default function LandingPage() {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-x-10 ">
                   {/* Left side (Text) */}
                   <div className="text-center  mb-8 md:mb-0 flex flex-col items-center justify-center relative">
-                    <h2 className="text-lg lg:text-xl font-semibold text-white">
-                      QR Shortener
-                    </h2>
+                    <h2 className="text-lg lg:text-xl font-semibold text-white">QR Shortener</h2>
                     <p className="text-sm leading-6 text-whitelight mt-4 text-center">
-                      Your one-stop solution for managing links, QR Codes, and
-                      landing pages. Build, track, and optimize your content to
-                      connect effectively across all platforms.
+                      Your one-stop solution for managing links, QR Codes, and landing pages. Build,
+                      track, and optimize your content to connect effectively across all platforms.
                     </p>
 
                     <div className="h-16 w-16 absolute -top-[65%] sm:-top-[95%] md:-top-[60%] lg:-top-[95%] bg-green  rounded-full border-2 border-[#FFFFFF] border-spacing-3 p-3 text-primarycolor transition hover:text-white flex items-center justify-center">
@@ -213,7 +198,7 @@ export default function LandingPage() {
                   {/* Right side (Icons/Features) */}
                   <div className="flex justify-center gap-5 min-w-[40%] items-center  ">
                     <Image
-                      src={"/images/qrCode.svg"}
+                      src={"/images/link/qrCode.svg"}
                       width={200}
                       height={200}
                       alt="no image"
@@ -246,9 +231,7 @@ export default function LandingPage() {
               <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
                 <div className=" px-4 py-6 ">
                   <People className="inline-block h-12 w-12 text-black fill-black mb-3" />
-                  <h2 className="title-font font-semibold text-4xl text-primarycolor">
-                    500K
-                  </h2>
+                  <h2 className="title-font font-semibold text-4xl text-primarycolor">500K</h2>
                   <p className="leading-relaxed text-primarycolor font-normal text-lg mt-3 mb-7">
                     Global Paying Customers
                   </p>
@@ -264,9 +247,7 @@ export default function LandingPage() {
                 <div className=" px-4 py-6 ">
                   <People className="inline-block h-12 w-12 text-black fill-black mb-3" />
 
-                  <h2 className="title-font font-semibold text-4xl text-primarycolor">
-                    300K
-                  </h2>
+                  <h2 className="title-font font-semibold text-4xl text-primarycolor">300K</h2>
                   <p className="leading-relaxed text-primarycolor font-normal text-lg mt-3 mb-7">
                     Use Website created monthly
                   </p>
@@ -281,9 +262,7 @@ export default function LandingPage() {
               <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
                 <div className=" px-4 py-6 ">
                   <People className="inline-block h-12 w-12 text-black fill-black mb-3" />
-                  <h2 className="title-font font-semibold text-4xl text-primarycolor">
-                    500+
-                  </h2>
+                  <h2 className="title-font font-semibold text-4xl text-primarycolor">500+</h2>
                   <p className="leading-relaxed text-primarycolor font-normal text-lg mt-3 mb-7">
                     App integrations
                   </p>
@@ -298,9 +277,7 @@ export default function LandingPage() {
               <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
                 <div className=" px-4 py-6 ">
                   <People className="inline-block h-12 w-12 text-black fill-black mb-3" />
-                  <h2 className="title-font font-semibold text-4xl text-primarycolor">
-                    10K
-                  </h2>
+                  <h2 className="title-font font-semibold text-4xl text-primarycolor">10K</h2>
                   <p className="leading-relaxed text-primarycolor font-normal text-lg mt-3 mb-7">
                     Connections
                   </p>
@@ -324,8 +301,8 @@ export default function LandingPage() {
               Frequently asked questions
             </h1>
             <p className="mb-8 leading-relaxed font-normal text-secondarycolor text-[20px]">
-              Get all the essentials for fostering brand relationships, handling
-              links and QR Codes, and engaging audiences.
+              Get all the essentials for fostering brand relationships, handling links and QR Codes,
+              and engaging audiences.
             </p>
           </div>
           <div className="w-full">
@@ -367,17 +344,13 @@ export default function LandingPage() {
               Latest Blog News
             </h1>
             <p className="mb-8 leading-relaxed font-normal text-secondarycolor text-[20px]">
-              Get all the essentials for fostering brand relationships, handling
-              links and QR Codes.
+              Get all the essentials for fostering brand relationships, handling links and QR Codes.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
             {blogData?.records?.map((data, index) => {
               return (
-                <article
-                  key={index}
-                  className="overflow-hidden rounded-lg  bg-white "
-                >
+                <article key={index} className="overflow-hidden rounded-lg  bg-white ">
                   <div className="overflow-hidden rounded-lg">
                     <Image
                       alt="blogImage"
@@ -389,13 +362,8 @@ export default function LandingPage() {
                   </div>
 
                   <div className="p-2 sm:p-4">
-                    <Link
-                      href={`https://shopeasy.ai/blog/${data?.blog_slug_name}`}
-                      target="_blank"
-                    >
-                      <h3 className="text-lg font-semibold text-primarycolor">
-                        {data?.title}
-                      </h3>
+                    <Link href={`https://shopeasy.ai/blog/${data?.blog_slug_name}`} target="_blank">
+                      <h3 className="text-lg font-semibold text-primarycolor">{data?.title}</h3>
                     </Link>
 
                     {/* <p className="mt-2 line-clamp-3 text-sm font-normal text-secondarycolor">

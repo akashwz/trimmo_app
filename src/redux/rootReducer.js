@@ -6,6 +6,8 @@ import { appreanceReducer } from "./Reducer/appearance.reducer";
 import analyticsSlice from "./slices/analyticsSlice";
 import apperanceSlice from "./slices/apperanceSlice";
 import authSlice from "./slices/authSlice";
+import blogSlice from "./slices/blogSlice";
+import customSlice from "./slices/customSlice";
 import {
   analyticsIdReducer,
   analyticsReducer,
@@ -23,6 +25,8 @@ const rootReducer = combineReducers({
   analyticsSlice,
   apperanceSlice,
   authSlice,
+  blogSlice,
+  customSlice,
 });
 
 export default rootReducer;

@@ -2,15 +2,15 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { LoginContext } from "./context/loginContext";
-import { ChevronBarLeft, ChevronLeft, List } from "react-bootstrap-icons";
+
+import { ChevronLeft, List } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { saveLoginData } from "@/store/slices/userSlice";
-import { persistor } from "@/store/store";
+// import { saveLoginData } from "@/redux/slices/authSlice";
 import Image from "next/image";
+import { LoginContext } from "@/context/loginContext";
 
 export default function Header({ toggleSidebar, setIsSidebarOpen }) {
-  const loginData = useSelector((state) => state.userSlice.loginData);
+  const { loginData } = useSelector((state) => state?.authSlice);
   const count = useSelector((state) => state.customSlice.value);
 
   const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
@@ -38,16 +38,13 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
     setIsLoggedInMenuOpen(false);
     router.push("/");
 
-    dispatch(saveLoginData({})); // Clear Redux state
-    persistor.purge(); // Clear persisted storage
+    // dispatch(saveLoginData({})); // Clear Redux state
+    // persistor.purge(); // Clear persisted storage
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        loggedInPopupRef.current &&
-        !loggedInPopupRef.current.contains(event.target)
-      ) {
+      if (loggedInPopupRef.current && !loggedInPopupRef.current.contains(event.target)) {
         setIsLoggedInMenuOpen(false);
       }
     };
@@ -61,10 +58,7 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        loggedOutPopupRef.current &&
-        !loggedOutPopupRef.current.contains(event.target)
-      ) {
+      if (loggedOutPopupRef.current && !loggedOutPopupRef.current.contains(event.target)) {
         setIsMenuOpen(false); // Close the popup
       }
     };
@@ -79,11 +73,7 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
   return (
     <>
       <div className="w-full bg-green sticky top-0 z-30">
-        <div
-          className={`w-full ${
-            !isLoggedIn && "max-w-[1290px]"
-          } mx-auto bg-green text-white1`}
-        >
+        <div className={`w-full ${!isLoggedIn && "max-w-[1290px]"} mx-auto bg-green text-white1`}>
           <header className="bg-transparent">
             <div
               className={`mx-auto flex h-16 ${
@@ -101,9 +91,9 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
                   </button>
                 )}
 
-                <Link className="block" href="/home">
+                <Link className="block" href="/link">
                   <Image
-                    src={"/images/logo-trimo.svg"}
+                    src={"/images/link/logo-trimo.svg"}
                     width={208}
                     height={44}
                     alt="logo"
@@ -150,7 +140,7 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
                     </Link>
                     <Link
                       className="rounded bg-white px-7 py-2.5 text-[16px] leading-5 font-medium text-[#050505] transition hover:text-[#267e55]"
-                      href="#"
+                      href="/register"
                     >
                       Sign up Free
                     </Link>
@@ -230,10 +220,7 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
                       <span className="sr-only">Toggle dashboard menu</span>
 
                       <Image
-                        src={
-                          loginData?.profile_picture ||
-                          "/images/image20.svg"
-                        }
+                        src={loginData?.profile_picture || "/images/link/image20.svg"}
                         width={208}
                         height={44}
                         alt="Profile"

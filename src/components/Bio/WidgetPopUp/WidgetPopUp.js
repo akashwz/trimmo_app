@@ -1,6 +1,6 @@
 "use client";
 import { Transition } from "@/controller/Transitions";
-import { createBio, getProductCategory } from "@/redux/Action/auth.action";
+import { createBio, getProductCategory } from "@/redux/slices/authSlice";
 import {
   CircularProgress,
   Dialog,
@@ -46,10 +46,9 @@ const WidgetPopUp = ({
   widgetShopData,
   inputRef,
 }) => {
-  const { allPlateformItems } = useSelector((state) => state?.authReducer);
+  const { allPlateformItems, bioData, userData } = useSelector((state) => state?.authSlice);
   const defaultApps = allPlateformItems?.filter((item) => item.type === "default");
   const shopApps = allPlateformItems?.filter((item) => item.type === "shop");
-  const { bioData } = useSelector((state) => state?.authReducer);
   const { loader } = useSelector((state) => state.errorReducer);
   const inputFileRef = useRef(null);
 
@@ -69,7 +68,6 @@ const WidgetPopUp = ({
     }))
     ?.filter((item) => item?.isAuthorized);
 
-  const { userData } = useSelector((state) => state?.authReducer);
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(
     widgetShopData?.widget_type === "products" ? "product" : "categories",

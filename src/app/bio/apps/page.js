@@ -6,7 +6,7 @@ import {
   getAllPlateform,
   getBio,
   thirdPartyAuth,
-} from "@/redux/Action/auth.action";
+} from "@/redux/slices/authSlice";
 import { encryptDevData } from "@/utils/encryptionUtils";
 import { socket } from "@/utils/socket";
 import { CircularProgress, Dialog, Slide, Tooltip } from "@mui/material";
@@ -22,8 +22,7 @@ const Apps = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedWidget, setSelectedWidget] = useState(null);
   const dispatch = useDispatch();
-  const { allPlateformItems } = useSelector((state) => state?.authReducer);
-  const { bioData, userData } = useSelector((state) => state?.authReducer);
+  const { bioData, userData, allPlateformItems } = useSelector((state) => state?.authSlice);
   const [isPopupClose, setIsPopupClose] = useState(false);
   const [removeAppId, setRemoveAppId] = useState(false);
   const [socketData, setSocketData] = useState(null);

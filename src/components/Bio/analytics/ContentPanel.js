@@ -11,7 +11,7 @@ import { useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import moment from "moment";
-import { viewAnalytics, viewBioLinks, viewAnalyticsIds } from "@/redux/Action/analytics.action";
+import { viewAnalytics, viewBioLinks, viewAnalyticsIds } from "@/redux/slices/analyticsSlice";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,10 +42,11 @@ function a11yProps(index) {
   };
 }
 
-export default function ContentPanel() {
+export default function ContentPanel({ handleDropdownChange, selectedId, setSelectedId }) {
   const dispatch = useDispatch();
-  const { analyticsSingleIdData } = useSelector((state) => state?.analyticsIdReducer);
-  const { analyticsTotalClickData } = useSelector((state) => state?.analyticsTotalClickReducer);
+  const { analyticsIdData, totalClickAnalytics, bioLinks } = useSelector(
+    (state) => state?.analyticsSlice,
+  );
 
   const [value, setValue] = useState(0);
   const [selectedLinkId, setSelectedLinkId] = useState("");
@@ -67,28 +68,29 @@ export default function ContentPanel() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bioLinksData = await dispatch(viewBioLinks());
-      setLinkData(bioLinksData?.social_media || []);
-      setShopData(bioLinksData?.shop || []);
+      dispatch(viewBioLinks());
+      setLinkData(bioLinks?.social_media || []);
+      setShopData(bioLinks?.shop || []);
     };
     fetchData();
   }, []);
 
   useEffect(() => {
     const fetchAnalyticsData = async () => {
-      const selectedId = value === 0 ? selectedLinkId : selectedShopId;
+      setSelectedId(value === 0 ? selectedLinkId : selectedShopId);
+      // const selectedId = value === 0 ? selectedLinkId : selectedShopId;
       if (selectedId) {
-        dispatch(viewAnalyticsIds("", "", selectedId));
+        dispatch(viewAnalyticsIds({ startDate: "", endDate: "", id: selectedId }));
       }
     };
     fetchAnalyticsData();
   }, [selectedLinkId, selectedShopId, value, dispatch]);
 
   useEffect(() => {
-    if (analyticsSingleIdData) {
-      const totalClicks = analyticsSingleIdData?.map((elem) => elem?.totalClicks);
-      const uniqueClicks = analyticsSingleIdData?.map((elem) => elem?.uniqueClicks);
-      const date = analyticsSingleIdData.map((elem) =>
+    if (analyticsIdData) {
+      const totalClicks = analyticsIdData?.map((elem) => elem?.totalClicks);
+      const uniqueClicks = analyticsIdData?.map((elem) => elem?.uniqueClicks);
+      const date = analyticsIdData.map((elem) =>
         elem?.date ? moment(elem.date).format("D MMM") : "",
       );
 
@@ -104,7 +106,7 @@ export default function ContentPanel() {
       ]);
       setCategories(date);
     }
-  }, [analyticsSingleIdData]);
+  }, [analyticsIdData]);
 
   const handleOptionChange = (event) => {
     const newValue = event.target.value;

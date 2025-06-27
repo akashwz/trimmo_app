@@ -3,7 +3,7 @@
 import API from "@/api";
 import ToastNotification from "@/controller/ToastNotification";
 import { GET_BIO } from "@/redux/action.type";
-import { clearBio } from "@/redux/Action/auth.action";
+import { clearBio } from "@/redux/slices/authSlice";
 import { decryptData } from "@/utils/encryptionUtils";
 import { Backdrop, CircularProgress } from "@mui/material";
 import axios from "axios";

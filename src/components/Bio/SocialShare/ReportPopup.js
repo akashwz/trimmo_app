@@ -5,10 +5,10 @@ import { X } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import { Transition } from "@/controller/Transitions";
-import { addReportUser } from "@/redux/Action/auth.action";
+import { addReportUser } from "@/redux/slices/authSlice";
 
 const ReportPopup = ({ showReportPopup, url, closeReportPopup }) => {
-  const { userData } = useSelector((state) => state?.authReducer || {});
+  const { userData } = useSelector((state) => state?.authSlice || {});
   const dispatch = useDispatch();
 
   const [reportData, setReportData] = useState({

@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { BoxArrowLeft, Link45deg } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import ConfirmationPopUp from "../confirmation-popup/ConfirmationPopUp";
-import { logOut } from "@/redux/Action/auth.action";
+import { logOut } from "@/redux/slices/authSlice";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import AppearanceIcon from "../IconComponent/AppearanceIcon";
@@ -15,7 +15,7 @@ import AppsIcon from "../IconComponent/AppsIcon";
 import Newslatter from "../IconComponent/Newslatter";
 
 const Sidebar = () => {
-  const { bioData } = useSelector((state) => state?.authReducer);
+  const { bioData } = useSelector((state) => state?.authSlice);
   const hasNewsletterAccess = bioData?.authorize_app?.some(
     (app) => app._id === "67a03fb743859a78cba94114",
   );

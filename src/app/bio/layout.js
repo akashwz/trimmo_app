@@ -6,13 +6,12 @@ import { persistor, store } from "@/redux/store";
 import { Toaster } from "react-hot-toast";
 import { PersistGate } from "redux-persist/integration/react";
 import { useEffect } from "react";
-import { getBio, getUser } from "@/redux/Action/auth.action";
+import { getBio, getUser } from "@/redux/slices/authSlice";
 import { getCookie } from "cookies-next/client";
 import { usePathname } from "next/navigation";
 
 function RootComponent({ children }) {
   const dispatch = useDispatch();
-  // const { userData } = useSelector((state) => state?.authReducer);
   const checkToken = getCookie("token");
   const location = usePathname();
 
@@ -21,12 +20,6 @@ function RootComponent({ children }) {
       dispatch(getUser());
     }
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (userData) {
-  //     dispatch(getBio(userData?.data?.username));
-  //   }
-  // }, [userData]);
 
   useEffect(() => {
     const canonicalUrl = `${window.location.origin}${location}`;
@@ -66,5 +59,5 @@ function RootComponent({ children }) {
 }
 
 export default function RootLayout({ children }) {
-  return <RootComponent>{children}</RootComponent>;
+  return <>{children}</>;
 }

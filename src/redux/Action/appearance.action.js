@@ -10,7 +10,7 @@ import {
 import { editUser } from "./auth.action";
 import API from "@/api";
 
-export const updateApperance = (data) => {
+export const updateAppreance = (data) => {
   return async (dispatch) => {
     try {
       dispatch({
@@ -27,7 +27,7 @@ export const updateApperance = (data) => {
     }
   };
 };
-export const updateApperanceTheme = (data) => {
+export const updateAppreanceTheme = (data) => {
   return async (dispatch) => {
     try {
       dispatch({

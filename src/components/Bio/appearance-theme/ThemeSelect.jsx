@@ -1,4 +1,4 @@
-import { getTheme } from "@/redux/Action/appearance.action";
+import { getTheme } from "@/redux/slices/apperanceSlice";
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +9,7 @@ const ThemeSelect = ({
   selectedImage,
   handleThemeSelect,
 }) => {
-  const { appreanceTheme } = useSelector((state) => state?.appreanceReducer);
-  const { getThemeData } = useSelector((state) => state?.appreanceReducer);
+  const { appreanceTheme, getThemeData } = useSelector((state) => state?.apperanceSlice);
   const [theme, setTheme] = useState(appreanceTheme || "bold");
   const dispatch = useDispatch();
 
@@ -36,18 +35,18 @@ const ThemeSelect = ({
         <AccordionSummary
           expandIcon={
             <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="currentColor"
-            class="bi bi-chevron-up"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"
-            />
-          </svg>
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-chevron-up"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"
+              />
+            </svg>
           }
           aria-controls="panel1-content"
           id="panel1-header"

@@ -3,7 +3,7 @@
 import API from "@/api";
 import ProfileViewTheme from "@/components/Bio/profile-preview/ProfileViewTheme";
 import ToastNotification from "@/controller/ToastNotification";
-import { editUser, getBio } from "@/redux/Action/auth.action";
+import { editUser, getBio } from "@/redux/slices/authSlice";
 import { CircularProgress, Skeleton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -13,8 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 const ProfileDetails = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { bioData } = useSelector((state) => state?.authReducer);
-  const { userData } = useSelector((state) => state?.authReducer);
+  const { bioData, userData } = useSelector((state) => state?.authSlice);
   const { loader } = useSelector((state) => state.errorReducer);
 
   const [userDetails, setUserDetails] = useState({

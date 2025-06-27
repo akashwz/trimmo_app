@@ -16,7 +16,7 @@ import ReportPopup from "./ReportPopup";
 import { getCookie } from "cookies-next";
 
 const SocialShare = ({ showSharePopup, url, closeSharePopup, image, username, name }) => {
-  const { userData } = useSelector((state) => state?.authReducer || {});
+  const { userData } = useSelector((state) => state?.authSlice || {});
   const [copied, setCopied] = useState(false);
   const [showReportPopup, setShowReportPopup] = useState(false);
   const token = getCookie("token");

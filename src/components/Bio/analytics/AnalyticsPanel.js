@@ -43,8 +43,8 @@ function a11yProps(index) {
 }
 
 export default function AnalyticsPanel() {
-  const { analyticsData } = useSelector((state) => state?.analyticsReducer);
-  const { analyticsTotalClickData } = useSelector((state) => state?.analyticsTotalClickReducer);
+  const { analyticsData, totalClickAnalytics } = useSelector((state) => state?.analyticsSlice);
+
   const [value, setValue] = useState(0);
   const [chartData, setChartData] = useState([]);
   const [chartClickData, setChartClickData] = useState([]);
@@ -89,10 +89,10 @@ export default function AnalyticsPanel() {
   }, [analyticsData]);
 
   useEffect(() => {
-    if (analyticsTotalClickData) {
-      const totalClickRate = analyticsTotalClickData?.map((elem) => elem?.clickRate);
+    if (totalClickAnalytics) {
+      const totalClickRate = totalClickAnalytics?.map((elem) => elem?.clickRate);
 
-      const date = analyticsTotalClickData.map((elem) =>
+      const date = totalClickAnalytics.map((elem) =>
         elem?.date ? moment(elem.date).format("D MMM") : "",
       );
       setChartClickData([
@@ -103,7 +103,7 @@ export default function AnalyticsPanel() {
       ]);
       setCategories(date);
     }
-  }, [analyticsTotalClickData]);
+  }, [totalClickAnalytics]);
 
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));

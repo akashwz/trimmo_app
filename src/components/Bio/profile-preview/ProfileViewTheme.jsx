@@ -15,7 +15,7 @@ const ProfileViewTheme = ({
   handleTabClickPreview,
   shopData,
 }) => {
-  const { bioData } = useSelector((state) => state?.authReducer);
+  const { bioData } = useSelector((state) => state?.authSlice);
   const [isHovered, setIsHovered] = useState(false);
   const [loading, setLoading] = useState(true);
 

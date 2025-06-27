@@ -17,7 +17,7 @@ import JoinCommunity from "../lending/JoinCommunity";
 
 export default function Home() {
   const router = useRouter();
-  // const { userData } = useSelector((state) => state?.authReducer || {});
+  // const { userData } = useSelector((state) => state?.authSlice || {});
 
   // useEffect(() => {
   //   localStorage.removeItem("persist:root");

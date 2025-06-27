@@ -3,13 +3,13 @@
 import API from "@/api";
 import AccountSetting from "@/components/Bio/AccountSetting/AccountSetting";
 import { UPDATE_APPERANCE, UPDATE_APPERANCE_THEME } from "@/redux/action.type";
-import { getBio } from "@/redux/Action/auth.action";
+import { getBio } from "@/redux/slices/authSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Setting = () => {
   const dispatch = useDispatch();
-  const { userData } = useSelector((state) => state?.authReducer);
+  const { userData } = useSelector((state) => state?.authSlice);
 
   // useEffect(() => {
   //   apperanceDataGet();

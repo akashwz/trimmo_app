@@ -1,6 +1,6 @@
 "use client";
 
-import { resetOtp, verifyOtp } from "@/redux/Action/auth.action";
+import { resetOtp, verifyOtp } from "@/redux/slices/authSlice";
 import { CircularProgress } from "@mui/material";
 import { getCookie } from "cookies-next/client";
 import { t } from "i18next";

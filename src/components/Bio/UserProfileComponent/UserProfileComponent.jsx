@@ -7,7 +7,7 @@ import SocialShare from "@/components/Bio/SocialShare/SocialShare";
 import SvgSection from "@/components/Bio/SvgSection/SvgSection";
 import { Transition } from "@/controller/Transitions";
 import { GET_BIO } from "@/redux/action.type";
-import { clearBio, getAnalytics } from "@/redux/Action/auth.action";
+import { clearBio, getAnalytics } from "@/redux/slices/authSlice";
 // import { fontMap } from "@/utils/fonts";
 import { Backdrop, CircularProgress, Dialog } from "@mui/material";
 import Link from "next/link";
@@ -21,11 +21,11 @@ const User = ({ params }) => {
   const dispatch = useDispatch();
   const unwrappedParams = React.use(params);
   const slug = unwrappedParams?.user;
-  const { bioData } = useSelector((state) => state?.authReducer);
+  const { bioData } = useSelector((state) => state?.authSlice);
   const { loader } = useSelector((state) => state.errorReducer);
   const url = process.env.NEXT_PUBLIC_APP_URL + `/${bioData && bioData?.username}`;
   const [copied, setCopied] = useState(false);
-  //   const { appreance } = useSelector((state) => state?.appreanceReducer);
+  //   const { appreance } = useSelector((state) => state?.apperanceSlice);
   const appreance = bioData && bioData?.customize_theme;
 
   const [isHovered, setIsHovered] = useState(false);

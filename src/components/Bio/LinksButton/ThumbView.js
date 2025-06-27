@@ -12,7 +12,7 @@ const ThumbView = ({
   handleMouseLeave,
   handleButtonClick,
 }) => {
-  const { bioData } = useSelector((state) => state.authReducer);
+  const { bioData } = useSelector((state) => state?.authSlice);
   const isOnlyURLType = ["youtube", "calendly"];
   return (
     <div>

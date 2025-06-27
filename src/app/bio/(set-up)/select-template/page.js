@@ -1,7 +1,7 @@
 "use client";
 
-import { getTheme } from "@/redux/Action/appearance.action";
-import { editUser } from "@/redux/Action/auth.action";
+import { getTheme } from "@/redux/slices/apperanceSlice";
+import { editUser } from "@/redux/slices/authSlice";
 import { CircularProgress } from "@mui/material";
 import { t } from "i18next";
 import Image from "next/image";
@@ -16,7 +16,7 @@ const SelectTemplate = () => {
   const [imageData, setImageData] = useState([]);
   const dispatch = useDispatch();
   const { loader } = useSelector((state) => state.errorReducer);
-  const { userData } = useSelector((state) => state?.authReducer);
+  const { userData } = useSelector((state) => state?.authSlice);
 
   useEffect(() => {
     if (userData?.data?.template) {

@@ -39,9 +39,8 @@ const Header = () => {
     setIsResourcesMenuOpen(false);
   };
 
-  const { userData } = useSelector((state) => state?.authReducer || {});
+  const { userData } = useSelector((state) => state?.authSlice || {});
   const router = useRouter();
-
   const mainLink = useMemo(() => {
     if (!token) return "/login";
     return userData?.data?.template ? "/bio/edit-profile" : "/bio/about-yourself";

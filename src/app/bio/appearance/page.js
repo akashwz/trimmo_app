@@ -11,8 +11,8 @@ import TypographyTheme from "@/components/Bio/appearance-theme/TypographyTheme";
 import ProfileViewTheme from "@/components/Bio/profile-preview/ProfileViewTheme";
 import ToastNotification from "@/controller/ToastNotification";
 import { UPDATE_APPERANCE, UPDATE_APPERANCE_THEME } from "@/redux/action.type";
-import { getSingleThemeData } from "@/redux/Action/appearance.action";
-import { editUser, getBio } from "@/redux/Action/auth.action";
+import { getSingleThemeData } from "@/redux/slices/apperanceSlice";
+import { editUser, getBio } from "@/redux/slices/authSlice";
 import { CircularProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -96,9 +96,8 @@ const initialAppreance = {
 const Appearance = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { userData } = useSelector((state) => state?.authReducer);
-  const { bioData } = useSelector((state) => state?.authReducer);
-  const { appreanceTheme, singleThemeData } = useSelector((state) => state?.appreanceReducer);
+  const { userData, bioData } = useSelector((state) => state?.authSlice);
+  const { appreanceTheme, singleThemeData } = useSelector((state) => state?.apperanceSlice);
   const [socialMedia, setSocialMedia] = useState([]);
   const [shopData, setShopData] = useState([]);
   const [expanded, setExpanded] = useState(true);

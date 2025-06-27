@@ -4,7 +4,7 @@ import API from "@/api";
 import { auth, googleProvider } from "@/controller/firebase";
 import ToastNotification from "@/controller/ToastNotification";
 import { AUTH, GET_BIO } from "@/redux/action.type";
-import { clearBio, emailLogin, getBio, socialLogin } from "@/redux/Action/auth.action";
+import { clearBio, emailLogin, getBio, socialLogin } from "@/redux/slices/authSlice";
 import { CircularProgress } from "@mui/material";
 import { getCookie, setCookie } from "cookies-next/client";
 import { signInWithPopup } from "firebase/auth";
@@ -18,8 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 const Login = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { userData } = useSelector((state) => state?.authReducer);
-  const { bioData } = useSelector((state) => state?.authReducer);
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
   const inputRef = useRef(null);

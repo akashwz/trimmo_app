@@ -27,7 +27,7 @@ import {
   thirdPartyAuth,
   updateBio,
   updateWidget,
-} from "@/redux/Action/auth.action";
+} from "@/redux/slices/authSlice";
 import { encryptDevData } from "@/utils/encryptionUtils";
 import { socket } from "@/utils/socket";
 import {
@@ -55,9 +55,7 @@ import { t } from "i18next";
 const EditProfile = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { userData } = useSelector((state) => state?.authReducer);
-  const { bioData } = useSelector((state) => state?.authReducer);
-  const { getSingleAppData } = useSelector((state) => state?.authReducer);
+  const { userData, bioData, getSingleAppData } = useSelector((state) => state?.authSlice);
   const [copied, setCopied] = useState(false);
   const [socialMedia, setSocialMedia] = useState([]);
   const [shopData, setShopData] = useState([]);
@@ -148,7 +146,6 @@ const EditProfile = () => {
       return () => clearTimeout(timer);
     }
   }, [openConfirmDialog]);
-
   const handleTabClickPreview = async (tab) => {
     setActiveTabPreview(tab);
   };
@@ -157,7 +154,7 @@ const EditProfile = () => {
   const [widgetSelected, setWidgetSelected] = useState();
   const [widgetShopData, setWidgetShopData] = useState();
 
-  const { allPlateformItems } = useSelector((state) => state?.authReducer);
+  const { allPlateformItems } = useSelector((state) => state?.authSlice);
 
   const [openAccordion, setOpenAccordion] = useState({ id: null, type: null });
 
@@ -206,41 +203,49 @@ const EditProfile = () => {
     if (bioData) {
       setChangeAppearanceData(bioData?.customize_theme);
     }
-  }, []);
+  }, [bioData]);
 
-  useEffect(() => {
-    apperanceDataGet();
-  }, []);
+  // useEffect(() => {
+  //   apperanceDataGet();
+  // }, []);
 
-  const apperanceDataGet = async () => {
-    try {
-      const apiCall = await API({
-        url: `/bio/${userData?.data?.username}`,
-        method: "get",
-      });
-
-      if (apiCall?.data?.data?.username) {
-        // dispatch({
-        //   type: UPDATE_APPERANCE,
-        //   payload: apiCall?.data?.data?.customize_theme,
-        // });
-        setChangeAppearanceData(apiCall?.data?.data?.customize_theme);
-      }
-    } catch (error) {
-      dispatch(clearBio());
-      router.push("/");
-    }
-  };
+  // const apperanceDataGet = async () => {
+  //   try {
+  //     const apiCall = await API({
+  //       url: `/bio/${userData?.data?.username}`,
+  //       method: "get",
+  //     });
+  //     if (apiCall?.data?.data?.username) {
+  //       // dispatch({
+  //       //   type: UPDATE_APPERANCE,
+  //       //   payload: apiCall?.data?.data?.customize_theme,
+  //       // });
+  //       setChangeAppearanceData(apiCall?.data?.data?.customize_theme);
+  //     }
+  //   } catch (error) {
+  //     dispatch(clearBio());
+  //     router.push("/");
+  //   }
+  // };
 
   const closeBioPopup = () => {
     setBioPopup(false);
     dispatch(clearEditData());
   };
-  // useEffect(() => {
-  //   if (userData?.data?.username) {
-  //     dispatch(getBio(userData?.data?.username));
-  //   }
-  // }, [userData]);
+  useEffect(() => {
+    const fetchBio = async () => {
+      try {
+        const result = await dispatch(getBio(userData.data.username)).unwrap();
+      } catch (err) {
+        console.error(err, "Error fetching bio");
+      }
+    };
+
+    if (userData?.data?.username) {
+      fetchBio();
+    }
+  }, [userData]);
+
   useEffect(() => {
     if (bioData?.social_media) {
       setSocialMedia(bioData?.social_media);
@@ -1149,7 +1154,7 @@ const EditProfile = () => {
                   }`}
                   onClick={() => handleTabClick("Links")}
                 >
-                  {t('lang_links')}
+                  {t("lang_links")}
                 </button>
 
                 <button
@@ -1158,7 +1163,7 @@ const EditProfile = () => {
                   }`}
                   onClick={() => handleTabClick("Shop")}
                 >
-                  {t('lang_shop')}
+                  {t("lang_shop")}
                 </button>
               </div>
             </>
@@ -1169,13 +1174,13 @@ const EditProfile = () => {
               onClick={() => setAddLink(true)}
               className="btn-green my-4 w-[60px] hover:bg-[#ebff57] hover:text-[#000] hover:border-[#ebff57]"
             >
-              + {t('lang_add_collection')}
+              + {t("lang_add_collection")}
             </button>
           </div>
           {addLink && (
             <div className="w-full bg-white rounded-[20px] p-5 mt-4 duration-300 transition-transform">
               <div className="flex items-center border-b pb-2.5 justify-between mb-2">
-                <p className="font-medium capitalize">{t('lang_add_widget')}</p>
+                <p className="font-medium capitalize">{t("lang_add_widget")}</p>
                 <X
                   className="w-5 h-5 cursor-pointer"
                   onClick={() => {
@@ -1219,7 +1224,7 @@ const EditProfile = () => {
                     } text-white transition-all duration-300`}
                     onClick={addWidget}
                   >
-                    <Tooltip title={`${t('lang_add_link')}`}>
+                    <Tooltip title={`${t("lang_add_link")}`}>
                       <PlusCircle className="w-5 h-5" />
                     </Tooltip>
                   </button>
@@ -1308,7 +1313,9 @@ const EditProfile = () => {
                                 {elem?._id === "social media" ? (
                                   <div className="w-full bg-[#F4F4EF] rounded-xl p-4 duration-300 transition-transform mt-4">
                                     <div className="flex items-center justify-between mb-2">
-                                      <p className="font-medium">{t('lang_add')} {elem?._id}</p>
+                                      <p className="font-medium">
+                                        {t("lang_add")} {elem?._id}
+                                      </p>
                                       {/* <div className="flex items-center justify-between gap-2">
                                        <X
                                          className="w-5 h-5 cursor-pointer"
@@ -1324,14 +1331,16 @@ const EditProfile = () => {
                                         className="p-2 text-sm mt-2 hover:bg-[#ebff57] hover:text-[#000] hover:border-[#ebff57] bg-[#26D367] border rounded-full w-full text-white"
                                         onClick={() => setShowPlatform(true)}
                                       >
-                                        + {t('lang_add_link_from_existing_platform')}
+                                        + {t("lang_add_link_from_existing_platform")}
                                       </button>
                                     </div>
                                   </div>
                                 ) : (
                                   <div className="w-full bg-[#F4F4EF] rounded-xl p-4 duration-300 transition-transform mt-4">
                                     <div className="flex items-center justify-between mb-2">
-                                      <p className="font-medium">{t('lang_add')} {elem?._id}</p>
+                                      <p className="font-medium">
+                                        {t("lang_add")} {elem?._id}
+                                      </p>
                                       {/* <div className="flex items-center justify-between gap-2">
                                        <X
                                          className="w-5 h-5 cursor-pointer"
@@ -1395,7 +1404,7 @@ const EditProfile = () => {
                                           }
                                         }}
                                       >
-                                        + {t('lang_add_link_from_existing_platform')}
+                                        + {t("lang_add_link_from_existing_platform")}
                                       </button>
                                     </div>
                                   </div>
@@ -1630,7 +1639,7 @@ const EditProfile = () => {
                                                   <div
                                                     onClick={() => handleAppAuthorize(item?.ref_id)}
                                                   >
-                                                    {t('lang_this_app_is_not_authorize_click_here')}
+                                                    {t("lang_this_app_is_not_authorize_click_here")}
                                                   </div>
                                                 )}
                                               </div>
@@ -1727,7 +1736,9 @@ const EditProfile = () => {
                                 {elem?._id === "social media" ? (
                                   <div className="w-full bg-[#F4F4EF] rounded-xl p-4 duration-300 transition-transform mt-2">
                                     <div className="flex items-center justify-between mb-2">
-                                      <p className="font-medium">{t('lang_add')} {elem?._id}</p>
+                                      <p className="font-medium">
+                                        {t("lang_add")} {elem?._id}
+                                      </p>
                                       {/* <div className="flex items-center justify-between gap-2">
                                       <X
                                         className="w-5 h-5 cursor-pointer"
@@ -1743,14 +1754,16 @@ const EditProfile = () => {
                                         className="p-2 text-sm mt-2 hover:bg-[#ebff57] hover:text-[#000] hover:border-[#ebff57] bg-[#26D367] border rounded-full w-full text-white"
                                         onClick={() => setShowPlatform(true)}
                                       >
-                                        + {t('lang_add_link_from_existing_platform')}
+                                        + {t("lang_add_link_from_existing_platform")}
                                       </button>
                                     </div>
                                   </div>
                                 ) : (
                                   <div className="w-full bg-[#F4F4EF] rounded-xl p-4 mt-4 duration-300 transition-transform">
                                     <div className="flex items-center justify-between mb-2">
-                                      <p className="font-medium">{t('lang_add')} {elem?._id}</p>
+                                      <p className="font-medium">
+                                        {t("lang_add")} {elem?._id}
+                                      </p>
                                       {/* <div className="flex items-center justify-between gap-2">
                                       <X
                                         className="w-5 h-5 cursor-pointer"
@@ -1814,7 +1827,7 @@ const EditProfile = () => {
                                           }
                                         }}
                                       >
-                                        + {t('lang_add_link_from_existing_platform')}
+                                        + {t("lang_add_link_from_existing_platform")}
                                       </button>
                                     </div>
                                   </div>
@@ -2074,11 +2087,11 @@ const EditProfile = () => {
             }}
           >
             {!copied ? (
-              <p>{t('lang_copy_url')}</p>
+              <p>{t("lang_copy_url")}</p>
             ) : (
               <span className="flex items-center gap-2">
                 <CheckCircleFill className="input-icon w-5 h-5" strokeWidth={1.5} />
-                <p className="text-black">{t('lang_url_copied')}!</p>
+                <p className="text-black">{t("lang_url_copied")}!</p>
               </span>
             )}
           </button>
@@ -2102,7 +2115,7 @@ const EditProfile = () => {
 
             {copied && (
               <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-24 px-2 py-1 text-xs text-white bg-black rounded transition-opacity duration-300">
-                {t('lang_link_copied')}
+                {t("lang_link_copied")}
               </div>
             )}
           </div>
@@ -2115,7 +2128,7 @@ const EditProfile = () => {
           onClick={() => setShowSharePopup(true)}
         >
           <Share className="w-4 h-4 fill-white group-hover:fill-[#000]" />
-          {t('lang_share')}
+          {t("lang_share")}
         </button>
 
         <div className="px-5 my-auto">
@@ -2237,7 +2250,7 @@ const EditProfile = () => {
                   onClick={() => handleRemoveDialog(getSingleAppData?._id)}
                   className="mt-4 flex items-center gap-2 bg-white text-black border border-black px-4 py-2 rounded-md shadow-md transition group-hover:bg-gray-100"
                 >
-                  <span>{t('lang_remove_authorized')}</span>
+                  <span>{t("lang_remove_authorized")}</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={16}
@@ -2270,7 +2283,9 @@ const EditProfile = () => {
             </div>
 
             <div className="mt-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-200">{t('lang_overview')}</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-200">
+                {t("lang_overview")}
+              </h3>
               <p className="mt-2 text-gray-600 dark:text-gray-400">
                 {getSingleAppData?.long_description}
               </p>
@@ -2340,7 +2355,9 @@ const EditProfile = () => {
       >
         <div className="bg-white shadow-lg rounded-lg p-6 z-50">
           <div className="flex text-primary items-center justify-between">
-            <p className="text-lg font-medium">{t('lang_are_you_sure_you_want_to_delete_this_widget')}?</p>
+            <p className="text-lg font-medium">
+              {t("lang_are_you_sure_you_want_to_delete_this_widget")}?
+            </p>
             <button
               onClick={() => setOpenConfirmDialog(false)}
               className="close-btn hover:bg-gray-200"
@@ -2362,13 +2379,13 @@ const EditProfile = () => {
                 setOpenConfirmDialog(false);
               }}
             >
-              {t('lang_yes_delete_this_widget')}
+              {t("lang_yes_delete_this_widget")}
             </button>
             <button
               className="px-5 py-2 text-sm rounded-full text-black font-medium bg-transparent border border-black transition-all duration-300"
               onClick={() => setOpenConfirmDialog(false)}
             >
-              {t('lang_cancel')}
+              {t("lang_cancel")}
             </button>
           </div>
         </div>

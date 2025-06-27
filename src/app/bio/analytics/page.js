@@ -8,7 +8,7 @@ import {
   totalClickAnalytics,
   viewAnalytics,
   viewAnalyticsIds,
-} from "@/redux/Action/analytics.action";
+} from "@/redux/slices/analyticsSlice";
 import Timeline from "@/components/Bio/analytics/Timeline";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -67,10 +67,10 @@ const Analytics = () => {
   const callAPIs = (start, end) => {
     const formattedStartDate = start.toISOString().split("T")[0];
     const formattedEndDate = end.toISOString().split("T")[0];
+    dispatch(viewAnalytics({ startDate: formattedStartDate, endDate: formattedEndDate }));
+    dispatch(totalAnalytics());
+    dispatch(totalClickAnalytics({ startDate: formattedStartDate, endDate: formattedEndDate }));
     setIsActivityCalendarOpen(false);
-    dispatch(viewAnalytics(formattedStartDate, formattedEndDate));
-    dispatch(totalAnalytics(formattedStartDate, formattedEndDate));
-    dispatch(totalClickAnalytics(formattedStartDate, formattedEndDate));
   };
 
   const callAPIsContentId = (start, end) => {
@@ -78,7 +78,13 @@ const Analytics = () => {
     const formattedEndDate = end.toISOString().split("T")[0];
     setIsContentCalendarOpen(false);
     if (selectedId) {
-      dispatch(viewAnalyticsIds(formattedStartDate, formattedEndDate, selectedId));
+      dispatch(
+        viewAnalyticsIds({
+          startDate: formattedStartDate,
+          endDate: formattedEndDate,
+          id: selectedId,
+        }),
+      );
     }
   };
 
@@ -152,7 +158,11 @@ const Analytics = () => {
               </div>
             )}
           </div>
-          <ContentPanel handleDropdownChange={handleDropdownChange} selectedId={selectedId} />
+          <ContentPanel
+            handleDropdownChange={handleDropdownChange}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
+          />
         </div>
       </div>
     </div>

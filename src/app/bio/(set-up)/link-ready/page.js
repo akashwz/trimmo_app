@@ -2,7 +2,7 @@
 
 import ConfettiComponent from "@/components/Bio/confetti/Confetti";
 import SocialShare from "@/components/Bio/SocialShare/SocialShare";
-import { getSingleThemeData } from "@/redux/Action/appearance.action";
+import { getSingleThemeData } from "@/redux/slices/apperanceSlice";
 import { CircularProgress } from "@mui/material";
 import { t } from "i18next";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 const LinkReady = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { userData } = useSelector((state) => state?.authReducer);
+  const { userData } = useSelector((state) => state?.authSlice);
   const [cardImage, setCardImage] = useState(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [imageData, setImageData] = useState();

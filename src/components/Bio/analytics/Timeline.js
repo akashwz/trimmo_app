@@ -5,9 +5,7 @@ import { Eye, Link45deg, Percent, PersonAdd } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
 
 const Timeline = () => {
-  const { analyticsData } = useSelector((state) => state?.analyticsReducer);
-  const { analyticsTotalData } = useSelector((state) => state?.analyticsTotalReducer);
-
+  const { analyticsData, totalAnalytics } = useSelector((state) => state?.analyticsSlice);
   return (
     <div className="flex flex-col gap-4 px-4 pb-[140px] md:pb-4">
       <div className="p-8 bg-white rounded-lg w-full scroll-mt-[150px] sm:scroll-mt-[125px]">
@@ -22,7 +20,7 @@ const Timeline = () => {
               </div>
               <div className="flex-wrap items-center">
                 <h3 className="text-3xl font-semibold leading-heading">
-                  {analyticsTotalData?.totalViews}
+                  {totalAnalytics?.totalViews}
                 </h3>
                 <p className="text-[#676B5F] text-sm leading-none">Views</p>
               </div>
@@ -33,7 +31,7 @@ const Timeline = () => {
               </div>
               <div className="flex-wrap items-center">
                 <h3 className="text-3xl font-semibold leading-heading">
-                  {analyticsTotalData?.totalClicks}
+                  {totalAnalytics?.totalClicks}
                 </h3>
                 <p className="text-[#676B5F] text-sm leading-none">Clicks</p>
               </div>
@@ -45,7 +43,7 @@ const Timeline = () => {
               </div>
               <div className="flex-wrap items-center">
                 <h3 className="text-3xl font-semibold leading-heading">
-                  {analyticsTotalData?.uniqueViews}
+                  {totalAnalytics?.uniqueViews}
                 </h3>
                 <p className="text-[#676B5F] text-sm leading-none">Unique Views</p>
               </div>
@@ -56,7 +54,7 @@ const Timeline = () => {
               </div>
               <div className="flex-wrap items-center">
                 <h3 className="text-3xl font-semibold leading-heading">
-                  {analyticsTotalData?.uniqueClicks}
+                  {totalAnalytics?.uniqueClicks}
                 </h3>
                 <p className="text-[#676B5F] text-sm leading-none">Unique Clicks</p>
               </div>

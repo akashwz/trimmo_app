@@ -1,6 +1,6 @@
 "use client";
 
-import { clearEditData, editUser } from "@/redux/Action/auth.action";
+import { clearEditData, editUser } from "@/redux/slices/authSlice";
 import { CircularProgress } from "@mui/material";
 import { t } from "i18next";
 import { useRouter } from "next/navigation";
@@ -10,9 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 const AboutYourSelf = ({ params }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { editData } = useSelector((state) => state.authReducer);
+  const { editData, userData } = useSelector((state) => state?.authSlice);
   const { loader } = useSelector((state) => state.errorReducer);
-  const { userData } = useSelector((state) => state?.authReducer);
 
   const [profile, setProfile] = useState("");
   const profileList = ["Creator", "Business", "Musician", "Real estate", "Personal", "Other"];
@@ -32,8 +31,10 @@ const AboutYourSelf = ({ params }) => {
   return (
     <div className="flex items-center mb-5 justify-center w-full">
       <div className=" text-center aboutyourself w-full sm:w-[50%] ">
-        <h2 className="mb-1 mt-5 lg:mb-3">{t('lang_welcome_to_trimmo')}</h2>
-        <p className="info-text block">{t('lang_select_one_category_that_best_describes_your_trimmo_bio')}</p>
+        <h2 className="mb-1 mt-5 lg:mb-3">{t("lang_welcome_to_trimmo")}</h2>
+        <p className="info-text block">
+          {t("lang_select_one_category_that_best_describes_your_trimmo_bio")}
+        </p>
         <div className="flex flex-col my-5 gap-4">
           {profileList?.map((elem, index) => (
             <button
@@ -59,7 +60,7 @@ const AboutYourSelf = ({ params }) => {
           onClick={() => dispatch(editUser({ designation: profile }))}
           className="w-full mx-auto bg-green-400 hover:bg-[#ebff57] hover:text-[#000] text-white font-medium py-2 px-8 rounded-full shadow-md transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-400 disabled:hover:text-white items-center flex justify-center"
         >
-          {t('lang_continue')} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
+          {t("lang_continue")} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
         </button>
       </div>
     </div>

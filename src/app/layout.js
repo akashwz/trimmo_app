@@ -5,6 +5,7 @@ import "./globals.css";
 import { persistor, store } from "@/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import "../../public/i18n";
+import TrimmoAppProvider from "./provider/TrimmoAppProvider";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -61,7 +62,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            {children}
+            <TrimmoAppProvider>{children}</TrimmoAppProvider>
           </PersistGate>
         </Provider>
       </body>

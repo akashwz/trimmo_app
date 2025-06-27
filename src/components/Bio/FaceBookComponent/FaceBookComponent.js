@@ -1,10 +1,10 @@
-import { faceBookItem } from "@/redux/Action/auth.action";
+import { faceBookItem } from "@/redux/slices/authSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const FaceBookComponent = ({ setAddDefaultApp }) => {
   const dispatch = useDispatch();
-  const { faceBookData } = useSelector((state) => state?.authReducer);
+  const { faceBookData } = useSelector((state) => state?.authSlice);
   const [selectedId, setSelectedId] = useState(null);
   const [loading, setLoading] = useState(true);
 

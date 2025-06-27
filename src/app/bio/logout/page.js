@@ -1,6 +1,6 @@
 "use client";
 
-import { logOut } from "@/redux/Action/auth.action";
+import { logOut } from "@/redux/slices/authSlice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

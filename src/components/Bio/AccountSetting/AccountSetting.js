@@ -6,7 +6,7 @@ import {
   editUser,
   logOut,
   passwordChange,
-} from "@/redux/Action/auth.action";
+} from "@/redux/slices/authSlice";
 import { CircularProgress, Dialog, Tooltip } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { EyeFill, EyeSlashFill, X } from "react-bootstrap-icons";
@@ -16,29 +16,28 @@ const AccountSetting = () => {
   const [openPopUp, setOpenPopUp] = useState();
   const [openPopUpPublish, setOpenPopUpPublish] = useState();
   const dispatch = useDispatch();
-  const { userData } = useSelector((state) => state?.authReducer);
-  const { userNames, emailPhoneStatus } = useSelector((state) => state.authReducer);
+  const { userData, userNames, emailPhoneStatus } = useSelector((state) => state?.authSlice);
   const url = process.env.NEXT_PUBLIC_APP_URL + `/${userData?.data?.username}`;
   const { loader } = useSelector((state) => state.errorReducer);
 
-    const yesDeleteButtonRef = useRef(null);
-    const yesPublishButtonRef = useRef(null);
-    useEffect(() => {
-      if (openPopUp) {
-        const timer = setTimeout(() => {
-          yesDeleteButtonRef.current?.focus();
-        }, 300);
-        return () => clearTimeout(timer);
-      }
-    }, [openPopUp]);
-    useEffect(() => {
-      if (openPopUpPublish) {
-        const timer = setTimeout(() => {
-          yesPublishButtonRef.current?.focus();
-        }, 300);
-        return () => clearTimeout(timer);
-      }
-    }, [openPopUpPublish]);
+  const yesDeleteButtonRef = useRef(null);
+  const yesPublishButtonRef = useRef(null);
+  useEffect(() => {
+    if (openPopUp) {
+      const timer = setTimeout(() => {
+        yesDeleteButtonRef.current?.focus();
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [openPopUp]);
+  useEffect(() => {
+    if (openPopUpPublish) {
+      const timer = setTimeout(() => {
+        yesPublishButtonRef.current?.focus();
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [openPopUpPublish]);
 
   const handlePopUpOpen = () => {
     setOpenPopUp(true);
@@ -88,14 +87,13 @@ const AccountSetting = () => {
     dispatch(
       editUser({
         username: formData.username,
-      })
+      }),
     );
     setInitialFormData({ ...formData }); // update initial to current after save
   };
 
   const isFormChanged =
-    formData.username !== initialFormData.username ||
-    formData.email !== initialFormData.email;
+    formData.username !== initialFormData.username || formData.email !== initialFormData.email;
 
   const handleDelete = async () => {
     const deletData = await dispatch(deleteAccount());

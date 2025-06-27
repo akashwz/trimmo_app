@@ -1,7 +1,7 @@
 "use client";
 
 import ProfileViewTheme from "@/components/Bio/profile-preview/ProfileViewTheme";
-import { addBio, getAllPlateform } from "@/redux/Action/auth.action";
+import { addBio, getAllPlateform } from "@/redux/slices/authSlice";
 import { CircularProgress } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -11,12 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 const SelectPlateForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { bioData } = useSelector((state) => state.authReducer);
-  const { userData } = useSelector((state) => state.authReducer);
+  const { bioData, userData, allPlateformItems } = useSelector((state) => state?.authSlice);
   const [platform, setPlatform] = useState([]);
   const [socialMedia, setSocialMedia] = useState([]);
   const [cardImage, setCardImage] = useState(null);
-  const { allPlateformItems } = useSelector((state) => state?.authReducer);
   const { loader } = useSelector((state) => state.errorReducer);
 
   const selectPlateform = async (value) => {

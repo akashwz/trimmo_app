@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { socialLogin, thirdPartyAuth } from "@/redux/Action/auth.action";
+import { socialLogin, thirdPartyAuth } from "@/redux/slices/authSlice";
 import { encryptDevData } from "@/utils/encryptionUtils";
 import { CircularProgress } from "@mui/material";
 

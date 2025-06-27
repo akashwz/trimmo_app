@@ -1,5 +1,5 @@
 import ToastNotification from "@/controller/ToastNotification";
-import { getBio } from "@/redux/Action/auth.action";
+import { getBio } from "@/redux/slices/authSlice";
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";

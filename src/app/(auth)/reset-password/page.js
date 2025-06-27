@@ -1,6 +1,6 @@
 "use client";
 
-import { resetOtp } from "@/redux/Action/auth.action";
+import { resetOtp } from "@/redux/slices/authSlice";
 import { CircularProgress } from "@mui/material";
 import { t } from "i18next";
 import { useRouter } from "next/navigation";

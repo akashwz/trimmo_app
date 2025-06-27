@@ -1,13 +1,13 @@
 "use client";
 
-import { getNewslatter } from "@/redux/Action/auth.action";
+import { getNewslatter } from "@/redux/slices/authSlice";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Newslatter = () => {
   const dispatch = useDispatch();
-  const { newslatterData } = useSelector((state) => state?.authReducer);
+  const { newslatterData } = useSelector((state) => state?.authSlice);
 
   useEffect(() => {
     dispatch(getNewslatter("67a03fb743859a78cba94114"));

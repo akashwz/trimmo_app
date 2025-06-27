@@ -8,7 +8,7 @@ import {
   checkUserName,
   registration,
   socialLogin,
-} from "@/redux/Action/auth.action";
+} from "@/redux/slices/authSlice";
 import { CircularProgress } from "@mui/material";
 import { getCookie } from "cookies-next/client";
 import { signInWithPopup } from "firebase/auth";
@@ -22,9 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Register = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { userNames } = useSelector((state) => state.authReducer);
-  const { checkEmailPhoneData } = useSelector((state) => state.authReducer);
-  const { userData } = useSelector((state) => state?.authReducer);
+  const { userNames, checkEmailPhoneData, userData } = useSelector((state) => state?.authSlice);
   const recaptchaRef = useRef(null);
   const inputRef = useRef(null);
   const passwordRef = useRef(null);

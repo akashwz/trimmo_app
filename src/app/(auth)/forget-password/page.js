@@ -1,6 +1,6 @@
 "use client";
 
-import { forgetPassword } from "@/redux/Action/auth.action";
+import { forgetPassword } from "@/redux/slices/authSlice";
 import { CircularProgress } from "@mui/material";
 import { getCookie } from "cookies-next";
 import { t } from "i18next";

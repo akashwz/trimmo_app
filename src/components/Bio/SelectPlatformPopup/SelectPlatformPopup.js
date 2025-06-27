@@ -1,7 +1,7 @@
 "use client";
 
 import { Transition } from "@/controller/Transitions";
-import { createBio, getAllPlateform } from "@/redux/Action/auth.action";
+import { createBio, getAllPlateform } from "@/redux/slices/authSlice";
 import { Dialog, Tooltip } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 const SelectPlatformPopup = ({ showPlatform, closePlatformPopup, username, activeTabPreview }) => {
   const dispatch = useDispatch();
   const [platform, setPlatform] = useState({});
-  const { allPlateformItems } = useSelector((state) => state?.authReducer);
+  const { allPlateformItems } = useSelector((state) => state?.authSlice);
 
   const handleAddLink = () => {
     const payload = {
@@ -71,7 +71,7 @@ const SelectPlatformPopup = ({ showPlatform, closePlatformPopup, username, activ
                     viewBox="0 0 16 16"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
                     />
                   </svg>

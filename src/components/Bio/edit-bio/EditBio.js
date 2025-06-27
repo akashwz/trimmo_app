@@ -3,7 +3,7 @@ import API from "@/api";
 import ToastNotification from "@/controller/ToastNotification";
 import { Transition } from "@/controller/Transitions";
 import useDebounce from "@/customhooks/useDebounce";
-import { checkUserName, editUser, getBio } from "@/redux/Action/auth.action";
+import { checkUserName, editUser, getBio } from "@/redux/slices/authSlice";
 import { CircularProgress, Dialog, Skeleton, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { CloudUpload, InfoCircle, X } from "react-bootstrap-icons";
@@ -12,7 +12,7 @@ import ImageCropper from "../ImageCropper/ImageCropper";
 
 const EditBio = ({ userName, bioPopup, handleBioCloseConfirm }) => {
   const dispatch = useDispatch();
-  const { editData, bioData } = useSelector((state) => state?.authReducer);
+  const { editData, bioData } = useSelector((state) => state?.authSlice);
   const [userData, setUserData] = useState({
     name: "",
     bio: "",

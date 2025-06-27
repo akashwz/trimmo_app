@@ -1,6 +1,6 @@
 import API from "@/api";
 import ToastNotification from "@/controller/ToastNotification";
-import { updateApperance } from "@/redux/Action/appearance.action";
+import { updateAppreance } from "@/redux/slices/apperanceSlice";
 import {
   Accordion,
   AccordionDetails,
@@ -102,7 +102,7 @@ const Background = ({
 
   const handleImageClick = (imagePath) => {
     dispatch(
-      updateApperance({
+      updateAppreance({
         ...changeAppearanceData,
         bg_image: imagePath,
       }),
@@ -194,7 +194,7 @@ const Background = ({
       setTimeout(() => {
         if (apiCall?.status === 200 || apiCall?.status === 304) {
           dispatch(
-            updateApperance({
+            updateAppreance({
               ...changeAppearanceData,
               bg_image: apiCall?.data?.data?.url,
             }),
@@ -223,7 +223,7 @@ const Background = ({
         method: "delete",
       });
       if (apiCall.status === 200 || apiCall.status === 304) {
-        dispatch(updateApperance({ ...changeAppearanceData, bg_image: "" }));
+        dispatch(updateAppreance({ ...changeAppearanceData, bg_image: "" }));
       }
     } catch (error) {
       ToastNotification.error(error);
@@ -317,7 +317,7 @@ const Background = ({
               viewBox="0 0 16 16"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"
               />
             </svg>

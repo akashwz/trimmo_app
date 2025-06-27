@@ -1,6 +1,6 @@
 "use client";
 
-import { addBio } from "@/redux/Action/auth.action";
+import { addBio } from "@/redux/slices/authSlice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 const AddLinks = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { platformData, bioData } = useSelector((state) => state.authReducer);
+  const { platformData, bioData } = useSelector((state) => state?.authSlice);
   const [socialMedia, setSocialMedia] = useState([]);
   // useEffect(() => {
   //     if (platformData) {

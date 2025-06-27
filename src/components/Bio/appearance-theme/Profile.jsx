@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import EditBio from "../edit-bio/EditBio";
 import { useDispatch, useSelector } from "react-redux";
-import { clearEditData, editUser, getBio } from "@/redux/Action/auth.action";
+import { clearEditData, editUser, getBio } from "@/redux/slices/authSlice";
 import SelectPlatformPopup from "../SelectPlatformPopup/SelectPlatformPopup";
 import ImageCropper from "../ImageCropper/ImageCropper";
 import { CloudUpload, InfoCircle, Pencil, X } from "react-bootstrap-icons";
@@ -18,9 +18,8 @@ import API from "@/api";
 const Profile = ({ expandedProfile, handleChangeProfile }) => {
   const [bioPopup, setBioPopup] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { userData } = useSelector((state) => state?.authReducer);
+  const { userData, bioData } = useSelector((state) => state?.authSlice);
   const { loader } = useSelector((state) => state.errorReducer);
-  const { editData, bioData } = useSelector((state) => state?.authReducer);
   const [showPlatform, setShowPlatform] = useState(false);
   const [showOptions, setShowOptions] = useState({
     show: false,
@@ -201,7 +200,7 @@ const Profile = ({ expandedProfile, handleChangeProfile }) => {
               viewBox="0 0 16 16"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"
               />
             </svg>

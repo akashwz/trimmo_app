@@ -6,5 +6,9 @@ import { useContext } from "react";
 export default function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
 
-  return <>{!isLoggedIn ? <LandingPage /> : null}</>;
+  return (
+    <>
+      <LandingPage />
+    </>
+  );
 }

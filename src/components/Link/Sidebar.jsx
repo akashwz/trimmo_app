@@ -19,7 +19,7 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
           {/* Create Button */}
           <div className="border-b p-4">
             <Link
-              className="block bg-green rounded px-7 py-2.5 text-[16px] leading-5 font-medium text-white transition hover:bg-[#267e55] text-center"
+              className="block bg-themeGreen rounded px-7 py-2.5 text-[16px] leading-5 font-medium text-white transition hover:bg-[#267e55] text-center"
               href="/links/create"
             >
               Create new
@@ -29,10 +29,10 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
           {/* Sidebar Links */}
           <div className="px-4">
             <Link
-              href={"/home"}
+              href={"/link/home"}
               className={`w-full mt-4 rounded font-montserrat bg-[#F5F5F5] hover:bg-whitelight px-4 py-2 text-lg font-semibold ${
                 pathName.includes("home")
-                  ? "text-green fill-green"
+                  ? "text-themeGreen fill-themeGreen"
                   : "text-secondarycolor fill-secondarycolor"
               } flex gap-2 items-center`}
             >
@@ -41,10 +41,10 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
             </Link>
 
             <Link
-              href={"/analytics"}
+              href={"/link/analytics"}
               className={`w-full mt-4 rounded font-montserrat bg-[#F5F5F5] hover:bg-whitelight px-4 py-2 text-lg font-semibold ${
                 pathName.includes("analytics")
-                  ? "text-green fill-green"
+                  ? "text-themeGreen fill-themeGreen"
                   : "text-secondarycolor fill-secondarycolor"
               } flex gap-2 items-center`}
             >
@@ -88,10 +88,10 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
             </ul>
 
             <Link
-              href={"/customizeqr"}
+              href={"/link/customizeqr"}
               className={`w-full mt-4 rounded font-montserrat bg-[#F5F5F5] hover:bg-whitelight px-4 py-2 text-lg font-semibold ${
                 pathName.includes("customizeqr")
-                  ? "text-green fill-green"
+                  ? "text-themeGreen fill-themeGreen"
                   : "text-secondarycolor fill-secondarycolor"
               } flex gap-2 items-center`}
             >

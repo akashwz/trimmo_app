@@ -21,7 +21,7 @@ const GenerateQR = ({ settings, setSettings, destination }) => {
                   className={`w-12 h-6 flex items-center rounded-full ${
                     !isToggled && "p-1"
                   } cursor-pointer transition-colors duration-300 ${
-                    isToggled ? "bg-green" : "bg-gray-300"
+                    isToggled ? "bg-themeGreen" : "bg-gray-300"
                   }`}
                   onClick={handleToggle}
                 >

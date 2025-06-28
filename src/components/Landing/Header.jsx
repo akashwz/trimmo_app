@@ -3,7 +3,7 @@ import React from "react";
 const Header = () => {
   return (
     <header className="p-2 md:p-5">
-      <div className="logo">
+      <div className="applogo">
         <img src="images/app/logo.svg" className="max-w-[70%] mx-auto lg:max-w-full" />
       </div>
       <div className="flex items-center md:items-start justify-between">

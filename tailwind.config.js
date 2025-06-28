@@ -9,7 +9,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        green: "#1F8F5B",
+        themeGreen: "#1F8F5B",
         yellowish: "#F0FD71", // Custom yellowish color
         primarycolor: "#050505", // dark Black
         secondarycolor: "#666666", // Gray color

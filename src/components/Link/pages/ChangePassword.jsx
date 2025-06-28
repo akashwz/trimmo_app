@@ -4,8 +4,8 @@ import React from 'react'
 function ChangePassword() {
     const router = useRouter()
   return (
-   <>
-    <div className="min-h-[93vh] flex flex-col w-full">
+    <>
+      <div className="min-h-[93vh] flex flex-col w-full">
         <div className=" flex-1 min-h-[200px] overflow-y-auto p-4 bg-gray-100 w-full md:w-[80%] xl:w-[60%] mx-auto">
           <section className="text-gray-600 body-font relative">
             <div className="container px-5 py-10 mx-auto">
@@ -19,10 +19,7 @@ function ChangePassword() {
                   {/* Current Password Field */}
                   <div className="p-2 w-full">
                     <div className="relative">
-                      <label
-                        htmlFor="cpassword"
-                        className="leading-7 text-sm text-gray-600"
-                      >
+                      <label htmlFor="cpassword" className="leading-7 text-sm text-gray-600">
                         Current password
                       </label>
                       <input
@@ -37,10 +34,7 @@ function ChangePassword() {
                   {/* New Password Field */}
                   <div className="p-2 w-full">
                     <div className="relative">
-                      <label
-                        htmlFor="npwd"
-                        className="leading-7 text-sm text-gray-600"
-                      >
+                      <label htmlFor="npwd" className="leading-7 text-sm text-gray-600">
                         New password
                       </label>
                       <input
@@ -55,10 +49,7 @@ function ChangePassword() {
                   {/* Confirm New Password Field */}
                   <div className="p-2 w-full">
                     <div className="relative">
-                      <label
-                        htmlFor="cnpwd"
-                        className="leading-7 text-sm text-gray-600"
-                      >
+                      <label htmlFor="cnpwd" className="leading-7 text-sm text-gray-600">
                         Confirm new password
                       </label>
                       <input
@@ -73,16 +64,14 @@ function ChangePassword() {
                   <div className="w-full mt-10 flex items-center justify-between p-4 bg-white border-t ">
                     <button
                       onClick={() => router.push("/home")}
-                      className="box-border rounded bg-whitelight px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-[#050505] transition hover:text-[#267e55] border hover:border-green"
+                      className="box-border rounded bg-whitelight px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-[#050505] transition hover:text-[#267e55] border hover:border-themeGreen"
                     >
                       Cancel
                     </button>
-                    <button className="block bg-green rounded px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-white transition hover:bg-[#267e55]">
+                    <button className="block bg-themeGreen rounded px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-white transition hover:bg-[#267e55]">
                       Change password
                     </button>
                   </div>
-
-                
                 </div>
               </div>
             </div>
@@ -93,17 +82,17 @@ function ChangePassword() {
         {/* <div className="sticky bottom-0 flex items-center justify-between p-4 bg-white border-t ">
           <button
             onClick={() => router.push("/home")}
-            className="box-border rounded bg-whitelight px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-[#050505] transition hover:text-[#267e55] border hover:border-green"
+            className="box-border rounded bg-whitelight px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-[#050505] transition hover:text-[#267e55] border hover:border-themeGreen"
           >
             Cancel
           </button>
-          <button className="block bg-green rounded px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-white transition hover:bg-[#267e55]">
+          <button className="block bg-themeGreen rounded px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-white transition hover:bg-[#267e55]">
             Change Password
           </button>
         </div> */}
       </div>
-   </>
-  )
+    </>
+  );
 }
 
 export default ChangePassword

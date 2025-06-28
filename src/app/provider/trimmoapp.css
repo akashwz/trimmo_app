@@ -45,7 +45,7 @@ body {
   z-index: -1;
   background-repeat: no-repeat;
 }
-.logo {
+.applogo {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);

@@ -16,7 +16,7 @@ import {
   ThreeDots,
   Trash,
 } from "react-bootstrap-icons";
-import { deleteShortLink, getAllShortLinks } from "@/store/slices/customSlice";
+import { deleteShortLink, getAllShortLinks } from "@/redux/slices/customSlice";
 import ConfirmationPopup from "../ConfirmationPopup";
 import Image from "next/image";
 import QRCodeStyling from "qr-code-styling";

@@ -991,7 +991,7 @@ const QRCode = ({ settings, setSettings, showButton, destination }) => {
             </button>
             <button
               onClick={() => handleDownload("svg")}
-              className="px-4 py-2 bg-green text-black rounded-lg shadow-md hover:bg-green-600"
+              className="px-4 py-2 bg-themeGreen text-black rounded-lg shadow-md hover:bg-green-600"
             >
               Download SVG
             </button>

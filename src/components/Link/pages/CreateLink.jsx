@@ -261,12 +261,12 @@ function CreateLink() {
 
         {/* bottom fixed section */}
         <div className="sticky bottom-0 flex items-center justify-between p-4 bg-white border-t ">
-          <button className="box-border rounded bg-whitelight px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-[#050505] transition hover:text-[#267e55] border hover:border-green">
+          <button className="box-border rounded bg-whitelight px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-[#050505] transition hover:text-[#267e55] border hover:border-themeGreen">
             Cancel
           </button>
           <button
             onClick={() => handleCreateShortLink()}
-            className="block bg-green  rounded px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-white transition hover:bg-[#267e55]"
+            className="block bg-themeGreen  rounded px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-white transition hover:bg-[#267e55]"
           >
             Create your link
           </button>

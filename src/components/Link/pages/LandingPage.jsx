@@ -18,7 +18,6 @@ import { getAllBlogs } from "@/redux/slices/blogSlice";
 export default function LandingPage() {
   const dispatch = useDispatch();
   const { blogData } = useSelector((state) => state?.blogSlice);
-  console.log(blogData, "blogData");
   useEffect(() => {
     dispatch(getAllBlogs({ page: 1, limit: 3 }));
   }, []);
@@ -73,8 +72,8 @@ export default function LandingPage() {
                     />
                     Short Link
                   </button>
-                  <button className="mx-3 inline-flex items-center text-primarycolor bg-white group  hover:text-green px-7 py-2.5 border-0 focus:outline-none  rounded text-sm font-medium">
-                    <QrCode className="mr-2 w-3 h-3 lg:w-5 lg:h-5 text-primarycolor group-hover:fill-green " />
+                  <button className="mx-3 inline-flex items-center text-primarycolor bg-white group  hover:text-themeGreen px-7 py-2.5 border-0 focus:outline-none  rounded text-sm font-medium">
+                    <QrCode className="mr-2 w-3 h-3 lg:w-5 lg:h-5 text-primarycolor group-hover:fill-themeGreen " />
                     QR Code
                   </button>
                 </div>
@@ -180,7 +179,7 @@ export default function LandingPage() {
             </div>
 
             {/* Second section (Green background) */}
-            <div className="bg-green py-16  rounded ">
+            <div className="bg-themeGreen py-16  rounded ">
               <div className="container mx-auto px-7">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-x-10 ">
                   {/* Left side (Text) */}
@@ -191,7 +190,7 @@ export default function LandingPage() {
                       track, and optimize your content to connect effectively across all platforms.
                     </p>
 
-                    <div className="h-16 w-16 absolute -top-[65%] sm:-top-[95%] md:-top-[60%] lg:-top-[95%] bg-green  rounded-full border-2 border-[#FFFFFF] border-spacing-3 p-3 text-primarycolor transition hover:text-white flex items-center justify-center">
+                    <div className="h-16 w-16 absolute -top-[65%] sm:-top-[95%] md:-top-[60%] lg:-top-[95%] bg-themeGreen  rounded-full border-2 border-[#FFFFFF] border-spacing-3 p-3 text-primarycolor transition hover:text-white flex items-center justify-center">
                       <QrCode className="text-white fill-white h-7 w-7" />
                     </div>
                   </div>
@@ -206,7 +205,7 @@ export default function LandingPage() {
                   </div>
                   {/* Button Section */}
                   <div className="flex flex-col gap-4 mt-8 w-[50%]">
-                    <button className="bg-white text-primarycolor px-8 py-3 rounded hover:text-green transition text-sm">
+                    <button className="bg-white text-primarycolor px-8 py-3 rounded hover:text-themeGreen transition text-sm">
                       QR Codes
                     </button>
                     <Link

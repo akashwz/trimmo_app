@@ -12,23 +12,16 @@ import {
   Legend,
 } from "chart.js";
 import { useDispatch, useSelector } from "react-redux";
-import { getAnalytics } from "@/store/slices/customSlice";
+import { getAnalytics } from "@/redux/slices/customSlice";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 function Analytics() {
   const dispatch = useDispatch();
   const { analyticsStatus, analyticsData, analyticsError } = useSelector(
-    (state) => state.customSlice
+    (state) => state.customSlice,
   );
+
   const [fromDate, setFromDate] = useState("2020-01-25");
   const [toDate, setToDate] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -83,9 +76,7 @@ function Analytics() {
 
   const filterData = () => {
     const filtered = allData.filter(
-      (item) =>
-        (fromDate ? item.date >= fromDate : true) &&
-        (toDate ? item.date <= toDate : true)
+      (item) => (fromDate ? item.date >= fromDate : true) && (toDate ? item.date <= toDate : true),
     );
     setFilteredData(filtered);
   };
@@ -94,7 +85,7 @@ function Analytics() {
     filterData();
   }, [fromDate, toDate]);
 
-  // Chart data - Replace filteredData with analyticsData 
+  // Chart data - Replace filteredData with analyticsData
   const data = {
     labels: filteredData.map((item) => item.date), // Dates (X-axis)
     datasets: [
@@ -150,9 +141,7 @@ function Analytics() {
     <div className="h-[93vh] flex flex-col w-full">
       <div className="max-w-6xl mx-auto p-4 w-full">
         {/* Heading */}
-        <h1 className="text-2xl md:text-4xl font-bold text-center text-primarycolor">
-          Analytics
-        </h1>
+        <h1 className="text-2xl md:text-4xl font-bold text-center text-primarycolor">Analytics</h1>
 
         {/* Date Filters */}
         <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-8 text-black">
@@ -186,10 +175,7 @@ function Analytics() {
         <hr className="border-t border-gray-300 my-6" />
 
         {/* Chart */}
-        <div
-          className="w-full bg-white rounded shadow-sm p-1 sm:p-4"
-          style={{ height: "400px" }}
-        >
+        <div className="w-full bg-white rounded shadow-sm p-1 sm:p-4" style={{ height: "400px" }}>
           <Line data={data} options={options} />
         </div>
       </div>

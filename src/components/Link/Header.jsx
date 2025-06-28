@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { saveLoginData } from "@/redux/slices/authSlice";
 import Image from "next/image";
 import { LoginContext } from "@/context/loginContext";
+import { logOut } from "@/redux/slices/authSlice";
 
 export default function Header({ toggleSidebar, setIsSidebarOpen }) {
   const { loginData } = useSelector((state) => state?.authSlice);
@@ -31,12 +32,10 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
   ];
 
   const handleLogout = (e) => {
-    localStorage.removeItem("token");
-
     setIsLoggedIn(false);
     setIsSidebarOpen(false);
     setIsLoggedInMenuOpen(false);
-    router.push("/");
+    dispatch(logOut);
 
     // dispatch(saveLoginData({})); // Clear Redux state
     // persistor.purge(); // Clear persisted storage
@@ -72,8 +71,10 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
 
   return (
     <>
-      <div className="w-full bg-green sticky top-0 z-30">
-        <div className={`w-full ${!isLoggedIn && "max-w-[1290px]"} mx-auto bg-green text-white1`}>
+      <div className="w-full bg-themeGreen sticky top-0 z-30">
+        <div
+          className={`w-full ${!isLoggedIn && "max-w-[1290px]"} mx-auto bg-themeGreen text-white1`}
+        >
           <header className="bg-transparent">
             <div
               className={`mx-auto flex h-16 ${
@@ -84,7 +85,7 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
                 {/* Sidebar Toggle Button for Small Screens */}
                 {isLoggedIn && (
                   <button
-                    className="block lg:hidden rounded-full bg-green p-[5px] sm:p-2.5 text-white sm:border border-white transition hover:text-opacity-80 hover:border-opacity-80"
+                    className="block lg:hidden rounded-full bg-themeGreen p-[5px] sm:p-2.5 text-white sm:border border-white transition hover:text-opacity-80 hover:border-opacity-80"
                     onClick={toggleSidebar}
                   >
                     <ChevronLeft className="h-6 w-6  fill-white" />
@@ -105,22 +106,20 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
               <div className="flex flex-1 items-center justify-end lg:justify-between">
                 {/* Navigation for larger screens when loggedOut */}
 
-                {!isLoggedIn && (
-                  <nav aria-label="Global" className="hidden lg:block">
-                    <ul className="flex items-center gap-6 text-sm">
-                      {navLinks.map((link, index) => (
-                        <li key={index}>
-                          <Link
-                            className="text-white transition hover:text-gray-300 text-[16px] font-medium leading-5"
-                            href={link.path}
-                          >
-                            {link.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                )}
+                <nav aria-label="Global" className="hidden lg:block">
+                  <ul className="flex items-center gap-6 text-sm">
+                    {navLinks.map((link, index) => (
+                      <li key={index}>
+                        <Link
+                          className="text-white transition hover:text-gray-300 text-[16px] font-medium leading-5"
+                          href={link.path}
+                        >
+                          {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
 
                 {!isLoggedIn && (
                   <div className="hidden lg:flex lg:gap-4 lg:items-center">
@@ -146,12 +145,11 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
                     </Link>
                   </div>
                 )}
-                {isLoggedIn && <div></div>}
 
                 {/* Popup for smaller screens when loggedOut */}
                 <div
                   ref={loggedOutPopupRef}
-                  className={`absolute top-16 right-4 z-50 w-52 sm:w-64 bg-green border border-white text-black rounded-lg shadow-lg lg:hidden transition-transform ${
+                  className={`absolute top-16 right-4 z-50 w-52 sm:w-64 bg-themeGreen border border-white text-black rounded-lg shadow-lg lg:hidden transition-transform ${
                     isMenuOpen ? "block" : "hidden"
                   }`}
                 >
@@ -172,7 +170,7 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
                           <li>
                             <button
                               type="button"
-                              className="block w-full rounded bg-white px-7 py-2.5 text-[16px] leading-5 font-medium text-primarycolor transition hover:text-green"
+                              className="block w-full rounded bg-white px-7 py-2.5 text-[16px] leading-5 font-medium text-primarycolor transition hover:text-themeGreen"
                               onClick={() => {
                                 setIsMenuOpen(false);
                                 router.push("/login");
@@ -232,7 +230,7 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
                     {isLoggedInMenuOpen && (
                       <div
                         ref={loggedInPopupRef}
-                        className="absolute right-0 top-10 mt-2 w-48 bg-green text-black rounded-lg shadow-lg z-50"
+                        className="absolute right-0 top-10 mt-2 w-48 bg-themeGreen text-black rounded-lg shadow-lg z-50"
                       >
                         <ul className="p-4 space-y-2">
                           <li>
@@ -240,7 +238,18 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
                               className="w-full text-left px-4 py-2 text-sm font-medium text-white hover:text-whitelight"
                               onClick={() => {
                                 setIsLoggedInMenuOpen(false); // Close the popup
-                                router.push("/profile");
+                                router.push("/link/home");
+                              }}
+                            >
+                              Create Link
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="w-full text-left px-4 py-2 text-sm font-medium text-white hover:text-whitelight"
+                              onClick={() => {
+                                setIsLoggedInMenuOpen(false); // Close the popup
+                                router.push("/link/profile");
                               }}
                             >
                               Profile
@@ -272,7 +281,7 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
                   </div>
                 ) : (
                   <button
-                    className="block rounded bg-green p-2.5 text-white border border-white transition hover:text-opacity-80 hover:border-opacity-80 lg:hidden"
+                    className="block rounded bg-themeGreen p-2.5 text-white border border-white transition hover:text-opacity-80 hover:border-opacity-80 lg:hidden"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                   >
                     <List className="size-5 fill-white" />

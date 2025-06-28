@@ -16,86 +16,51 @@ import {
   ThreeDots,
   Trash,
 } from "react-bootstrap-icons";
-import { deleteShortLink, getAllShortLinks } from "@/redux/slices/customSlice";
+import {
+  createShortLink,
+  deleteShortLink,
+  getAllShortLinks,
+  getCustomizeQR,
+} from "@/redux/slices/customSlice";
 import ConfirmationPopup from "../ConfirmationPopup";
 import Image from "next/image";
 import QRCodeStyling from "qr-code-styling";
+import CreateLink from "./CreateLink";
+
+function generateRandomCode() {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const length = Math.floor(Math.random() * 4) + 7; // Random length between 7 and 10
+  let result = "";
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters[randomIndex];
+  }
+
+  return result;
+}
 
 function HomePage() {
   const [openSharePopup, setOpenSharePopup] = useState(false);
+  const [openLinkPopup, setOpenLinkPopup] = useState(false);
   const [currentShortCode, setCurrentShortCode] = useState(null);
   const [isConfirmationPopup, setIsConfirmationPopup] = useState(false);
+  const [destination, setDestination] = useState("");
+  const [error, setError] = useState("");
+  const [title, setTitle] = useState("");
+  const [domain, setDomain] = useState("https://trimmo.link");
+  const [shortcode, setShortCode] = useState(generateRandomCode());
+
+  const handleChange = (e) => {
+    setDomain(e.target.value);
+  };
 
   const dispatch = useDispatch();
-  const { shortLinkStatus, shortLinkData, shortLinkError, deleteShortLinkStatus } = useSelector(
-    (state) => state.customSlice,
-  );
+  const { shortLinkData } = useSelector((state) => state.customSlice);
 
   const qrCodeRefs = useRef([]);
   const qrCodeInstances = useRef([]);
-  const [settings, setSettings] = useState({
-    width: 300,
-    height: 300,
-    margin: 10,
-    type: "svg",
-    data: "",
-    image: "",
-    dotsOptions: {
-      type: "classy-rounded",
-      gradient: {
-        type: "linear",
-        rotation: 0,
-        colorStops: [
-          { offset: 0, color: "#6B2A61" },
-          { offset: 1, color: "#B35A90" },
-        ],
-      },
-    },
-    cornersSquareOptions: {
-      type: "extra-rounded",
-      gradient: {
-        type: "linear",
-        rotation: 0,
-        colorStops: [
-          { offset: 0, color: "#6B2A61" },
-          { offset: 1, color: "#B35A90" },
-        ],
-      },
-    },
-    cornersDotOptions: {
-      type: "dot",
-      gradient: {
-        type: "linear",
-        rotation: 0,
-        colorStops: [
-          { offset: 0, color: "#6B2A61" },
-          { offset: 1, color: "#B35A90" },
-        ],
-      },
-    },
-    backgroundOptions: {
-      color: "#FFFFFF",
-      gradient: {
-        type: "linear",
-        rotation: 0,
-        colorStops: [
-          { offset: 0, color: "#ffffff" },
-          { offset: 1, color: "#ffffff" },
-        ],
-      },
-    },
-    qrOptions: {
-      typeNumber: 0,
-      mode: "Byte",
-      errorCorrectionLevel: "H",
-    },
-    imageOptions: {
-      crossOrigin: "anonymous",
-      margin: 5,
-      hideBackgroundDots: true,
-      imageSize: 0,
-    },
-  });
+  const [settings, setSettings] = useState(null);
 
   useEffect(() => {
     qrCodeRefs.current = qrCodeRefs.current.slice(0, shortLinkData.length);
@@ -103,8 +68,10 @@ function HomePage() {
     shortLinkData.forEach((link, index) => {
       if (!qrCodeInstances.current[index]) {
         qrCodeInstances.current[index] = new QRCodeStyling({
-          ...settings,
-          data: link.shorturl, // Set the QR code data to the short URL
+          width: 160, // set desired width
+          height: 160, // set desired height
+          ...link.qrcode,
+          data: link.shorturl,
         });
       }
 
@@ -120,12 +87,16 @@ function HomePage() {
     };
   }, [shortLinkData, settings]);
 
-  useEffect(() => {
+  const fetchData = async () => {
     const payload = {
       page: 1,
       limit: "all",
     };
-    dispatch(getAllShortLinks(payload));
+    await dispatch(getAllShortLinks(payload));
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
 
   const formatDate = (dateString) => {
@@ -153,14 +124,49 @@ function HomePage() {
     setOpenSharePopup(true);
   };
 
-  const handleDeleteShortLinkClick = (id) => {
-    dispatch(deleteShortLink(id));
+  const handleDeleteShortLinkClick = async (id) => {
+    const apiCall = await dispatch(deleteShortLink(id));
     setIsConfirmationPopup(false); // Close the popup after confirmation
+    if (apiCall?.payload?.success === true) {
+      fetchData();
+    }
+  };
+
+  const handleGenerateLink = () => {
+    setOpenLinkPopup(true);
+  };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setDestination(value);
+    if (e.key === "Enter") {
+      handleGenerateLink();
+    }
+  };
+
+  const handleCreateShortLink = async () => {
+    if (!destination.trim()) {
+      setError("Destination is required.");
+      return;
+    }
+    setError("");
     const payload = {
-      page: 1,
-      limit: "all",
+      destination,
+      title,
+      domain,
+      shortcode,
+      qrcode: settings,
     };
-    dispatch(getAllShortLinks(payload));
+    const data = await dispatch(createShortLink(payload));
+    if (data?.payload?.success === true) {
+      setOpenLinkPopup(false);
+      setDestination("");
+      fetchData();
+    }
+  };
+
+  const handleDestination = (e) => {
+    setDestination(e.target.value);
   };
 
   return (
@@ -170,6 +176,24 @@ function HomePage() {
           openSharePopup={openSharePopup}
           setOpenSharePopup={setOpenSharePopup}
           shortCode={currentShortCode}
+        />
+      )}
+      {openLinkPopup && (
+        <CreateLink
+          openLinkPopup={openLinkPopup}
+          setOpenLinkPopup={setOpenLinkPopup}
+          handleCreateShortLink={handleCreateShortLink}
+          destination={destination}
+          handleDestination={handleDestination}
+          error={error}
+          domain={domain}
+          title={title}
+          shortCode={shortcode}
+          setTitle={setTitle}
+          settings={settings}
+          setSettings={setSettings}
+          handleChange={handleChange}
+          setShortCode={setShortCode}
         />
       )}
       <div className="h-[93vh] flex flex-col w-full">
@@ -185,15 +209,21 @@ function HomePage() {
               <div className="border rounded border-primarycolor my-2">
                 <div className="relative">
                   <input
-                    type="email"
-                    className="w-full rounded-lg bg-white text-primarycolor p-4 text-sm shadow-sm focus:outline-none pr-24  md:pr-36"
+                    type="text"
+                    value={destination}
+                    onChange={handleInputChange}
+                    onKeyDown={handleInputChange}
+                    className="w-full rounded-lg bg-white text-primarycolor p-4 text-sm shadow-sm focus:outline-none pr-24 md:pr-36"
                     placeholder="Example: http://super-long-link.com/shorten-it"
                   />
 
                   <span className="absolute inset-y-0 end-0 grid place-content-center px-1">
                     <button
                       type="button"
-                      className="group inline-block rounded-lg bg-primarycolor px-1 md:px-5 py-3 text-[10px] md:text-sm font-medium text-white "
+                      disabled={!destination}
+                      className={`group inline-block rounded-lg px-1 md:px-5 py-3 text-[10px] md:text-sm font-medium text-white
+            ${destination ? "bg-primarycolor" : "bg-gray-400 cursor-not-allowed"}`}
+                      onClick={handleGenerateLink}
                     >
                       <span className="inline-block group-hover:scale-105">Shorten URL</span>
                     </button>
@@ -208,10 +238,6 @@ function HomePage() {
                 <div className="flex flex-wrap gap-1 items-center">
                   <Check2Circle className="h-4 w-4" />
                   QR Codes
-                </div>
-                <div className="flex flex-wrap gap-1 items-center">
-                  <Check2Circle className="h-4 w-4" />
-                  Link-in-bio page
                 </div>
               </div>
             </section>
@@ -261,7 +287,7 @@ function HomePage() {
                                     <span>Share</span>
                                   </button>
                                   <Link
-                                    href={`/links/edit/${shortLink?._id}`}
+                                    href={`/link/edit/${shortLink?._id}`}
                                     className="box-border rounded bg-white p-1 text-[10px] leading-5 font-medium text-black transition hover:bg-whitelight border flex items-center"
                                   >
                                     <Pencil className="h-4 w-4" />

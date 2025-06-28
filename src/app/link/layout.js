@@ -74,7 +74,7 @@ export default function RootLayout({ children }) {
     } else {
       setIsLoggedIn(true);
       if (pathName == "/" || pathName == "/login") {
-        router.push("/home");
+        router.push("/link/home");
       }
       if (window.innerWidth <= 1024) {
         setIsSidebarOpen(false);

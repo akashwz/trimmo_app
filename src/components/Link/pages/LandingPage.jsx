@@ -17,7 +17,8 @@ import { getAllBlogs } from "@/redux/slices/blogSlice";
 
 export default function LandingPage() {
   const dispatch = useDispatch();
-  const { blogData } = useSelector((state) => state?.blogSlice);
+  const { blogData } = useSelector((state) => state.blogSlice);
+
   useEffect(() => {
     dispatch(getAllBlogs({ page: 1, limit: 3 }));
   }, []);
@@ -64,7 +65,7 @@ export default function LandingPage() {
                 <div className="flex justify-center">
                   <button className="inline-flex items-center text-primarycolor bg-yellowish hover:bg-[#d6f66c] px-7 py-2.5 border-0 focus:outline-none rounded text-sm font-medium">
                     <Image
-                      src="/images/link/link.svg"
+                      src="/images/link.svg"
                       width={28}
                       height={28}
                       alt="Link Icon"
@@ -151,12 +152,12 @@ export default function LandingPage() {
                     </p>
 
                     <div className="h-16 w-16 absolute -top-[65%] sm:-top-[95%] md:-top-[60%] lg:-top-[95%] bg-[#F5F5F5]  rounded-full border-2 border-[#FFFFFF] border-spacing-3 p-3 text-primarycolor transition hover:text-white flex items-center justify-center">
-                      <Image src={"/images/link/link.svg"} width={30} height={30} alt="no image" />
+                      <Image src={"/images/link.svg"} width={30} height={30} alt="no image" />
                     </div>
                   </div>
                   <div className="flex justify-center gap-5 min-w-[40%] items-center  ">
                     <Image
-                      src={"/images/link/shortenLink.svg"}
+                      src={"/images/shortenLink.svg"}
                       width={300}
                       height={300}
                       alt="no image"
@@ -196,12 +197,7 @@ export default function LandingPage() {
                   </div>
                   {/* Right side (Icons/Features) */}
                   <div className="flex justify-center gap-5 min-w-[40%] items-center  ">
-                    <Image
-                      src={"/images/link/qrCode.svg"}
-                      width={200}
-                      height={200}
-                      alt="no image"
-                    />
+                    <Image src={"/images/qrCode.svg"} width={200} height={200} alt="no image" />
                   </div>
                   {/* Button Section */}
                   <div className="flex flex-col gap-4 mt-8 w-[50%]">

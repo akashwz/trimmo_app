@@ -3,7 +3,7 @@ import {
   editShortLink,
   getShortLinkById,
   resetEditShortLinkStatus,
-} from "@/store/slices/customSlice";
+} from "@/redux/slices/customSlice";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -21,70 +21,10 @@ function EditLink() {
 
   const [destination, setDestination] = useState("");
   const [title, setTitle] = useState("");
+  const [domain, setDomain] = useState("");
+  const [shortcode, setShortCode] = useState("");
   const [error, setError] = useState("");
-  const [settings, setSettings] = useState({
-    width: 300,
-    height: 300,
-    margin: 10,
-    type: "svg",
-    data: "",
-    image: "",
-    dotsOptions: {
-      type: "classy-rounded",
-      gradient: {
-        type: "linear",
-        rotation: 0,
-        colorStops: [
-          { offset: 0, color: "#6B2A61" },
-          { offset: 1, color: "#B35A90" },
-        ],
-      },
-    },
-    cornersSquareOptions: {
-      type: "extra-rounded",
-      gradient: {
-        type: "linear",
-        rotation: 0,
-        colorStops: [
-          { offset: 0, color: "#6B2A61" },
-          { offset: 1, color: "#B35A90" },
-        ],
-      },
-    },
-    cornersDotOptions: {
-      type: "dot",
-      gradient: {
-        type: "linear",
-        rotation: 0,
-        colorStops: [
-          { offset: 0, color: "#6B2A61" },
-          { offset: 1, color: "#B35A90" },
-        ],
-      },
-    },
-    backgroundOptions: {
-      color: "#FFFFFF",
-      gradient: {
-        type: "linear",
-        rotation: 0,
-        colorStops: [
-          { offset: 0, color: "#ffffff" },
-          { offset: 1, color: "#ffffff" },
-        ],
-      },
-    },
-    qrOptions: {
-      typeNumber: 0,
-      mode: "Byte",
-      errorCorrectionLevel: "H",
-    },
-    imageOptions: {
-      crossOrigin: "anonymous",
-      margin: 5,
-      hideBackgroundDots: true,
-      imageSize: 0,
-    },
-  });
+  const [settings, setSettings] = useState(null);
 
   useEffect(() => {
     dispatch(getShortLinkById(linkId));
@@ -92,14 +32,21 @@ function EditLink() {
 
   useEffect(() => {
     if (shortLinkByIdData) {
-      setDestination(shortLinkByIdData?.destination || "");
-      setTitle(getShortLinkById?.title || "");
-      setSettings(shortLinkByIdData?.qrcode || "");
+      setDestination(shortLinkByIdData?.destination);
+      setTitle(shortLinkByIdData?.title || "");
+      setDomain(shortLinkByIdData?.domain || "");
+      setShortCode(shortLinkByIdData?.shortcode || "");
+      setSettings((prevSettings) => ({
+        ...prevSettings,
+        data: shortLinkByIdData?.shorturl || "",
+        ...shortLinkByIdData?.qrcode,
+      }));
     }
   }, [shortLinkByIdData]);
+  console.log(shortLinkByIdData, "shortLinkByIdData");
   useEffect(() => {
     if (editShortLinkStatus === "success") {
-      router.push("/home");
+      router.push("/link/home");
       dispatch(resetEditShortLinkStatus());
     }
   }, [editShortLinkStatus]);
@@ -115,6 +62,8 @@ function EditLink() {
       destination,
       title,
       qrcode: settings,
+      domain,
+      shortcode,
     };
 
     dispatch(editShortLink(payload));
@@ -123,9 +72,9 @@ function EditLink() {
   useEffect(() => {
     setSettings((prev) => ({
       ...prev,
-      data: destination,
+      data: `${domain}/${shortcode}`,
     }));
-  }, [destination]);
+  }, [domain, shortcode]);
 
   const handleDestination = (e) => {
     setDestination(e.target.value);
@@ -207,11 +156,13 @@ function EditLink() {
                           <select
                             name="HeadlineAct"
                             id="HeadlineAct"
+                            value={domain}
+                            onChange={(e) => setDomain(e.target.value)}
                             className="w-full h-10 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                           >
                             <option value="">Please select</option>
-                            <option value="JM">bit.ly</option>
-                            <option value="SRV">trimmo.link</option>
+                            <option value="https://bit.ly">bit.ly</option>
+                            <option value="https://trimmo.link">trimmo.link</option>
                           </select>
                         </div>
                       </div>
@@ -222,10 +173,11 @@ function EditLink() {
                             Custom back-half (optional)
                           </label>
                           <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                            type="text"
+                            id="shortcode"
+                            value={shortcode}
+                            onChange={(e) => setShortCode(e.target.value)}
+                            className="w-full bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3"
                           />
                         </div>
                       </div>
@@ -252,7 +204,7 @@ function EditLink() {
         {/* bottom fixed section */}
         <div className="sticky bottom-0 flex items-center justify-between p-4 bg-white border-t ">
           <button
-            onClick={() => router.push("/home")}
+            onClick={() => router.push("/link/home")}
             className="box-border rounded bg-whitelight px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-[#050505] transition hover:text-[#267e55] border hover:border-themeGreen"
           >
             Cancel

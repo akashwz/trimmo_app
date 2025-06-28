@@ -21,7 +21,6 @@ function Analytics() {
   const { analyticsStatus, analyticsData, analyticsError } = useSelector(
     (state) => state.customSlice,
   );
-
   const [fromDate, setFromDate] = useState("2020-01-25");
   const [toDate, setToDate] = useState("");
   const [filteredData, setFilteredData] = useState([]);

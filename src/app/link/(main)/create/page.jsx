@@ -1,6 +1,5 @@
 "use client";
-import Loader from "@/components/Loader";
-import CreateLink from "@/components/pages/CreateLink";
+import CreateLink from "@/components/Link/pages/CreateLink";
 import dynamic from "next/dynamic";
 import React from "react";
 

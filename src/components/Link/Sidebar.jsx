@@ -20,7 +20,7 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
           <div className="border-b p-4">
             <Link
               className="block bg-themeGreen rounded px-7 py-2.5 text-[16px] leading-5 font-medium text-white transition hover:bg-[#267e55] text-center"
-              href="/links/create"
+              href="/link/create"
             >
               Create new
             </Link>

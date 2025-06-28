@@ -1,6 +1,6 @@
 "use client";
 
-import { customizeQR, getCustomizeQR } from "@/store/slices/customSlice";
+import { customizeQR, getCustomizeQR } from "@/redux/slices/customSlice";
 import QRCodeStyling from "qr-code-styling";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -433,7 +433,7 @@ const QRCode = ({ settings, setSettings, showButton, destination }) => {
             className="flex justify-center flex-col items-center rounded-lg p-4 mb-6"
           ></div>
 
-          <Accordion title="Dots Settings">
+          <Accordion title="Logo">
             <div className="grid grid-cols-2 gap-4">
               {/* <div className="col-span-2">
                 <label className="block text-gray-700 font-medium mb-1">QR Code Data</label>

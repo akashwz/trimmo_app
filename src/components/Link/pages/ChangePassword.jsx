@@ -63,7 +63,7 @@ function ChangePassword() {
 
                   <div className="w-full mt-10 flex items-center justify-between p-4 bg-white border-t ">
                     <button
-                      onClick={() => router.push("/home")}
+                      onClick={() => router.push("/link/home")}
                       className="box-border rounded bg-whitelight px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-[#050505] transition hover:text-[#267e55] border hover:border-themeGreen"
                     >
                       Cancel
@@ -81,7 +81,7 @@ function ChangePassword() {
         {/* Bottom fixed section */}
         {/* <div className="sticky bottom-0 flex items-center justify-between p-4 bg-white border-t ">
           <button
-            onClick={() => router.push("/home")}
+            onClick={() => router.push("/link/home")}
             className="box-border rounded bg-whitelight px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-[#050505] transition hover:text-[#267e55] border hover:border-themeGreen"
           >
             Cancel

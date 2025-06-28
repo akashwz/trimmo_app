@@ -6,16 +6,10 @@ export const createShortLink = createAsyncThunk(
   "createShortLink",
   async (payload, { rejectWithValue }) => {
     try {
-      const data = {
-        destination: payload?.destination,
-        title: payload?.title,
-        qrcode: payload?.qrcode,
-      };
-
       const apiCall = await API({
         url: `/shortlink`,
         method: "post",
-        data,
+        data: payload,
       });
       if (apiCall.status === 200 || apiCall.status === 304) {
         ToastNotification.success(apiCall?.data?.message || "Shortlink generated successfully");
@@ -133,17 +127,12 @@ export const getShortLinkById = createAsyncThunk(
 export const editShortLink = createAsyncThunk(
   "editShortLink",
   async (payload, { rejectWithValue }) => {
-    const { id, destination, title, qrcode } = payload;
-    const data = {
-      destination,
-      title,
-      qrcode,
-    };
+    const { id } = payload;
     try {
       const apiCall = await API({
         url: `/editshortlink/${id}`,
         method: "put",
-        data,
+        data: payload,
       });
       if (apiCall.status === 200 || apiCall.status === 304) {
         ToastNotification.success(apiCall?.data?.message || "Shortlink updated successfully");

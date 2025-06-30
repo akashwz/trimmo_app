@@ -60,10 +60,9 @@ export const getCustomizeQR = createAsyncThunk(
         method: "get",
         params,
       });
-      console.log(apiCall, "apiCall");
       if (apiCall.status === 200 || apiCall.status === 304) {
         // toast.success(apiCall?.data?.message || "Customize QR get successfully");
-        return apiCall?.data?.data;
+        return { response: apiCall?.data?.data, isDefault: payload?.is_default };
       }
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -237,7 +236,8 @@ const initialState = {
   shortLinkError: "",
 
   customizeQRDataStatus: "idle",
-  customizeQRData: [],
+  customizeQRData: {},
+  customizeQRList: [],
   customizeQRError: "",
 
   shortLinkByIdStatus: "idle",
@@ -311,7 +311,11 @@ export const customSlice = createSlice({
       })
       .addCase(getCustomizeQR.fulfilled, (state, action) => {
         state.customizeQRDataStatus = "success";
-        state.customizeQRData = action.payload;
+        if (!action.payload.isDefault || action.payload.isDefault === undefined) {
+          state.customizeQRList = action.payload.response;
+        } else {
+          state.customizeQRData = action.payload.response;
+        }
       })
       .addCase(getCustomizeQR.rejected, (state, action) => {
         state.customizeQRDataStatus = "error";

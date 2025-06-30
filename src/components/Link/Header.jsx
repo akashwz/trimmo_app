@@ -35,8 +35,8 @@ export default function Header({ toggleSidebar, setIsSidebarOpen }) {
     setIsLoggedIn(false);
     setIsSidebarOpen(false);
     setIsLoggedInMenuOpen(false);
-    dispatch(logOut);
-
+    dispatch(logOut());
+    router.push("/");
     // dispatch(saveLoginData({})); // Clear Redux state
     // persistor.purge(); // Clear persisted storage
   };

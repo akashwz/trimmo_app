@@ -15,8 +15,7 @@ function CustomizeqrPage() {
   const [selectedDeleteId, setSelectedDeleteId] = useState(null); // ✅ to store selected ID
 
   const dispatch = useDispatch();
-  const { customizeQRData } = useSelector((state) => state.customSlice);
-
+  const { customizeQRList } = useSelector((state) => state.customSlice);
   useEffect(() => {
     dispatch(getCustomizeQR());
   }, []);
@@ -37,10 +36,9 @@ function CustomizeqrPage() {
       <div className="h-[93vh] flex flex-col w-full">
         <div className="flex-1 min-h-[200px] overflow-y-auto p-4 bg-gray-100 w-full md:w-[80%] xl:w-[60%] mx-auto">
           <div className="flex flex-col items-center w-full mt-3 max-w-screen-xl mx-3">
-
             {/* ✅ QR Data list */}
-            {customizeQRData &&
-              customizeQRData?.map((data, index) => (
+            {customizeQRList &&
+              customizeQRList?.map((data, index) => (
                 <section
                   key={data._id || index}
                   className="lg:mt-4 rounded-lg shadow-sm text-primarycolor bg-white w-full"
@@ -56,7 +54,7 @@ function CustomizeqrPage() {
                         </h3>
                         <div className="sm:inline-flex flex flex-wrap sm:shrink-0 sm:items-center justify-center sm:gap-1 p-1 rounded">
                           <Link
-                            href={`/customizeqr/edit/${data?._id}`}
+                            href={`/link/customizeqr/edit/${data?._id}`}
                             className="box-border rounded bg-white p-1 text-[10px] leading-5 font-medium text-black transition hover:bg-whitelight border flex items-center"
                           >
                             <Pencil className="h-4 w-4" />

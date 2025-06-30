@@ -3,7 +3,7 @@ import QRCode from "../QRCode";
 
 const GenerateQR = ({ settings, setSettings, destination }) => {
   const [isToggled, setIsToggled] = useState(false);
-
+console.log({ settings, setSettings, destination }, "{ settings, setSettings, destination }");
   const handleToggle = () => {
     setIsToggled(!isToggled);
   };

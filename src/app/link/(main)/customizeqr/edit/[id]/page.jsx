@@ -1,7 +1,5 @@
 "use client";
-import EditCustomizeQR from "@/components/pages/EditCustomizeQR";
-import EditLink from "@/components/pages/EditLink";
-import dynamic from "next/dynamic";
+import EditCustomizeQR from "@/components/Link/pages/EditCustomizeQR";
 import React from "react";
 
 // const EditLink = dynamic(() => import("@/components/pages/EditLink"), {ssr:false});

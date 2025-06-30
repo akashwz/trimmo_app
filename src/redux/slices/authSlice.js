@@ -379,7 +379,6 @@ export const logOut = createAsyncThunk("auth/logOut", async (_, { rejectWithValu
       deleteCookie("token");
       localStorage.removeItem("selectedCard");
       localStorage.removeItem("username");
-      window.location.href = "/";
     }
   } catch (error) {
     ToastNotification.error(error);

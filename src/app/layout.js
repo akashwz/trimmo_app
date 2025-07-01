@@ -5,6 +5,7 @@ import "./globals.css";
 import { persistor, store } from "@/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import "../../public/i18n";
+import '../../styles/index.css';
 import TrimmoAppProvider from "./provider/TrimmoAppProvider";
 export default function RootLayout({ children }) {
   return (

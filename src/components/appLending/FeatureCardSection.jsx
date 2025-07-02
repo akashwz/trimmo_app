@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const FeatureCardSection = () => {
     return (
-        <div className="flex flex-col container-responsive responsive-section animate-fade-in-up my-[100px]">
+        <div className="flex container max-w-[1530px] mx-auto flex-col container-responsive responsive-section animate-fade-in-up ">
             <div className="animate-fade-in-up animation-delay-700">
                 <p className="text-[24px] sm:text-[34px] lg:text-[44px] font-polysans font-normal leading-[28px] sm:leading-[40px] lg:leading-[52px] text-left text-global-1">
                     <span>Whether you are a YouTuber, podcaster, coach, artist, seller, or side hustle</span><br className="hidden sm:block" />
@@ -48,7 +48,7 @@ const FeatureCardSection = () => {
                     <h2 className="text-[28px] sm:text-[34px] lg:text-[40px] font-polysans font-normal leading-10 lg:leading-12 text-global-6 mt-8 lg:mt-[147px]">
                         All your essential tools<br />in one Platform
                     </h2>
-                    <Button className="w-auto lg:w-[235px] h-[45px] lg:h-[50px] mt-auto mb-8 lg:mt-[170px] self-start">
+                    <Button className="w-auto lg:w-[235px] h-[45px] lg:h-[50px] mt-auto mb-8 lg:mt-[150px] self-start">
                         <span>Get Started Free</span>
                         <Image src="/images/app/img_frame_black_900.svg" alt="arrow" width={24} height={24} className="ml-2" />
                     </Button>
@@ -63,14 +63,14 @@ const FeatureCardSection = () => {
                         <span className="sm:hidden"> </span>to messages from one central dashboard<br className="hidden sm:block" />
                         <span className="sm:hidden"> </span>— Instagram, WhatsApp, Messenger, and more.
                     </p>
-                    <Button className="w-auto lg:w-[284px] h-[45px] lg:h-[50px] mt-6 lg:mt-[53px] self-start mb-6 lg:mb-0">
+                    <Button className="w-auto lg:w-[284px] h-[45px] lg:h-[50px] mt-6 lg:mt-[15px] self-start mb-6 lg:mb-0">
                         <span>Download Trimmo Chat</span>
                         <Image src="/images/app/img_frame_black_900.svg" alt="arrow" width={24} height={24} className="ml-2" />
                     </Button>
                 </div>
 
                 <div className="flex flex-col w-full lg:w-[490px] h-auto lg:h-[523px] bg-global-11 rounded-[20px] responsive-card hover-lift">
-                    <h2 className="text-[24px] sm:text-[28px] lg:text-[34px] font-polysans font-normal leading-[28px] lg:leading-[34px] text-global-1 mt-8 lg:mt-[231px]">
+                    <h2 className="text-[24px] sm:text-[28px] lg:text-[34px] font-polysans font-normal leading-[28px] lg:leading-[34px] text-global-1 mt-8 lg:mt-[200px]">
                         Schedule Once,<br />Post Everywhere.
                     </h2>
                     <p className="text-base lg:text-lg font-inter font-normal leading-6 text-global-5 mt-4 lg:mt-[19px]">
@@ -78,7 +78,7 @@ const FeatureCardSection = () => {
                         <span className="sm:hidden"> </span>Facebook, LinkedIn, X (Twitter), and more.<br className="hidden sm:block" />
                         <span className="sm:hidden"> </span>Maintain your presence without lifting a finger daily.
                     </p>
-                    <Button className="w-auto lg:w-[263px] h-[45px] lg:h-[50px] mt-6 lg:mt-[53px] self-start mb-6 lg:mb-0">
+                    <Button className="w-auto lg:w-[263px] h-[45px] lg:h-[50px] mt-6 lg:mt-[15px] self-start mb-6 lg:mb-0">
                         <span>Schedule your posts</span>
                         <Image src="/images/app/img_frame_black_900.svg" alt="arrow" width={24} height={24} className="ml-2" />
                     </Button>

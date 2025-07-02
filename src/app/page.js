@@ -34,44 +34,39 @@
 
 
 'use client';
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import Button from '@/components/ui/Button';
-import ExpandableList from '@/components/ui/ExpandableList';
-import Footer from '@/components/common/Footer';
-import HeroSection from '@/components/appLending/HeroSection';
-import StatisticsSection from '@/components/appLending/StatisticsSection';
-import HelpSection from '@/components/appLending/HelpSection';
-import CreatorsSection from '@/components/appLending/CreatorsSection';
-import ReviewsSection from '@/components/appLending/ReviewsSection';
-import VideoSection from '@/components/appLending/VideoSection';
-import TestimonialsSection from '@/components/appLending/TestimonialsSection';
-import FinalCtaSection from '@/components/appLending/FinalCtaSection';
-import FeatureCardsBottom from '@/components/appLending/FeatureCardsBottom';
-import SocialMediaPowerSection from '@/components/appLending/SocialMediaPowerSection';
-import FinalCTASectionBg from '@/components/appLending/FinalCTASectionBg';
-import FAQSection from '@/components/appLending/FAQSection';
+import { CreatorsSection } from '@/components/appLending/CreatorsSection';
+import { FAQSection } from '@/components/appLending/FAQSection';
+import { FeatureCardsBottom } from '@/components/appLending/FeatureCardsBottom';
 import FeatureCardSection from '@/components/appLending/FeatureCardSection';
+import FinalCTASectionBg from '@/components/appLending/FinalCTASectionBg';
+import Header from '@/components/appLending/Header';
+import { HelpSection } from '@/components/appLending/HelpSection';
+import HeroSection from '@/components/appLending/HeroSection';
+import ReviewsSection from '@/components/appLending/ReviewsSection';
+import { SocialMediaPowerSection } from '@/components/appLending/SocialMediaPowerSection';
+import StatisticsSection from '@/components/appLending/StatisticsSection';
+import TestimonialsSection from '@/components/appLending/TestimonialsSection';
+import VideoSection from '@/components/appLending/VideoSection';
+import Footer from '@/components/common/Footer';
 export default function TrimmoHomePage() {
  
   return (
     <div className="flex flex-col w-full min-h-screen bg-global-19">
       {/* Hero Section - Made Responsive */}
+      <Header />
       <HeroSection />
       <FeatureCardSection />
-      {/* <StatisticsSection />
+      <StatisticsSection />
       <HelpSection />
       <CreatorsSection />
       <ReviewsSection />
       <VideoSection />
       <TestimonialsSection />
-      <FinalCtaSection />
       <FeatureCardsBottom />
       <SocialMediaPowerSection />
       <FAQSection />
       <FinalCTASectionBg />
-      <Footer /> */}
+      <Footer /> 
     </div>
   );
 }

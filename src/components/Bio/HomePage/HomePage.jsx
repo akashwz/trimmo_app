@@ -1,19 +1,19 @@
 "use client";
-import Header from "@/components/Bio/lending/Header";
-import HeroSection from "@/components/Bio/lending/HeroSection";
-import Services from "@/components/Bio/lending/Services";
-import Cms1 from "@/components/Bio/lending/Cms1";
-import Socialmedia from "@/components/Bio/lending/Socialmedia";
-import Faqs from "@/components/Bio/lending/Faqs";
-import ImageSlider from "@/components/Bio/lending/imageSlider";
-import Testimonials from "@/components/Bio/lending/Testimonials";
-import Footer from "@/components/Bio/lending/Footer";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import Header from "@/components/appLending/Header";
+import StatisticsSection from "@/components/appLending/StatisticsSection";
+import HeroSection from "@/components/bioLanding/HeroSection";
 import { useRouter } from "next/navigation";
-import SocialMediaCms1 from "@/components/Bio/lending/SocialMediaCms1";
+import Services from "../lending/Services";
+import Cms1 from "../lending/Cms1";
+import Socialmedia from "../lending/Socialmedia";
+import SocialMediaCms1 from "../lending/SocialMediaCms1";
 import SocialMediaCms2 from "../lending/SocialMediaCms2";
 import JoinCommunity from "../lending/JoinCommunity";
+import Faqs from "../lending/Faqs";
+import ImageSlider from "../lending/ImageSlider";
+import Testimonials from "../lending/Testimonials";
+import Footer from "@/components/Link/Footer";
+import CmsSection from "@/components/bioLanding/CmsSection";
 
 export default function Home() {
   const router = useRouter();
@@ -33,19 +33,25 @@ export default function Home() {
   //   }
   // }, [userData]);
   return (
-    <div className="overflow-x-hidden">
-      <Header />
+    <div className="flex flex-col w-full min-h-screen bg-global-19">
+      {/* <Header />
       <HeroSection />
       <Services />
       <Cms1 />
-      {/* <Socialmedia /> */}
+      <Socialmedia />
       <SocialMediaCms1 />
       <SocialMediaCms2 />
       <JoinCommunity />
       <Faqs />
-      {/* <ImageSlider /> */}
+      <ImageSlider />
       <Testimonials />
-      <Footer />
+      <Footer /> */}
+      <Header />
+      <HeroSection />
+      <StatisticsSection />
+      <Cms1 />
+      <Socialmedia />
+      <CmsSection />
     </div>
   );
 }

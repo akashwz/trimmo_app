@@ -1,147 +1,144 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
-const Footer = ({ className = '', ...props }) => {
+const Footer = ({ className = "", ...props }) => {
   return (
-    <div 
-      className={`flex flex-row w-full h-[668px] bg-gradient-to-b from-[#034737] to-[#007e60] ${className}`} 
+    <div
+      className={`flex flex-col w-full bg-gradient-to-b from-[#034737] to-[#007e60] py-10 px-4 ${className}`}
       {...props}
     >
-      <div className="flex flex-col w-[1532px] h-[562px] mt-[88px] ml-[195px]">
-        <div className="flex flex-row w-[1531px] h-[419px]">
-          {/* Products Column */}
-          <div className="flex flex-col w-[465px] h-[419px]">
-            <span className="text-[22px] font-polysans font-bold leading-[27px] text-left text-global-6 w-[98px] h-[31px]">
-              Products
-            </span>
-            <Link href="/products-overview" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[144px] h-5 mt-[10px]">
+      <div className="w-full max-w-[1532px] mx-auto flex flex-col space-y-10">
+        {/* Top Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          {/* Products */}
+          <div className="flex flex-col space-y-2">
+            <span className="text-[22px] font-polysans font-bold text-global-6">Products</span>
+            <Link href="/products-overview" className="text-base text-global-6">
               Products Overview
             </Link>
-            <Link href="/models-overview" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[141px] h-5 mt-2">
+            <Link href="/models-overview" className="text-base text-global-6">
               Models Overview
             </Link>
-            <Link href="/search" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[65px] h-5 mt-2">
+            <Link href="/search" className="text-base text-global-6">
               Search
             </Link>
-            <Link href="/generate" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[82px] h-5 mt-2">
+            <Link href="/generate" className="text-base text-global-6">
               Generate
             </Link>
-            <Link href="/embed" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[56px] h-5 mt-2">
+            <Link href="/embed" className="text-base text-global-6">
               Embed
             </Link>
-            <Link href="/pricing" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[73px] h-5 mt-2">
+            <Link href="/pricing" className="text-base text-global-6">
               Pricing
             </Link>
-            
-            <span className="text-[22px] font-polysans font-semibold leading-[27px] text-left text-global-6 w-[65px] h-[31px] mt-[27px]">
+
+            <span className="mt-4 text-[22px] font-polysans font-semibold text-global-6">
               Social
             </span>
-            <Link href="/linkedin" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[66px] h-5 mt-[10px]">
-              Linkdin
+            <Link href="/linkedin" className="text-base text-global-6">
+              LinkedIn
             </Link>
-            <Link href="/youtube" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[66px] h-5 mt-[1px]">
-              youtube
+            <Link href="/youtube" className="text-base text-global-6">
+              YouTube
             </Link>
-            <Link href="/instagram" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[76px] h-5 mt-[1px]">
+            <Link href="/instagram" className="text-base text-global-6">
               Instagram
             </Link>
-            <Link href="/facebook" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[75px] h-5 mt-[1px]">
+            <Link href="/facebook" className="text-base text-global-6">
               Facebook
             </Link>
           </div>
 
-          {/* For Developers Column */}
-          <div className="flex flex-col w-[454px] h-[338px] ml-[195px] mt-0.5">
-            <span className="text-[22px] font-polysans font-semibold leading-[27px] text-left text-global-6 w-[163px] h-[31px]">
+          {/* For Developers */}
+          <div className="flex flex-col space-y-2">
+            <span className="text-[22px] font-polysans font-semibold text-global-6">
               For Developers
             </span>
-            <Link href="/sample-apps" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[110px] h-5 mt-[10px]">
+            <Link href="/sample-apps" className="text-base text-global-6">
               Sample Apps
             </Link>
-            <Link href="/developer-hub" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[117px] h-5 mt-[3px]">
+            <Link href="/developer-hub" className="text-base text-global-6">
               Developer Hub
             </Link>
-            <Link href="/api-docs" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[83px] h-5 mt-[3px]">
+            <Link href="/api-docs" className="text-base text-global-6">
               API Docs
             </Link>
-            <Link href="/sdks" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[47px] h-5 mt-[3px]">
+            <Link href="/sdks" className="text-base text-global-6">
               SDKs
             </Link>
-            <Link href="/discord" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[74px] h-5 mt-[3px]">
+            <Link href="/discord" className="text-base text-global-6">
               Discord
             </Link>
-            <Link href="/status" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[65px] h-5 mt-[3px]">
+            <Link href="/status" className="text-base text-global-6">
               Status
             </Link>
-            <Link href="/research" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[83px] h-5 mt-[3px]">
+            <Link href="/research" className="text-base text-global-6">
               Research
             </Link>
-            <Link href="/enterprise" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[101px] h-5 mt-[3px]">
-              Enterprice
+            <Link href="/enterprise" className="text-base text-global-6">
+              Enterprise
             </Link>
-            <Link href="/security" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[83px] h-5 mt-[3px]">
+            <Link href="/security" className="text-base text-global-6">
               Security
             </Link>
           </div>
 
-          {/* Solutions Column */}
-          <div className="flex flex-col w-[500px] h-[325px]">
-            <span className="text-[22px] font-polysans font-semibold leading-[27px] text-left text-global-6 w-[101px] h-[31px]">
-              Solutions
-            </span>
-            <Link href="/advertising" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[111px] h-5 mt-[10px]">
+          {/* Solutions */}
+          <div className="flex flex-col space-y-2">
+            <span className="text-[22px] font-polysans font-semibold text-global-6">Solutions</span>
+            <Link href="/advertising" className="text-base text-global-6">
               Advertising
             </Link>
-            <Link href="/automotive" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[103px] h-5 mt-[1px]">
+            <Link href="/automotive" className="text-base text-global-6">
               Automotive
             </Link>
-            <Link href="/government-security" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[179px] h-5 mt-[1px]">
+            <Link href="/government-security" className="text-base text-global-6">
               Government & Security
             </Link>
-            <Link href="/media-entertainment" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[179px] h-5 mt-[2px]">
+            <Link href="/media-entertainment" className="text-base text-global-6">
               Media & Entertainment
             </Link>
-            
-            <Link href="/company" className="text-[22px] font-polysans font-semibold leading-[27px] text-left text-global-6 w-[101px] h-[31px] mt-[25px]">
+
+            <span className="mt-4 text-[22px] font-polysans font-semibold text-global-6">
               Company
-            </Link>
-            <Link href="/about-us" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[75px] h-5 mt-[8px]">
+            </span>
+            <Link href="/about-us" className="text-base text-global-6">
               About Us
             </Link>
-            <Link href="/careers" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[73px] h-5 mt-[3px]">
+            <Link href="/careers" className="text-base text-global-6">
               Careers
             </Link>
-            <Link href="/blog" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[45px] h-5 mt-[3px]">
+            <Link href="/blog" className="text-base text-global-6">
               Blog
             </Link>
           </div>
 
-          {/* Legal Column */}
-          <div className="flex flex-col w-[112px] h-[160px]">
-            <span className="text-[22px] font-polysans font-semibold leading-[27px] text-left text-global-6 w-[99px] h-[31px]">
-              Products
-            </span>
-            <Link href="/terms-of-use" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[107px] h-5 mt-[10px]">
+          {/* Legal */}
+          <div className="flex flex-col space-y-2">
+            <span className="text-[22px] font-polysans font-semibold text-global-6">Legal</span>
+            <Link href="/terms-of-use" className="text-base text-global-6">
               Terms of Use
             </Link>
-            <Link href="/privacy-policy" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[112px] h-5 mt-[1px]">
+            <Link href="/privacy-policy" className="text-base text-global-6">
               Privacy Policy
             </Link>
-            <Link href="/trust-center" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[107px] h-5 mt-[1px]">
+            <Link href="/trust-center" className="text-base text-global-6">
               Trust Center
             </Link>
-            <Link href="/website-terms" className="text-base font-inter font-normal leading-[30px] text-left text-global-6 w-[112px] h-5 mt-[2px]">
+            <Link href="/website-terms" className="text-base text-global-6">
               Website Terms
             </Link>
           </div>
         </div>
 
-        {/* Footer Bottom */}
-        <div className="w-[1530px] h-px bg-footer-1 mt-[101px]"></div>
-        <div className="flex justify-center mt-5">
-          <span className="text-base font-inter font-medium leading-5 text-center text-global-6 w-[278px] h-[23px]">
+        {/* Divider */}
+        <div className="h-px bg-footer-1"></div>
+
+        {/* Bottom Text */}
+        <div className="flex justify-center">
+          <span className="text-base text-center text-global-6">
             ©2025 Trimmo, All Rights Reserved.
           </span>
         </div>

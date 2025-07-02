@@ -1,71 +1,143 @@
-import Image from "next/image";
-import Link from "next/link";
+import { ChevronRightIcon } from "lucide-react";
 import React from "react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 
-const FAQSection = () => {
+export const FAQSection = () => {
+  // FAQ data for the left column
+  const leftFaqItems = [
+    {
+      id: "item-1",
+      question: "01. All In One Chat - Lorem Ipsum is.",
+      answer:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.",
+    },
+    {
+      id: "item-2",
+      question: "01. All In One Chat - Lorem Ipsum is.",
+      answer: "",
+    },
+    {
+      id: "item-3",
+      question: "01. All In One Chat - Lorem Ipsum is.",
+      answer: "",
+    },
+    {
+      id: "item-4",
+      question: "01. All In One Chat - Lorem Ipsum is.",
+      answer: "",
+    },
+    {
+      id: "item-5",
+      question: "01. All In One Chat - Lorem Ipsum is.",
+      answer: "",
+    },
+  ];
+
+  // FAQ data for the right column
+  const rightFaqItems = [
+    {
+      id: "item-6",
+      question: "01. All In One Chat - Lorem Ipsum is.",
+      answer:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.",
+    },
+    {
+      id: "item-7",
+      question: "01. All In One Chat - Lorem Ipsum is.",
+      answer: "",
+    },
+    {
+      id: "item-8",
+      question: "01. All In One Chat - Lorem Ipsum is.",
+      answer: "",
+    },
+    {
+      id: "item-9",
+      question: "01. All In One Chat - Lorem Ipsum is.",
+      answer: "",
+    },
+    {
+      id: "item-10",
+      question: "01. All In One Chat - Lorem Ipsum is.",
+      answer: "",
+    },
+  ];
+
   return (
-  <div className="flex flex-col w-[1532px] h-[624px] ml-[195px] mt-[100px]">
-        <div className="flex flex-row w-[1530px] h-[106px] items-center">
-          <h2 className="text-[44px] font-polysans font-normal leading-[52px] text-global-1 w-[832px] h-[106px]">
-            <span>Lorem Ipsum is simply dummy text of the</span><br />
-            <span>printing and </span>
-            <span className="text-[#0000007f]">typesetting industry.</span>
+    <section className="w-full max-w-[1530px] mx-auto py-16">
+      <div className="mb-16">
+        <div className="flex justify-between items-center">
+          <h2 className="[font-family:'PolySans-Regular',Helvetica] text-[44px] leading-normal font-normal tracking-[0]">
+            <span className="text-black">
+              Lorem Ipsum is simply dummy text of the
+              <br />
+              printing and{" "}
+            </span>
+            <span className="text-[#00000080]">typesetting industry.</span>
           </h2>
-          <div className="flex items-center ml-auto space-x-2">
-            <Link href="/read-more" className="text-base font-polysans font-semibold text-global-1">Read More</Link>
-            <Image src="/images/app/img_frame_black_900.svg" alt="arrow" width={24} height={24} />
-          </div>
-        </div>
-        <div className="flex flex-row w-[1530px] h-[488px] mt-[30px] space-x-[30px]">
-          {/* FAQ Column 1 */}
-          <div className="flex flex-col w-[750px] h-[488px] space-y-[30px]">
-            <div className="flex flex-col w-[750px] h-[120px] bg-global-14 rounded-[20px] p-[20px]">
-              <div className="flex flex-row w-[710px] h-[30px] items-center">
-                <span className="text-xl font-polysans font-normal text-global-1 w-[334px] h-6">
-                  01. All In One Chat - Lorem Ipsum is.
-                </span>
-                <Image src="/images/app/img_frame_black_900_30x30.svg" alt="expand" width={30} height={30} className="ml-auto" />
-              </div>
-              <p className="text-base font-inter font-normal leading-6 text-global-5 w-[444px] h-12 mt-[10px]">
-                Lorem Ipsum is simply dummy text of the printing and<br />
-                typesetting industry. Lorem Ipsum has been the industry.
-              </p>
-            </div>
-            {[...Array(4)].map((_, index) => (
-              <div key={index} className="flex flex-row w-[750px] h-[62px] bg-global-14 rounded-[10px] p-[20px] items-center">
-                <span className="text-xl font-polysans font-normal text-global-1 w-[334px] h-6">
-                  0{index + 2}. All In One Chat - Lorem Ipsum is.
-                </span>
-                <Image src="/images/app/img_frame_30x30.svg" alt="expand" width={30} height={30} className="ml-auto" />
-              </div>
-            ))}
-          </div>
-          {/* FAQ Column 2 */}
-          <div className="flex flex-col w-[750px] h-[488px] space-y-[30px]">
-            <div className="flex flex-col w-[750px] h-[120px] bg-global-14 rounded-[20px] p-[20px]">
-              <div className="flex flex-row w-[710px] h-[30px] items-center">
-                <span className="text-xl font-polysans font-normal text-global-1 w-[334px] h-6">
-                  01. All In One Chat - Lorem Ipsum is.
-                </span>
-                <Image src="/images/app/img_frame_black_900_30x30.svg" alt="expand" width={30} height={30} className="ml-auto" />
-              </div>
-              <p className="text-base font-inter font-normal leading-6 text-global-5 w-[444px] h-12 mt-[10px]">
-                Lorem Ipsum is simply dummy text of the printing and<br />
-                typesetting industry. Lorem Ipsum has been the industry.
-              </p>
-            </div>
-            {[...Array(4)].map((_, index) => (
-              <div key={index} className="flex flex-row w-[750px] h-[62px] bg-global-14 rounded-[10px] p-[20px] items-center">
-                <span className="text-xl font-polysans font-normal text-global-1 w-[334px] h-6">
-                  0{index + 2}. All In One Chat - Lorem Ipsum is.
-                </span>
-                <Image src="/images/app/img_frame_30x30.svg" alt="expand" width={30} height={30} className="ml-auto" />
-              </div>
-            ))}
+
+          <div className="flex items-center cursor-pointer">
+            <span className="[font-family:'PolySans-Median',Helvetica] font-normal text-black text-base tracking-[0] leading-normal whitespace-nowrap mr-2">
+              Read More
+            </span>
+            <ChevronRightIcon className="w-6 h-6" />
           </div>
         </div>
       </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Left Column */}
+        <div>
+          <Accordion type="single" collapsible defaultValue="item-1" className="space-y-4">
+            {leftFaqItems.map((item) => (
+              <AccordionItem
+                key={item.id}
+                value={item.id}
+                className={`bg-bg-color rounded-[${
+                  item.id === "item-1" ? "20px" : "10px"
+                }] overflow-hidden border-none`}
+              >
+                <AccordionTrigger className="px-5 py-3 [font-family:'PolySans-Neutral',Helvetica] font-normal text-black text-xl">
+                  {item.question}
+                </AccordionTrigger>
+                {item.answer && (
+                  <AccordionContent className="px-[57px] py-2">
+                    <p className="[font-family:'Inter',Helvetica] font-normal text-description-color text-base leading-6">
+                      {item.answer}
+                    </p>
+                  </AccordionContent>
+                )}
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+
+        {/* Right Column */}
+        <div>
+          <Accordion type="single" collapsible defaultValue="item-6" className="space-y-4">
+            {rightFaqItems.map((item) => (
+              <AccordionItem
+                key={item.id}
+                value={item.id}
+                className={`bg-bg-color rounded-[${
+                  item.id === "item-6" ? "20px" : "10px"
+                }] overflow-hidden border-none`}
+              >
+                <AccordionTrigger className="px-5 py-3 [font-family:'PolySans-Neutral',Helvetica] font-normal text-black text-xl">
+                  {item.question}
+                </AccordionTrigger>
+                {item.answer && (
+                  <AccordionContent className="px-[57px] py-2">
+                    <p className="[font-family:'Inter',Helvetica] font-normal text-description-color text-base leading-6">
+                      {item.answer}
+                    </p>
+                  </AccordionContent>
+                )}
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </div>
+    </section>
   );
 };
-
-export default FAQSection;

@@ -3,15 +3,17 @@ import React from "react";
 
 const VideoSection = () => {
   return (
-<div className="w-[1530px] h-[550px] ml-[195px] mt-[100px]">
+    <div className="w-full max-w-[1530px] mx-auto my-[100px] px-4">
+      <div className="w-full h-auto">
         <Image
           src="/images/app/img_video.svg"
           alt="video placeholder"
           width={1530}
           height={550}
-          className="w-full h-full"
+          className="w-full h-auto object-cover"
         />
       </div>
+    </div>
   );
 };
 

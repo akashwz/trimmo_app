@@ -1,34 +1,49 @@
-import Image from "next/image";
 import React from "react";
 import Button from "../ui/Button";
 
-const SocialMediaPowerSection = () => {
+export const SocialMediaPowerSection = () => {
+  const socialIcons = [
+    { top: "top-[188px]", left: "left-[687px]", src: "/images/app/img_frame_green_a700_01.svg" },
+    { top: "top-[91px]", left: "left-[593px]", src: "/images/app/img_frame_light_blue_800.svg" },
+    { top: "top-[23px]", left: "left-[478px]", src: "/images/app/img_frame_red_a700.svg" },
+    { top: "top-0", left: "left-[342px]", src: "/images/app/img_frame_yellow_a200.svg" },
+    { top: "top-6", left: "left-[209px]", src: "/images/app/img_frame_white_a700_70x70.png" },
+    { top: "top-[91px]", left: "left-[94px]", src: "/images/app/img_frame_blue_500.svg" },
+    { top: "top-[188px]", left: "left-0", src: "/images/app/img_frame_blue_a400.svg" },
+  ];
+
   return (
-<div className="relative w-full h-[1324px] mt-[100px]">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/app/img_bg_gray_50.png')" }}>
-          <div className="flex flex-col w-[1080px] h-[527px] ml-[407px] mt-[336px] items-center">
-            {/* Social Media Icons */}
-            <div className="flex flex-row w-[569px] h-[161px] space-x-[45px] mb-[27px]">
-              <Image src="/images/app/img_frame_blue_500.svg" alt="social 1" width={70} height={70} className="rounded-lg mt-[91px]" />
-              <Image src="/images/app/img_frame_white_a700_70x70.png" alt="social 2" width={70} height={70} className="rounded-lg mt-[24px]" />
-              <Image src="/images/app/img_frame_yellow_a200.svg" alt="social 3" width={70} height={70} className="rounded-lg" />
-              <Image src="/images/app/img_frame_red_a700.svg" alt="social 4" width={70} height={70} className="rounded-lg mt-[23px]" />
-              <Image src="/images/app/img_frame_light_blue_800.svg" alt="social 5" width={70} height={70} className="rounded-lg mt-[91px]" />
-            </div>
-            <div className="flex flex-row w-[757px] h-[70px] space-x-[617px]">
-              <Image src="/images/app/img_frame_blue_a400.svg" alt="social 6" width={70} height={70} className="rounded-lg" />
-              <Image src="/images/app/img_frame_green_a700_01.svg" alt="social 7" width={70} height={70} className="rounded-lg" />
-            </div>
-            <h2 className="text-[60px] font-polysans font-semibold leading-[72px] text-center text-global-1 w-[1080px] h-[144px] mt-[50px]">
-              All Your Social Media Power in One<br />to Manage, Schedule, Chat & Convert.
-            </h2>
-            <Button className="w-[245px] h-[45px] mt-[50px]">
-              Let's Start Connecting
-            </Button>
-          </div>
+    <section className="relative w-full h-[600px] overflow-hidden my-[100px]">
+      <div className="relative h-full w-full">
+        <div className="absolute w-[1010px] h-[540px] top-0 left-[500px] bg-[#1f905c1a] rounded-[505px_505px_0px_0px]" />
+        <div className="absolute w-[810px] h-[440px] top-[100px] left-[600px] bg-[#1f905c33] rounded-[430px_430px_0px_0px]" />
+        <div className="absolute w-[610px] h-[330px] top-[210px] left-[700px] bg-[#1f905c1a] rounded-[430px_430px_0px_0px]" />
+
+        <div className="absolute w-[1082px] h-[239px] top-[361px] left-[500px]">
+          <Button className="absolute top-[194px] left-[418px] bg-[#cefc6c] text-black hover:bg-[#cefc6c]/90 rounded-[27.5px] px-[37px] py-[13px]">
+            <span className="[font-family:'PolySans-Median',Helvetica] font-normal text-base">
+              Let&apos;s Start Connecting
+            </span>
+          </Button>
+
+          <h2 className="absolute top-0 left-0 [font-family:'PolySans-Median',Helvetica] font-normal text-black text-6xl text-center tracking-[0] leading-normal">
+            All Your Social Media Power in One
+            <br />
+            to Manage, Schedule, Chat &amp; Convert.
+          </h2>
+        </div>
+
+        <div className="absolute w-[757px] h-[258px] top-[73px] left-[630px]">
+          {socialIcons.map((icon, index) => (
+            <img
+              key={`social-icon-${index}`}
+              className={`absolute w-[70px] h-[70px] ${icon.top} ${icon.left}`}
+              alt="Social media icon"
+              src={icon.src}
+            />
+          ))}
         </div>
       </div>
+    </section>
   );
 };
-
-export default SocialMediaPowerSection;

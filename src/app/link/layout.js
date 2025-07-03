@@ -6,9 +6,10 @@ import { Suspense, useEffect, useLayoutEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { SidebarContext } from "@/context/sidebarContext";
 import { LoginContext } from "@/context/loginContext";
-import Header from "@/components/Link/Header";
+// import Header from "@/components/Link/Header";
 import Loader from "@/components/Link/Loader";
 import { getCookie } from "cookies-next";
+import Header from "@/components/appLending/Header";
 
 const rubik = Rubik({
   subsets: ["latin"], // Choose subset(s)
@@ -93,7 +94,8 @@ export default function RootLayout({ children }) {
         <div className="w-full min-w-[260px]">
           <SidebarContext.Provider value={{ isSidebarOpen, setIsSidebarOpen, toggleSidebar }}>
             <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-              <Header toggleSidebar={toggleSidebar} setIsSidebarOpen={setIsSidebarOpen} />
+              {/* <Header toggleSidebar={toggleSidebar} setIsSidebarOpen={setIsSidebarOpen} /> */}
+              <Header />
               {children}
             </LoginContext.Provider>
           </SidebarContext.Provider>

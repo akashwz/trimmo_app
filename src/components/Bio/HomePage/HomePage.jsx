@@ -12,8 +12,12 @@ import JoinCommunity from "../lending/JoinCommunity";
 import Faqs from "../lending/Faqs";
 import ImageSlider from "../lending/ImageSlider";
 import Testimonials from "../lending/Testimonials";
-import Footer from "@/components/Link/Footer";
 import CmsSection from "@/components/bioLanding/CmsSection";
+import TestimonialsSection from "@/components/appLending/TestimonialsSection";
+import LetsChatSection from "@/components/bioLanding/LetsChatSection";
+import { FAQSection } from "@/components/appLending/FAQSection";
+import FinalCTASectionBg from "@/components/appLending/FinalCTASectionBg";
+import Footer from "@/components/common/Footer";
 
 export default function Home() {
   const router = useRouter();
@@ -52,6 +56,12 @@ export default function Home() {
       <Cms1 />
       <Socialmedia />
       <CmsSection />
+      <JoinCommunity />
+      <TestimonialsSection />
+      <LetsChatSection />
+      <FAQSection />
+      <FinalCTASectionBg />
+      <Footer />
     </div>
   );
 }

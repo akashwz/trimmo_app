@@ -2,7 +2,7 @@
 import React, { useContext, useEffect } from "react";
 import Link from "next/link";
 
-import Footer from "../Footer";
+// import Footer from "../Footer";
 import {
   Check2Circle,
   ChevronDown,
@@ -14,6 +14,14 @@ import {
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBlogs } from "@/redux/slices/blogSlice";
+import HeroSection from "@/components/linkLanding/HeroSection";
+import ConnectionsPlatform from "@/components/linkLanding/ConnectionsPlatform";
+import CreatorsSection from "@/components/appLending/CreatorsSection";
+import { FeatureCardsBottom } from "@/components/appLending/FeatureCardsBottom";
+import TestimonialsSection from "@/components/appLending/TestimonialsSection";
+import { FAQSection } from "@/components/appLending/FAQSection";
+import FinalCTASectionBg from "@/components/appLending/FinalCTASectionBg";
+import Footer from "@/components/common/Footer";
 
 export default function LandingPage() {
   const dispatch = useDispatch();
@@ -49,8 +57,7 @@ export default function LandingPage() {
   return (
     <>
       <div className="w-full bg-white ">
-        {/* Hero section start */}
-        <div className="bg-[#1F8F5B] text-white w-full min-h-fit max-h-[922px] flex flex-col justify-center items-center">
+        {/* <div className="bg-[#1F8F5B] text-white w-full min-h-fit max-h-[922px] flex flex-col justify-center items-center">
           <section className="text-white pt-24">
             <div className="container mx-auto flex px-5 items-center justify-center flex-col">
               <div className="text-center lg:w-2/3 w-full">
@@ -122,9 +129,6 @@ export default function LandingPage() {
             </div>
           </section>
         </div>
-        {/* Hero section end */}
-
-        {/* Service section Start */}
         <section className="flex flex-col justify-center items-center my-12 max-w-screen-xl mx-auto">
           <div className="text-center lg:w-2/3 w-full">
             <h1 className=" sm:text-3xl text-2xl 2xl:text-[40px]  font-semibold text-primarycolor  leading-10 md:leading-[60px] font-montserrat">
@@ -137,11 +141,9 @@ export default function LandingPage() {
           </div>
 
           <div className="py-5">
-            {/* First section (grey background) */}
             <div className="bg-[#F5F5F5] py-16 mb-16 rounded ">
               <div className="container mx-auto px-7">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-x-10 ">
-                  {/* Left side (Text) */}
                   <div className="text-center  mb-8 md:mb-0 flex flex-col items-center justify-center relative">
                     <h2 className="text-lg lg:text-xl font-semibold text-primarycolor">
                       URL Shortener
@@ -179,11 +181,9 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Second section (Green background) */}
             <div className="bg-themeGreen py-16  rounded ">
               <div className="container mx-auto px-7">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-x-10 ">
-                  {/* Left side (Text) */}
                   <div className="text-center  mb-8 md:mb-0 flex flex-col items-center justify-center relative">
                     <h2 className="text-lg lg:text-xl font-semibold text-white">QR Shortener</h2>
                     <p className="text-sm leading-6 text-whitelight mt-4 text-center">
@@ -195,11 +195,9 @@ export default function LandingPage() {
                       <QrCode className="text-white fill-white h-7 w-7" />
                     </div>
                   </div>
-                  {/* Right side (Icons/Features) */}
                   <div className="flex justify-center gap-5 min-w-[40%] items-center  ">
                     <Image src={"/images/qrCode.svg"} width={200} height={200} alt="no image" />
                   </div>
-                  {/* Button Section */}
                   <div className="flex flex-col gap-4 mt-8 w-[50%]">
                     <button className="bg-white text-primarycolor px-8 py-3 rounded hover:text-themeGreen transition text-sm">
                       QR Codes
@@ -217,9 +215,6 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-        {/* Service section End */}
-
-        {/* Counter Section start */}
         <section className="text-gray-600 body-font my-12">
           <div className="container px-5  mx-auto">
             <div className="flex flex-wrap -m-4 text-center">
@@ -287,9 +282,6 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-        {/* Counter Section End */}
-
-        {/* FAQ Section Start */}
         <section className="w-full  px-3 max-w-screen-xl mx-auto my-20 flex flex-col justify-center items-center">
           <div className="text-center sm:w-2/3 lg:w-1/2 w-full">
             <h1 className=" sm:text-3xl text-2xl 2xl:text-[40px]  font-semibold text-primarycolor  leading-10 md:leading-[60px] font-montserrat">
@@ -330,9 +322,6 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-        {/* FAQ Section End */}
-
-        {/* Blog Section Start */}
         <section className="w-full px-3 max-w-screen-xl mx-auto my-20 flex flex-col justify-center items-center">
           <div className="text-center sm:w-2/3 lg:w-1/2 w-full">
             <h1 className=" sm:text-3xl text-2xl 2xl:text-[40px]  font-semibold text-primarycolor  leading-10 md:leading-[60px] font-montserrat">
@@ -361,15 +350,6 @@ export default function LandingPage() {
                       <h3 className="text-lg font-semibold text-primarycolor">{data?.title}</h3>
                     </Link>
 
-                    {/* <p className="mt-2 line-clamp-3 text-sm font-normal text-secondarycolor">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Recusandae dolores, possimus pariatur animi
-                        temporibus nesciunt praesentium dolore sed nulla ipsum
-                        eveniet corporis quidem, mollitia itaque minus soluta,
-                        voluptates neque explicabo tempora nisi culpa eius atque
-                        dignissimos. Molestias explicabo corporis voluptatem?
-                      </p> */}
-
                     <Link
                       href={`https://shopeasy.ai/blog/${data?.blog_slug_name}`}
                       target="_blank"
@@ -389,10 +369,16 @@ export default function LandingPage() {
             })}
           </div>
         </section>
-        {/* Blog Section End */}
+        <Footer /> */}
+        <HeroSection />
+        <ConnectionsPlatform />
+        <CreatorsSection />
+        <FeatureCardsBottom />
+        <TestimonialsSection />
+        <FAQSection />
+        <FinalCTASectionBg />
         <Footer />
       </div>
-      {/* <Footer/> */}
     </>
   );
 }

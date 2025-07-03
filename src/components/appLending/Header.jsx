@@ -1,10 +1,17 @@
-"use client"
+"use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Button from "../ui/Button";
+import { t } from "i18next";
+import { useRouter } from "next/navigation";
+import { getCookie } from "cookies-next";
+import { useSelector } from "react-redux";
 
-const Header = () => {
+const Header = ({ bio, link, chat, socialMedia }) => {
+  const token = getCookie("token");
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
+  const { userData } = useSelector((state) => state?.authSlice || {});
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +22,42 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const mainLink = useMemo(() => {
+    if (!token) return "/login";
+
+    if (bio && userData?.data?.template) {
+      return "/bio/edit-profile";
+    } else if (bio) {
+      return "/bio/about-yourself";
+    } else if (link) {
+      return "/link/home";
+    } else if (chat) {
+      return "/chat";
+    } else if (socialMedia) {
+      return "/social-media";
+    } else {
+      return "/dashboard";
+    }
+  }, [token, userData]);
+
+  const MainTitle = useMemo(() => {
+    if (!token) return t("lang_login");
+    else if (token) {
+      if (bio && userData?.data?.template) {
+        return t("lang_my_account");
+      } else if (bio) {
+        return t("lang_getting_started");
+      } else {
+        return t("lang_my_account");
+      }
+    }
+  }, [token, userData]);
+
+  const handleClick = (e) => {
+    e.stopPropagation();
+    window.location.href = mainLink;
+  };
+
   return (
     <>
       <header
@@ -24,7 +67,10 @@ const Header = () => {
       >
         <div className="container">
           <div className="header-inner flex justify-between items-center py-6">
-            <div className="header-logo">
+            <div
+              className="header-logo cursor-pointer"
+              onClick={() => (window.location.href = "/")}
+            >
               <Image
                 src="/images/app/img_vector_white_a700.svg"
                 alt="Trimmo Logo"
@@ -71,12 +117,23 @@ const Header = () => {
                   className="hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <span className="hidden sm:block text-sm sm:text-base font-polysans font-semibold text-global-6 hover:text-global-9 transition-colors duration-300 cursor-pointer">
-                Log in
-              </span>
-              <Button className="w-[100px] sm:w-[145px] h-[35px] sm:h-[45px] text-xs sm:text-base">
-                Free Trial
-              </Button>
+              <button
+                onClick={handleClick}
+                className="hidden sm:block text-sm sm:text-base font-polysans font-semibold text-global-6 hover:text-global-9 transition-colors duration-300 cursor-pointer"
+              >
+                {MainTitle}
+              </button>
+              {!token && (
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router.push("/register");
+                  }}
+                  className="w-[100px] sm:w-[145px] h-[35px] sm:h-[45px] text-xs sm:text-base"
+                >
+                  Free Trial
+                </Button>
+              )}
             </div>
           </div>
         </div>

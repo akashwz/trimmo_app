@@ -50,7 +50,7 @@ export default function Home() {
       <ImageSlider />
       <Testimonials />
       <Footer /> */}
-      <Header />
+      <Header bio={true} />
       <HeroSection />
       <StatisticsSection />
       <Cms1 />

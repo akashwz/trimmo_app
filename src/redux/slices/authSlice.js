@@ -353,25 +353,28 @@ export const deleteBio = createAsyncThunk(
 
 export const clearEditData = createAsyncThunk("auth/clearEditData", async (data) => data);
 
-export const getUser = createAsyncThunk("auth/getUser", async ({ rejectWithValue }) => {
+export const getUser = createAsyncThunk("auth/getUser", async (_, { rejectWithValue }) => {
   try {
     const res = await API({ url: `/users`, method: "get" });
-    return res?.data?.data;
+    return res?.data;
   } catch (error) {
     ToastNotification.error(error);
     return rejectWithValue(null);
   }
 });
 
-export const deleteAccount = createAsyncThunk("auth/deleteAccount", async ({ rejectWithValue }) => {
-  try {
-    const res = await API({ url: `/users/delete-account`, method: "delete" });
-    return res?.data?.data;
-  } catch (error) {
-    ToastNotification.error(error);
-    return rejectWithValue(null);
-  }
-});
+export const deleteAccount = createAsyncThunk(
+  "auth/deleteAccount",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await API({ url: `/users/delete-account`, method: "delete" });
+      return res?.data?.data;
+    } catch (error) {
+      ToastNotification.error(error);
+      return rejectWithValue(null);
+    }
+  },
+);
 
 export const logOut = createAsyncThunk("auth/logOut", async (_, { rejectWithValue }) => {
   try {

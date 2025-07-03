@@ -15,6 +15,7 @@ const ProfileDetails = () => {
   const router = useRouter();
   const { bioData, userData } = useSelector((state) => state?.authSlice);
   const { loader } = useSelector((state) => state.errorReducer);
+  console.log(bioData, 'bioData');
 
   const [userDetails, setUserDetails] = useState({
     name: "",
@@ -150,7 +151,7 @@ const ProfileDetails = () => {
         {/* Right Column: Theme Preview */}
         <div className="flex justify-center w-full h-full">
           <ProfileViewTheme
-            changeAppearanceData={userData?.data?.customize_theme}
+            changeAppearanceData={bioData.customize_theme}
             socialMedia={bioData?.social_media}
             userData={userData}
             activeTabPreview={"Links"}

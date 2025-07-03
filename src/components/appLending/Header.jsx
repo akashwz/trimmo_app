@@ -69,7 +69,7 @@ const Header = ({ bio, link, chat, socialMedia }) => {
           <div className="header-inner flex justify-between items-center py-6">
             <div
               className="header-logo cursor-pointer"
-              onClick={() => (window.location.href = "/")}
+              onClick={() => router.push("/")}
             >
               <Image
                 src="/images/app/img_vector_white_a700.svg"

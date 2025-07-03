@@ -16,7 +16,7 @@ function RootComponent({ children }) {
     if (checkToken) {
       dispatch(getUser());
     }
-  }, [dispatch]);
+  }, [dispatch, checkToken]);
 
   useEffect(() => {
     const canonicalUrl = `${window.location.origin}${location}`;

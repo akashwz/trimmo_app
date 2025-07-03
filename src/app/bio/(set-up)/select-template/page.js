@@ -31,7 +31,8 @@ const SelectTemplate = () => {
       const data = await dispatch(getTheme());
 
       // setImageData(data.slice(0, 3));
-      setImageData(data);
+      console.log(data, 'data');
+      setImageData(data?.payload);
     } catch (error) {
       console.error("Error fetching theme:", error);
     }
@@ -59,7 +60,7 @@ const SelectTemplate = () => {
         <h2 className="mb-0 lg:mb-3">{t("lang_welcome_to_trimmo")}</h2>
         <p className="info-text block">{t("lang_trimmo_theme_desc")}</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-          {imageData.map((image, index) => (
+          {imageData?.map((image, index) => (
             <div
               key={index}
               className="flex items-center my-4 justify-center cursor-pointer"

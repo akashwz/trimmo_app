@@ -137,7 +137,7 @@ const SelectPlateForm = () => {
       </div>
       <div className="w-full flex flex-col lg:flex-row gap-8 mt-8 justify-center">
         <ProfileViewTheme
-          changeAppearanceData={userData?.data?.customize_theme}
+          changeAppearanceData={bioData?.customize_theme}
           socialMedia={socialMedia}
           userData={userData}
           // shopData={platform}

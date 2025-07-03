@@ -5,9 +5,12 @@ import "./globals.css";
 import { persistor, store } from "@/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import "../../public/i18n";
-import '../../styles/index.css';
+import "../../styles/index.css";
 import TrimmoAppProvider from "./provider/TrimmoAppProvider";
+import { getCookie } from "cookies-next";
+
 export default function RootLayout({ children }) {
+  const token = getCookie("token");
   return (
     <html lang="en">
       <head>
@@ -63,7 +66,9 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <TrimmoAppProvider>{children}</TrimmoAppProvider>
+            <TrimmoAppProvider>
+              {children}
+            </TrimmoAppProvider>
           </PersistGate>
         </Provider>
       </body>

@@ -95,7 +95,7 @@ export default function RootLayout({ children }) {
           <SidebarContext.Provider value={{ isSidebarOpen, setIsSidebarOpen, toggleSidebar }}>
             <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
               {/* <Header toggleSidebar={toggleSidebar} setIsSidebarOpen={setIsSidebarOpen} /> */}
-              <Header link={true} />
+              {/* <Header link={true} /> */}
               {children}
             </LoginContext.Provider>
           </SidebarContext.Provider>

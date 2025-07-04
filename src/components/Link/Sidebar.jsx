@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -11,11 +12,22 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
       {/* Sidebar Drawer */}
 
       <div
-        className={`fixed top-16 left-0 h-[calc(100%-4rem)] bg-white text-primarycolor border-r border-[#E5E5E5] transition-transform duration-300  ${
+        className={`fixed left-0 h-full bg-white text-primarycolor border-r border-[#E5E5E5] transition-transform duration-300  ${
           isSidebarOpen ? "translate-x-0 " : "-translate-x-full"
         } w-[80%] md:w-[60%] lg:w-[20%] z-20`}
       >
         <div className="w-full h-full box-border overflow-y-auto">
+          <div className="logo p-4 flex justify-center">
+            <Link href="/" passHref>
+              <Image
+                src="/images/bio/trimmo-black-logo.svg"
+                width={120}
+                height={28}
+                alt="trimmo-black-logo"
+                className="max-w-[120px] hidden md:inline-block cursor-pointer"
+              />
+            </Link>
+          </div>
           {/* Create Button */}
           <div className="border-b p-4">
             <Link
@@ -51,41 +63,6 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
               <GraphUp className="h-5 w-5 font-semibold" />
               <span className="text-sm">Analytics</span>
             </Link>
-
-            {/* Collapsible Settings Section */}
-            <ul className="mt-6 space-y-1">
-              <li>
-                <details className="group [&_summary::-webkit-details-marker]:hidden">
-                  <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-primarycolor bg-[#F5F5F5] hover:bg-whitelight">
-                    <div className="flex gap-2 items-center">
-                      <Gear className="w-5 h-5 fill-primarycolor" />
-                      <span className="text-sm font-medium">Settings</span>
-                    </div>
-                    <ChevronDown className="fill-primarycolor h-4 w-4 group-open:-rotate-180" />
-                  </summary>
-
-                  <ul className="mt-1 rounded">
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm font-medium font-montserrat border-b text-secondarycolor bg-[#F5F5F5] hover:bg-whitelight"
-                      >
-                        Banned Users
-                      </a>
-                    </li>
-
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm font-medium font-montserrat border-b text-secondarycolor bg-[#F5F5F5] hover:bg-whitelight"
-                      >
-                        Calendar
-                      </a>
-                    </li>
-                  </ul>
-                </details>
-              </li>
-            </ul>
 
             <Link
               href={"/link/customizeqr"}

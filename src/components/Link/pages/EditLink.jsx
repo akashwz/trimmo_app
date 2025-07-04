@@ -1,6 +1,7 @@
 "use client";
 import {
   editShortLink,
+  getAllShortLinks,
   getShortLinkById,
   resetEditShortLinkStatus,
 } from "@/redux/slices/customSlice";
@@ -25,6 +26,12 @@ function EditLink() {
   const [shortcode, setShortCode] = useState("");
   const [error, setError] = useState("");
   const [settings, setSettings] = useState(null);
+  const [isGenerated, setIsGenerated] = useState(false);
+
+  const handleGenerateClick = () => {
+    setIsGenerated(true);
+    setDestination(shortLinkByIdData?.destination);
+  };
 
   useEffect(() => {
     dispatch(getShortLinkById(linkId));
@@ -41,6 +48,7 @@ function EditLink() {
         data: shortLinkByIdData?.shorturl || "",
         ...shortLinkByIdData?.qrcode,
       }));
+      setIsGenerated(shortLinkByIdData?.qrcode)
     }
   }, [shortLinkByIdData]);
   console.log(shortLinkByIdData, "shortLinkByIdData");
@@ -51,7 +59,7 @@ function EditLink() {
     }
   }, [editShortLinkStatus]);
 
-  const handleEditShortLink = () => {
+  const handleEditShortLink = async () => {
     if (!destination.trim()) {
       setError("Destination is required.");
       return;
@@ -66,7 +74,13 @@ function EditLink() {
       shortcode,
     };
 
-    dispatch(editShortLink(payload));
+    const response = await dispatch(editShortLink(payload));
+    console.log(response, "response");
+    const payloadData = {
+      page: 1,
+      limit: "all",
+    };
+    await dispatch(getAllShortLinks(payloadData));
   };
 
   useEffect(() => {
@@ -81,8 +95,8 @@ function EditLink() {
   };
   return (
     <>
-      <div className="h-[93vh] flex flex-col w-full">
-        <div className="flex-1 min-h-[200px] overflow-y-auto p-4 bg-gray-100 w-full md:w-[80%] xl:w-[60%] mx-auto">
+      <div className="min-h-[200px] overflow-y-auto flex flex-col w-full">
+        <div className="flex-1 p-4 bg-gray-100 w-full md:w-[80%] xl:w-[60%] mx-auto">
           <section className="text-gray-600 body-font relative">
             <div className="container px-5 py-10 mx-auto">
               <div className="flex flex-col  w-full mb-12">
@@ -195,7 +209,12 @@ function EditLink() {
                 </div>
               </div>
               <div className="w-full bg-white p-5 rounded shadow-sm mt-4">
-                <QRCode settings={settings} setSettings={setSettings} />
+                <QRCode
+                  settings={settings}
+                  setSettings={setSettings}
+                  handleGenerateClick={handleGenerateClick}
+                  isGenerated={isGenerated}
+                />
               </div>
             </div>
           </section>

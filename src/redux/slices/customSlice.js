@@ -60,6 +60,7 @@ export const getCustomizeQR = createAsyncThunk(
         method: "get",
         params,
       });
+      console.log(apiCall?.data?.data, 'apiCall?.data?.data');
       if (apiCall.status === 200 || apiCall.status === 304) {
         // toast.success(apiCall?.data?.message || "Customize QR get successfully");
         return { response: apiCall?.data?.data, isDefault: payload?.is_default };

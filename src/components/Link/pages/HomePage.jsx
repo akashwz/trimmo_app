@@ -22,10 +22,10 @@ import {
   getAllShortLinks,
   getCustomizeQR,
 } from "@/redux/slices/customSlice";
-import ConfirmationPopup from "../ConfirmationPopup";
 import Image from "next/image";
 import QRCodeStyling from "qr-code-styling";
 import CreateLink from "./CreateLink";
+import ConfirmationPopUp from "@/components/Bio/confirmation-popup/ConfirmationPopUp";
 
 function generateRandomCode() {
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -57,6 +57,11 @@ function HomePage() {
 
   const dispatch = useDispatch();
   const { shortLinkData } = useSelector((state) => state.customSlice);
+  const [isGenerated, setIsGenerated] = useState(false);
+
+  const handleGenerateClick = () => {
+    setIsGenerated(true);
+  };
 
   const qrCodeRefs = useRef([]);
   const qrCodeInstances = useRef([]);
@@ -64,6 +69,7 @@ function HomePage() {
 
   useEffect(() => {
     qrCodeRefs.current = qrCodeRefs.current.slice(0, shortLinkData.length);
+    console.log(qrCodeRefs, "qrCodeRefs");
 
     shortLinkData.forEach((link, index) => {
       if (!qrCodeInstances.current[index]) {
@@ -138,8 +144,14 @@ function HomePage() {
 
   const handleInputChange = (e) => {
     const value = e.target.value;
-    setDestination(value);
-    if (e.key === "Enter") {
+
+    const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-./?%&=]*)?$/i;
+
+    if (urlPattern.test(value) || value === "") {
+      setDestination(value);
+    }
+
+    if (e.key === "Enter" && urlPattern.test(value)) {
       handleGenerateLink();
     }
   };
@@ -155,7 +167,7 @@ function HomePage() {
       title,
       domain,
       shortcode,
-      qrcode: settings,
+      qrcode: isGenerated && settings,
     };
     const data = await dispatch(createShortLink(payload));
     if (data?.payload?.success === true) {
@@ -194,10 +206,12 @@ function HomePage() {
           setSettings={setSettings}
           handleChange={handleChange}
           setShortCode={setShortCode}
+          handleGenerateClick={handleGenerateClick}
+          isGenerated={isGenerated}
         />
       )}
-      <div className="h-[93vh] flex flex-col w-full">
-        <div className="flex-1 min-h-[200px] overflow-y-auto p-4 bg-gray-100 w-full md:w-[80%] xl:w-[60%] mx-auto">
+      <div className="min-h-[200px] overflow-y-auto flex flex-col w-full">
+        <div className="flex-1 p-4 bg-gray-100 w-full md:w-[80%] xl:w-[60%] mx-auto">
           <div className="flex flex-col items-center w-full mt-3 max-w-screen-xl mx-3">
             {/* section 1 */}
             <section className=" mt-3 mb-5 lg:mb-5 rounded-lg p-4 shadow-sm sm:p-6 lg:p-8 text-primarycolor bg-white w-full  ">
@@ -244,133 +258,142 @@ function HomePage() {
 
             {/* second section */}
             {shortLinkData &&
-              shortLinkData.map((shortLink, index) => {
-                return (
-                  <section
-                    key={index}
-                    className=" mt-5 lg:mt-8 lg:mb-8 rounded-lg p-4 shadow-sm sm:p-6 lg:p-8 text-primarycolor bg-white w-full  "
-                  >
-                    <fieldset>
-                      <legend className="sr-only">Checkboxes</legend>
+              shortLinkData.map((shortLink, index) => (
+                <section
+                  key={index}
+                  className="mt-5 lg:mt-8 lg:mb-8 rounded-lg shadow-sm text-primarycolor bg-white w-full"
+                >
+                  <fieldset>
+                    <legend className="sr-only">Checkboxes</legend>
 
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="Option1"
-                          className="flex  cursor-pointer items-start gap-4 rounded-lg  p-4 transition hover:bg-gray-50"
-                        >
-                          <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
+                    <div className="space-y-2">
+                      <label className="flex flex-col sm:flex-row flex-wrap cursor-pointer items-start gap-4 rounded-lg p-4 transition hover:bg-gray-50 w-full">
+                        {/* QR Code Section */}
+                        {shortLink?.qrcode ? (
+                          <div
+                            className="flex justify-center items-center rounded-lg h-40 w-40 mx-auto sm:mx-0"
+                            ref={(el) => (qrCodeRefs.current[index] = el)}
+                          />
+                        ) : (
+                          <div className="relative flex items-center justify-center">
                             <div
-                              key={index}
-                              className="flex justify-center flex-col items-center rounded-lg h-40 w-40"
                               ref={(el) => (qrCodeRefs.current[index] = el)}
-                            />
+                              className={`flex justify-center flex-col items-center rounded-lg mb-6 transition-all duration-500 blur-sm`}
+                            ></div>
+                            <Link
+                              href={`/link/edit/${shortLink?._id}`}
+                              className="absolute bg-black text-white px-4 py-2 rounded-md text-sm"
+                            >
+                              Generate QR code
+                            </Link>
+                          </div>
+                        )}
 
-                            <div className="w-[100%]">
-                              <div className="flex flex-col md:flex-row justify-between items-center w-full mb-3">
-                                <h3 className="text-xl font-semibold text-primarycolor font-montserrat line-clamp-2">
-                                  {shortLink?.title || "Elated- Themes - portfolio | ThemeForest"}
-                                </h3>
-                                <div className="sm:inline-flex flex flex-wrap  sm:shrink-0 sm:items-center justify-center sm:gap-1  p-1 rounded">
-                                  <button
-                                    onClick={() => handleCopy(shortLink?.shorturl, index)}
-                                    className="box-border rounded bg-[#F5F5F5] p-1 text-[10px] leading-5 font-medium text-black transition hover:bg-whitelight border flex items-center"
-                                  >
-                                    <Copy className="mr-1 h-4 w-4" />
+                        {/* Right Content */}
+                        <div className="flex-1 w-full min-w-0">
+                          {/* Title & Actions */}
+                          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-2">
+                            <h3 className="text-xl font-semibold text-primarycolor font-montserrat line-clamp-2 break-words max-w-full">
+                              {shortLink?.title || "Elated- Themes - portfolio | ThemeForest"}
+                            </h3>
 
-                                    <span>{copiedIndex === index ? "Copied" : "Copy"}</span>
-                                  </button>
-                                  <button
-                                    onClick={() => handleShareClick(shortLink?.shortcode)}
-                                    className="box-border rounded bg-white p-1 text-[10px] leading-5 font-medium text-black transition hover:bg-whitelight border flex items-center"
-                                  >
-                                    <Share className="mr-1 h-4 w-4" />
-                                    <span>Share</span>
-                                  </button>
-                                  <Link
-                                    href={`/link/edit/${shortLink?._id}`}
-                                    className="box-border rounded bg-white p-1 text-[10px] leading-5 font-medium text-black transition hover:bg-whitelight border flex items-center"
-                                  >
-                                    <Pencil className="h-4 w-4" />
-                                  </Link>
+                            {/* Action Buttons */}
+                            <div className="flex flex-wrap items-center gap-2 mt-2 md:mt-0">
+                              <button
+                                onClick={() => handleCopy(shortLink?.shorturl, index)}
+                                className="box-border rounded bg-[#F5F5F5] p-1 text-[10px] leading-5 font-medium text-black transition hover:bg-whitelight border flex items-center"
+                              >
+                                <Copy className="mr-1 h-4 w-4" />
+                              </button>
 
-                                  <button
-                                    onClick={() => {
-                                      setIsConfirmationPopup(true);
-                                    }}
-                                    className="box-border rounded bg-white p-1 text-[10px] leading-5 font-medium text-black transition hover:bg-whitelight border flex justify-center items-center"
-                                  >
-                                    <Trash className="h-4 w-4" />
-                                  </button>
+                              <button
+                                onClick={() => handleShareClick(shortLink?.shortcode)}
+                                className="box-border rounded bg-white p-1 text-[10px] leading-5 font-medium text-black transition hover:bg-whitelight border flex items-center"
+                              >
+                                <Share className="mr-1 h-4 w-4" />
+                              </button>
 
-                                  <ConfirmationPopup
-                                    isOpen={isConfirmationPopup}
-                                    onClose={() => setIsConfirmationPopup(false)}
-                                    title="Delete Item"
-                                    subheading="Are you sure you want to delete this item? "
-                                    confirmText="Yes, Delete"
-                                    onConfirm={() => {
-                                      handleDeleteShortLinkClick(shortLink?._id);
-                                    }}
-                                  />
-                                </div>
+                              <Link
+                                href={`/link/edit/${shortLink?._id}`}
+                                className="box-border rounded bg-white p-1 text-[10px] leading-5 font-medium text-black transition hover:bg-whitelight border flex items-center"
+                              >
+                                <Pencil className="h-4 w-4" />
+                              </Link>
+
+                              <button
+                                onClick={() => setIsConfirmationPopup(true)}
+                                className="box-border rounded bg-white p-1 text-[10px] leading-5 font-medium text-black transition hover:bg-whitelight border flex items-center"
+                              >
+                                <Trash className="h-4 w-4" />
+                              </button>
+
+                              {/* Confirmation Popup */}
+                              <ConfirmationPopUp
+                                heading="Delete Item"
+                                subheading="Are you sure you want to delete this item?"
+                                confirmationPopup={isConfirmationPopup}
+                                runFunction={() => handleDeleteShortLinkClick(shortLink?._id)}
+                                handleCloseConfirm={() => setIsConfirmationPopup(false)}
+                                confirmButton="Yes"
+                              />
+                            </div>
+                          </div>
+
+                          {/* Links Section */}
+                          <div className="w-full">
+                            <div className="mb-2 hover:underline truncate">
+                              <Link
+                                target="_blank"
+                                href={shortLink?.shorturl || "http://super-long-link.com"}
+                                className="text-[#1276D2] font-medium text-sm"
+                              >
+                                {shortLink?.shorturl || "http://super-long-link.com"}
+                              </Link>
+                            </div>
+
+                            <div className="mb-3 hover:underline truncate max-w-md">
+                              <Link
+                                target="_blank"
+                                href={shortLink?.destination}
+                                alt="longLink"
+                                className="text-secondarycolor text-[16px] font-normal truncate block"
+                              >
+                                {shortLink?.destination || "http://super-long-link.com/shorten-it"}
+                              </Link>
+                            </div>
+
+                            {/* Meta Info */}
+                            <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
+                              <div className="flex items-center gap-1">
+                                <BarChartLineFill className="h-4 w-4 text-primarycolor fill-primarycolor" />
                               </div>
 
-                              <div className="max-w-[70%]">
-                                <div className="mb-3 hover:underline">
-                                  <Link
-                                    target="_blank"
-                                    href={shortLink?.shorturl || "http://super-long-link.com"}
-                                    className="text-[#1276D2] font-medium text-sm mb-3"
-                                  >
-                                    {shortLink?.shorturl || "http://super-long-link.com"}
-                                  </Link>
-                                </div>
-                                <div className="mb-3 hover:underline">
-                                  <Link
-                                    target="_blank"
-                                    href={shortLink?.destination}
-                                    alt="longLink"
-                                    className="text-secondarycolor text-[16px] font-normal mb-3"
-                                  >
-                                    {shortLink?.destination ||
-                                      "http://super-long-link.com/shorten-it"}
-                                  </Link>
-                                </div>
-                                <div className="mt-6 flex  flex-wrap items-center gap-2 text-xs">
-                                  <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-1">
-                                    <BarChartLineFill className="h-4 w-4 text-primarycolor fill-primarycolor" />
-                                  </div>
-                                  <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-1 bg-[#F5F5F5] p-1 rounded">
-                                    <Lock className="h-4 w-[10px] text-primarycolor fill-primarycolor" />
+                              <div className="flex items-center gap-1 bg-[#F5F5F5] p-1 rounded">
+                                <Lock className="h-4 w-[10px] text-primarycolor fill-primarycolor" />
+                                <p className="text-primarycolor font-normal text-[10px]">
+                                  Click data
+                                </p>
+                              </div>
 
-                                    <p className="text-primarycolor font-normal text-[10px]">
-                                      Click data
-                                    </p>
-                                  </div>
-                                  <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-1  p-1 rounded">
-                                    <Calendar className="h-4 w-[10px] text-primarycolor fill-primarycolor" />
+                              <div className="flex items-center gap-1 p-1 rounded">
+                                <Calendar className="h-4 w-[10px] text-primarycolor fill-primarycolor" />
+                                <p className="text-primarycolor font-normal text-[10px]">
+                                  {formatDate(shortLink?.createdAt)}
+                                </p>
+                              </div>
 
-                                    <p className="text-primarycolor font-normal text-[10px]">
-                                      {formatDate(shortLink?.createdAt)}
-                                    </p>
-                                  </div>
-                                  <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-1  p-1 rounded">
-                                    <Tag className="h-4 w-[10px]  fill-primarycolor" />
-
-                                    <p className="text-primarycolor font-normal text-[10px]">
-                                      No tags
-                                    </p>
-                                  </div>
-                                </div>
+                              <div className="flex items-center gap-1 p-1 rounded">
+                                <Tag className="h-4 w-[10px] fill-primarycolor" />
+                                <p className="text-primarycolor font-normal text-[10px]">No tags</p>
                               </div>
                             </div>
                           </div>
-                        </label>
-                      </div>
-                    </fieldset>
-                  </section>
-                );
-              })}
+                        </div>
+                      </label>
+                    </div>
+                  </fieldset>
+                </section>
+              ))}
           </div>
         </div>
       </div>

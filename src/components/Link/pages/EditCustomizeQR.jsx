@@ -99,7 +99,7 @@ function EditCustomizeQR() {
 
   useEffect(() => {
     if (editCustomizeQrStatus === "success") {
-      router.push("/customizeqr");
+      router.push("/link/customizeqr");
       dispatch(resetEditCustomizeQrStatus());
     }
   }, [editCustomizeQrStatus]);
@@ -148,7 +148,12 @@ function EditCustomizeQR() {
                     />
                   </div>
                 </div>
-                <QRCode settings={settings} setSettings={setSettings} />
+                <QRCode
+                  settings={settings}
+                  setSettings={setSettings}
+                  // handleGenerateClick={handleGenerateClick}
+                  isGenerated="false"
+                />
               </div>
             </div>
           </section>
@@ -157,7 +162,7 @@ function EditCustomizeQR() {
         {/* bottom fixed section */}
         <div className="sticky bottom-0 flex items-center justify-between p-4 bg-white border-t ">
           <button
-            onClick={() => router.push("/customizeqr")}
+            onClick={() => router.push("/link/customizeqr")}
             className="box-border rounded bg-whitelight px-2 sm:px-5 md:px-7 py-2.5 text-[16px] leading-5 font-medium text-[#050505] transition hover:text-[#267e55] border hover:border-themeGreen"
           >
             Cancel

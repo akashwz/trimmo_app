@@ -83,19 +83,21 @@ function CreateLink({
   setSettings,
   handleChange,
   setShortCode,
+  isGenerated,
+  handleGenerateClick
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const { createShortLinkStatus, customizeQRData } = useSelector((state) => state.customSlice);
   const [shortUrl, setShortUrl] = useState(`${domain}/${shortCode}`);
-
+ 
   useEffect(() => {
-    dispatch(getCustomizeQR({ is_default: true }));
-    if (customizeQRData?.customize) {
-      setSettings(customizeQRData?.customize);
-    } else {
-      setSettings(defaultSettings);
-    }
+    dispatch(getCustomizeQR());
+    // if (customizeQRData?.customize) {
+    //   setSettings(customizeQRData?.customize);
+    // } else {
+    //   setSettings(defaultSettings);
+    // }
   }, []);
 
   useEffect(() => {
@@ -241,7 +243,7 @@ function CreateLink({
                   </div>
                 </div>
 
-                <GenerateQR settings={settings} setSettings={setSettings} destination={shortUrl} />
+                <GenerateQR settings={settings} setSettings={setSettings} destination={shortUrl} handleGenerateClick={handleGenerateClick} isGenerated={isGenerated} />
               </div>
             </section>
           </div>

@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Pencil, Trash } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
-import ConfirmationPopup from "../ConfirmationPopup";
 import SharePopup from "../SharePopup";
+import ConfirmationPopUp from "@/components/Bio/confirmation-popup/ConfirmationPopUp";
 
 function CustomizeqrPage() {
   const [openSharePopup, setOpenSharePopup] = useState(false);
@@ -81,16 +81,16 @@ function CustomizeqrPage() {
 
       {/* ✅ ConfirmationPopup rendered once, outside map */}
       {isConfirmationPopup && (
-        <ConfirmationPopup
-          isOpen={isConfirmationPopup}
-          onClose={() => {
+        <ConfirmationPopUp
+          heading="Delete Item"
+          subheading="Are you sure you want to delete this item?"
+          confirmationPopup={isConfirmationPopup}
+          runFunction={() => handleDeleteShortLinkClick(selectedDeleteId)}
+          handleCloseConfirm={() => {
             setIsConfirmationPopup(false);
             setSelectedDeleteId(null);
           }}
-          title="Delete Item"
-          subheading="Are you sure you want to delete this item?"
-          confirmText="Yes, Delete"
-          onConfirm={() => handleDeleteShortLinkClick(selectedDeleteId)}
+          confirmButton="Yes"
         />
       )}
     </>

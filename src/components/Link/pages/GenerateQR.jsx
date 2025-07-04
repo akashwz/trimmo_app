@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import QRCode from "../QRCode";
 
-const GenerateQR = ({ settings, setSettings, destination }) => {
+const GenerateQR = ({ settings, setSettings, destination, handleGenerateClick, isGenerated }) => {
   const [isToggled, setIsToggled] = useState(false);
-console.log({ settings, setSettings, destination }, "{ settings, setSettings, destination }");
+  console.log({ settings, setSettings, destination }, "{ settings, setSettings, destination }");
   const handleToggle = () => {
     setIsToggled(!isToggled);
   };
@@ -16,6 +16,8 @@ console.log({ settings, setSettings, destination }, "{ settings, setSettings, de
             setSettings={setSettings}
             showButton={true}
             destination={destination}
+            handleGenerateClick={handleGenerateClick}
+            isGenerated={isGenerated}
           />
         </section>
       </div>

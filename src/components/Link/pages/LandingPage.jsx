@@ -22,6 +22,7 @@ import TestimonialsSection from "@/components/appLending/TestimonialsSection";
 import { FAQSection } from "@/components/appLending/FAQSection";
 import FinalCTASectionBg from "@/components/appLending/FinalCTASectionBg";
 import Footer from "@/components/common/Footer";
+import Header from "@/components/appLending/Header";
 
 export default function LandingPage() {
   const dispatch = useDispatch();
@@ -370,6 +371,7 @@ export default function LandingPage() {
           </div>
         </section>
         <Footer /> */}
+        <Header link={true} />
         <HeroSection />
         <ConnectionsPlatform />
         <CreatorsSection />

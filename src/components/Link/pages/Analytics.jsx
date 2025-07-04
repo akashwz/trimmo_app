@@ -41,27 +41,27 @@ function Analytics() {
     }
   }, [fromDate, toDate]);
 
-  // const data = {
-  //   labels: analyticsData.map((item) => item.date), // Dates (X-axis)
-  //   datasets: [
-  //     {
-  //       label: "Clicks",
-  //       data: analyticsData.map((item) => item.clicks), // Clicks (Y-axis)
-  //       borderColor: "#10B981", // Tailwind green-500
-  //       backgroundColor: "rgba(16, 185, 129, 0.2)",
-  //       tension: 0.4, // Curved lines
-  //       fill: true, // Make it filled under the curve
-  //     },
-  //     {
-  //       label: "Scans",
-  //       data: analyticsData.map((item) => item.scans), // Scans (Y-axis)
-  //       borderColor: "#3B82F6", // Tailwind blue-500
-  //       backgroundColor: "rgba(59, 130, 246, 0.2)",
-  //       tension: 0.4, // Curved lines
-  //       fill: true, // Make it filled under the curve
-  //     },
-  //   ],
-  // };
+  const data = {
+    labels: analyticsData.map((item) => item.date), // Dates (X-axis)
+    datasets: [
+      {
+        label: "Clicks",
+        data: analyticsData.map((item) => item.clicks), // Clicks (Y-axis)
+        borderColor: "#10B981", // Tailwind green-500
+        backgroundColor: "rgba(16, 185, 129, 0.2)",
+        tension: 0.4, // Curved lines
+        fill: true, // Make it filled under the curve
+      },
+      {
+        label: "Scans",
+        data: analyticsData.map((item) => item.scans), // Scans (Y-axis)
+        borderColor: "#3B82F6", // Tailwind blue-500
+        backgroundColor: "rgba(59, 130, 246, 0.2)",
+        tension: 0.4, // Curved lines
+        fill: true, // Make it filled under the curve
+      },
+    ],
+  };
 
   // Sample data with dates and click values
 
@@ -74,7 +74,7 @@ function Analytics() {
   ];
 
   const filterData = () => {
-    const filtered = allData.filter(
+    const filtered = analyticsData.filter(
       (item) => (fromDate ? item.date >= fromDate : true) && (toDate ? item.date <= toDate : true),
     );
     setFilteredData(filtered);
@@ -83,29 +83,6 @@ function Analytics() {
   useEffect(() => {
     filterData();
   }, [fromDate, toDate]);
-
-  // Chart data - Replace filteredData with analyticsData
-  const data = {
-    labels: filteredData.map((item) => item.date), // Dates (X-axis)
-    datasets: [
-      {
-        label: "Clicks",
-        data: filteredData.map((item) => item.clicks), // Clicks (Y-axis)
-        borderColor: "#10B981", // Tailwind green-500
-        backgroundColor: "rgba(16, 185, 129, 0.2)",
-        tension: 0.4,
-        fill: true,
-      },
-      {
-        label: "Scans",
-        data: filteredData.map((item) => item.scans), // Scans (Y-axis)
-        borderColor: "#3B82F6", // Tailwind blue-500
-        backgroundColor: "rgba(59, 130, 246, 0.2)",
-        tension: 0.4, // Curved lines
-        fill: true, // Make it filled under the curve
-      },
-    ],
-  };
 
   const options = {
     responsive: true,

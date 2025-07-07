@@ -60,7 +60,7 @@ export const getCustomizeQR = createAsyncThunk(
         method: "get",
         params,
       });
-      console.log(apiCall?.data?.data, 'apiCall?.data?.data');
+      console.log(apiCall?.data?.data, "apiCall?.data?.data");
       if (apiCall.status === 200 || apiCall.status === 304) {
         // toast.success(apiCall?.data?.message || "Customize QR get successfully");
         return { response: apiCall?.data?.data, isDefault: payload?.is_default };
@@ -261,6 +261,37 @@ const initialState = {
   analyticsStatus: "idle",
   analyticsData: [],
   analyticsError: "error",
+
+  qr_setting: {
+    colorType: "single",
+    gradientType: "linear",
+    gradientColors: {
+      startColor: "#6B2A61",
+      endColor: "#6B2A61",
+    },
+    rotation: 0,
+    colorTypeCorner: "single",
+    gradientTypeCorner: "linear",
+    gradientColorsCorner: {
+      startColor: "#6B2A61",
+      endColor: "#6B2A61",
+    },
+    rotationCorner: 0,
+    gradientColorsCornerDot: {
+      startColor: "#6B2A61",
+      endColor: "#6B2A61",
+    },
+    rotationCornerDot: 0,
+    colorTypeCornerDot: "single",
+    gradientTypeCornerDot: "linear",
+    colorTypeBackground: "single",
+    gradientTypeBackground: "linear",
+    gradientColorsBackground: {
+      startColor: "#6B2A61",
+      endColor: "#6B2A61",
+    },
+    rotationBackground: 0,
+  },
 };
 
 export const customSlice = createSlice({
@@ -279,6 +310,19 @@ export const customSlice = createSlice({
 
     incrementByAmount: (state, action) => {
       state.value += action.payload;
+    },
+    updateQrSetting: (state, action) => {
+      const { parentKey, subKey, value } = action.payload;
+      console.log(parentKey, subKey, value, "parentKey, subKey, value");
+      if (subKey) {
+        // Update a nested key
+        if (state.qr_setting[parentKey]) {
+          state.qr_setting[parentKey][subKey] = value;
+        }
+      } else {
+        // Update a top-level key
+        state.qr_setting[parentKey] = value;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -407,6 +451,7 @@ export const {
   resetCreateShortLinkStatus,
   resetEditShortLinkStatus,
   resetEditCustomizeQrStatus,
+  updateQrSetting,
 } = customSlice.actions;
 
 export default customSlice.reducer;

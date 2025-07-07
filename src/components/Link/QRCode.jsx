@@ -1,6 +1,6 @@
 "use client";
 
-import { customizeQR, getCustomizeQR } from "@/redux/slices/customSlice";
+import { customizeQR, getCustomizeQR, updateQrSetting } from "@/redux/slices/customSlice";
 import QRCodeStyling from "qr-code-styling";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,40 +18,10 @@ const QRCode = ({
   const qrCodeInstance = useRef(null);
   const dispatch = useDispatch();
   console.log(settings, "settings");
-  const { customizeQRList } = useSelector((state) => state.customSlice);
+  const { customizeQRList, qr_setting } = useSelector((state) => state.customSlice);
   console.log(customizeQRList, "customizeQRList");
-
+  console.log("qr_setting-=-=", qr_setting);
   const [message, setMessage] = useState("");
-  const [colorType, setColorType] = useState("single");
-  const [gradientType, setGradientType] = useState("linear");
-  const [gradientColors, setGradientColors] = useState({
-    startColor: "#6B2A61",
-    endColor: "#6B2A61",
-  });
-  const [rotation, setRotation] = useState(0);
-  const [colorTypeCorner, setColorTypeCorner] = useState("single");
-  const [gradientTypeCorner, setGradientTypeCorner] = useState("linear");
-  const [gradientColorsCorner, setGradientColorsCorner] = useState({
-    startColor: "#6B2A61",
-    endColor: "#6B2A61",
-  });
-  const [rotationCorner, setRotationCorner] = useState(0);
-
-  const [colorTypeCornerDot, setColorTypeCornerDot] = useState("single");
-  const [gradientTypeCornerDot, setGradientTypeCornerDot] = useState("linear");
-  const [gradientColorsCornerDot, setGradientColorsCornerDot] = useState({
-    startColor: "#6B2A61",
-    endColor: "#6B2A61",
-  });
-  const [rotationCornerDot, setRotationCornerDot] = useState(0);
-
-  const [colorTypeBackground, setColorTypeBackground] = useState("single");
-  const [gradientTypeBackground, setGradientTypeBackground] = useState("linear");
-  const [gradientColorsBackground, setGradientColorsBackground] = useState({
-    startColor: "#6B2A61",
-    endColor: "#6B2A61",
-  });
-  const [rotationBackground, setRotationBackground] = useState(0);
 
   useEffect(() => {
     qrCodeInstance.current = new QRCodeStyling(settings);
@@ -130,53 +100,74 @@ const QRCode = ({
   };
 
   const handleColorTypeChange = (type) => {
-    setColorType(type);
+    dispatch(
+      updateQrSetting({
+        parentKey: "colorType",
+        subKey: null,
+        value: type,
+      }),
+    );
     if (type === "single") {
-      handleNestedChange("dotsOptions", "color", gradientColors.startColor);
+      handleNestedChange("dotsOptions", "color", qr_setting.gradientColors?.startColor);
       handleNestedChange("dotsOptions", "gradient", null);
     } else {
       handleNestedChange("dotsOptions", "gradient", {
-        type: gradientType,
-        rotation,
+        type: qr_setting["gradientType"],
+        rotation: qr_setting["rotation"],
         colorStops: [
-          { offset: 0, color: gradientColors.startColor },
-          { offset: 1, color: gradientColors.endColor },
+          { offset: 0, color: qr_setting.gradientColors?.startColor },
+          { offset: 1, color: qr_setting.gradientColors?.endColor },
         ],
       });
     }
   };
 
   const handleGradientColorChange = (key, value) => {
-    setGradientColors((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    dispatch(
+      updateQrSetting({
+        parentKey: "gradientColors",
+        subKey: key,
+        value: value,
+      }),
+    );
 
     handleNestedChange("dotsOptions", "gradient", {
-      type: gradientType,
-      rotation,
+      type: qr_setting["gradientType"],
+      rotation: qr_setting["rotation"],
       colorStops: [
-        { offset: 0, color: key === "startColor" ? value : gradientColors.startColor },
-        { offset: 1, color: key === "endColor" ? value : gradientColors.endColor },
+        { offset: 0, color: key === "startColor" ? value : qr_setting.gradientColors?.startColor },
+        { offset: 1, color: key === "endColor" ? value : qr_setting.gradientColors?.endColor },
       ],
     });
   };
 
   const handleRotationChange = (value) => {
-    setRotation(value);
+    dispatch(
+      updateQrSetting({
+        parentKey: "rotation",
+        subKey: null,
+        value: value,
+      }),
+    );
     handleNestedChange("dotsOptions", "gradient", {
-      type: gradientType,
+      type: qr_setting["gradientType"],
       rotation: value,
       colorStops: [
-        { offset: 0, color: gradientColors.startColor },
-        { offset: 1, color: gradientColors.endColor },
+        { offset: 0, color: qr_setting.gradientColors?.startColor },
+        { offset: 1, color: qr_setting.gradientColors?.endColor },
       ],
     });
   };
 
   const handleGradientTypeChange = (type) => {
-    setGradientType(type);
-
+    console.log(type, "type=-=>");
+    dispatch(
+      updateQrSetting({
+        parentKey: "gradientType",
+        subKey: null,
+        value: type,
+      }),
+    );
     setSettings((prev) => ({
       ...prev,
       dotsOptions: {
@@ -184,7 +175,7 @@ const QRCode = ({
         gradient: {
           ...prev.dotsOptions.gradient,
           type,
-          rotation,
+          rotation: qr_setting["rotation"],
         },
       },
     }));
@@ -201,52 +192,83 @@ const QRCode = ({
   };
 
   const handleColorTypeChangeCorner = (type) => {
-    setColorTypeCorner(type);
+    dispatch(
+      updateQrSetting({
+        parentKey: "colorTypeCorner",
+        subKey: null,
+        value: type,
+      }),
+    );
     if (type === "single") {
-      handleNestedChangeCorner("cornersSquareOptions", "color", gradientColorsCorner.startColor);
+      handleNestedChangeCorner(
+        "cornersSquareOptions",
+        "color",
+        qr_setting?.gradientColorsCorner?.startColor,
+      );
       handleNestedChangeCorner("cornersSquareOptions", "gradient", null);
     } else {
       handleNestedChangeCorner("cornersSquareOptions", "gradient", {
-        type: gradientTypeCorner,
-        rotation,
+        type: qr_setting["gradientTypeCorner"],
+        rotation: qr_setting["rotationCornerDot"], // use correct rotation for corner
         colorStops: [
-          { offset: 0, color: gradientColorsCorner.startColor },
-          { offset: 1, color: gradientColorsCorner.endColor },
+          { offset: 0, color: qr_setting?.gradientColorsCorner?.startColor },
+          { offset: 1, color: qr_setting?.gradientColorsCorner?.endColor },
         ],
       });
     }
   };
 
   const handleGradientColorChangeCorner = (key, value) => {
-    setGradientColorsCorner((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    dispatch(
+      updateQrSetting({
+        parentKey: "gradientColorsCorner",
+        subKey: key,
+        value: value,
+      }),
+    );
 
     handleNestedChangeCorner("cornersSquareOptions", "gradient", {
-      type: gradientTypeCorner,
-      rotation,
+      type: qr_setting["gradientTypeCorner"],
+      rotation: qr_setting["rotation"],
       colorStops: [
-        { offset: 0, color: key === "startColor" ? value : gradientColorsCorner.startColor },
-        { offset: 1, color: key === "endColor" ? value : gradientColorsCorner.endColor },
+        {
+          offset: 0,
+          color: key === "startColor" ? value : qr_setting?.gradientColorsCorner?.startColor,
+        },
+        {
+          offset: 1,
+          color: key === "endColor" ? value : qr_setting?.gradientColorsCorner?.endColor,
+        },
       ],
     });
   };
 
   const handleRotationChangeCorner = (value) => {
-    setRotationCorner(value);
+    dispatch(
+      updateQrSetting({
+        parentKey: "rotationCorner",
+        subKey: null,
+        value: value,
+      }),
+    );
     handleNestedChangeCorner("cornersSquareOptions", "gradient", {
-      type: gradientTypeCorner,
+      type: qr_setting["gradientTypeCorner"],
       rotation: value,
       colorStops: [
-        { offset: 0, color: gradientColorsCorner.startColor },
-        { offset: 1, color: gradientColorsCorner.endColor },
+        { offset: 0, color: qr_setting?.gradientColorsCorner?.startColor },
+        { offset: 1, color: qr_setting?.gradientColorsCorner?.endColor },
       ],
     });
   };
 
   const handleGradientTypeChangeCorner = (type) => {
-    setGradientTypeCorner(type);
+    dispatch(
+      updateQrSetting({
+        parentKey: "gradientTypeCorner",
+        subKey: null,
+        value: type,
+      }),
+    );
 
     setSettings((prev) => ({
       ...prev,
@@ -255,7 +277,7 @@ const QRCode = ({
         gradient: {
           ...prev.cornersSquareOptions.gradient,
           type,
-          rotation,
+          rotation: qr_setting["rotation"],
         },
       },
     }));
@@ -272,52 +294,83 @@ const QRCode = ({
   };
 
   const handleColorTypeChangeCornerDot = (type) => {
-    setColorTypeCornerDot(type);
+    dispatch(
+      updateQrSetting({
+        parentKey: "colorTypeCornerDot",
+        subKey: null,
+        value: type,
+      }),
+    );
     if (type === "single") {
-      handleNestedChangeCornerDot("cornersDotOptions", "color", gradientColorsCornerDot.startColor);
+      handleNestedChangeCornerDot(
+        "cornersDotOptions",
+        "color",
+        qr_setting?.gradientColorsCornerDot.startColor,
+      );
       handleNestedChangeCornerDot("cornersDotOptions", "gradient", null);
     } else {
       handleNestedChangeCornerDot("cornersDotOptions", "gradient", {
-        type: gradientTypeCornerDot,
-        rotation,
+        type: qr_setting?.gradientTypeCornerDot,
+        rotation: qr_setting["rotation"],
         colorStops: [
-          { offset: 0, color: gradientColorsCornerDot.startColor },
-          { offset: 1, color: gradientColorsCornerDot.endColor },
+          { offset: 0, color: qr_setting?.gradientColorsCornerDot.startColor },
+          { offset: 1, color: qr_setting?.gradientColorsCornerDot.endColor },
         ],
       });
     }
   };
 
   const handleGradientColorChangeCornerDot = (key, value) => {
-    setGradientColorsCornerDot((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    dispatch(
+      updateQrSetting({
+        parentKey: "gradientColorsCornerDot",
+        subKey: key,
+        value: value,
+      }),
+    );
 
     handleNestedChangeCornerDot("cornersDotOptions", "gradient", {
-      type: gradientTypeCornerDot,
-      rotation,
+      type: qr_setting?.gradientTypeCornerDot,
+      rotation: qr_setting["rotation"],
       colorStops: [
-        { offset: 0, color: key === "startColor" ? value : gradientColorsCornerDot.startColor },
-        { offset: 1, color: key === "endColor" ? value : gradientColorsCornerDot.endColor },
+        {
+          offset: 0,
+          color: key === "startColor" ? value : qr_setting?.gradientColorsCornerDot.startColor,
+        },
+        {
+          offset: 1,
+          color: key === "endColor" ? value : qr_setting?.gradientColorsCornerDot.endColor,
+        },
       ],
     });
   };
 
   const handleRotationChangeCornerDot = (value) => {
-    setRotationCornerDot(value);
+    dispatch(
+      updateQrSetting({
+        parentKey: "rotationCornerDot",
+        subKey: null,
+        value: value,
+      }),
+    );
     handleNestedChangeCornerDot("cornersDotOptions", "gradient", {
-      type: gradientTypeCornerDot,
+      type: qr_setting?.gradientTypeCornerDot,
       rotation: value,
       colorStops: [
-        { offset: 0, color: gradientColorsCornerDot.startColor },
-        { offset: 1, color: gradientColorsCornerDot.endColor },
+        { offset: 0, color: qr_setting?.gradientColorsCornerDot.startColor },
+        { offset: 1, color: qr_setting?.gradientColorsCornerDot.endColor },
       ],
     });
   };
 
   const handleGradientTypeChangeCornerDot = (type) => {
-    setGradientTypeCornerDot(type);
+    dispatch(
+      updateQrSetting({
+        parentKey: "gradientTypeCornerDot",
+        subKey: null,
+        value: type,
+      }),
+    );
 
     setSettings((prev) => ({
       ...prev,
@@ -326,7 +379,7 @@ const QRCode = ({
         gradient: {
           ...prev.cornersDotOptions.gradient,
           type,
-          rotation,
+          rotation: qr_setting["rotation"],
         },
       },
     }));
@@ -343,56 +396,83 @@ const QRCode = ({
   };
 
   const handleColorTypeChangeBackground = (type) => {
-    setColorTypeBackground(type);
+    dispatch(
+      updateQrSetting({
+        parentKey: "colorTypeBackground",
+        subKey: null,
+        value: type,
+      }),
+    );
     if (type === "single") {
       handleNestedChangeBackground(
         "backgroundOptions",
         "color",
-        gradientColorsBackground.startColor,
+        qr_setting?.gradientColorsBackground.startColor,
       );
       handleNestedChangeBackground("backgroundOptions", "gradient", null);
     } else {
       handleNestedChangeBackground("backgroundOptions", "gradient", {
-        type: gradientTypeBackground,
-        rotation,
+        type: qr_setting?.gradientTypeBackground,
+        rotation: qr_setting["rotation"],
         colorStops: [
-          { offset: 0, color: gradientColorsBackground.startColor },
-          { offset: 1, color: gradientColorsBackground.endColor },
+          { offset: 0, color: qr_setting?.gradientColorsBackground.startColor },
+          { offset: 1, color: qr_setting?.gradientColorsBackground.endColor },
         ],
       });
     }
   };
 
   const handleGradientColorChangeBackground = (key, value) => {
-    setGradientColorsBackground((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    dispatch(
+      updateQrSetting({
+        parentKey: "gradientColorsBackground",
+        subKey: key,
+        value: value,
+      }),
+    );
 
     handleNestedChangeBackground("backgroundOptions", "gradient", {
-      type: gradientTypeBackground,
-      rotation,
+      type: qr_setting?.gradientTypeBackground,
+      rotation: qr_setting["rotation"],
       colorStops: [
-        { offset: 0, color: key === "startColor" ? value : gradientColorsBackground.startColor },
-        { offset: 1, color: key === "endColor" ? value : gradientColorsBackground.endColor },
+        {
+          offset: 0,
+          color: key === "startColor" ? value : qr_setting?.gradientColorsBackground.startColor,
+        },
+        {
+          offset: 1,
+          color: key === "endColor" ? value : qr_setting?.gradientColorsBackground.endColor,
+        },
       ],
     });
   };
 
   const handleRotationChangeBackground = (value) => {
-    setRotationBackground(value);
+    dispatch(
+      updateQrSetting({
+        parentKey: "rotationBackground",
+        subKey: null,
+        value: value,
+      }),
+    );
     handleNestedChangeBackground("backgroundOptions", "gradient", {
-      type: gradientTypeBackground,
+      type: qr_setting?.gradientTypeBackground,
       rotation: value,
       colorStops: [
-        { offset: 0, color: gradientColorsBackground.startColor },
-        { offset: 1, color: gradientColorsBackground.endColor },
+        { offset: 0, color: qr_setting?.gradientColorsBackground.startColor },
+        { offset: 1, color: qr_setting?.gradientColorsBackground.endColor },
       ],
     });
   };
 
   const handleGradientTypeChangeBackground = (type) => {
-    setGradientTypeBackground(type);
+    dispatch(
+      updateQrSetting({
+        parentKey: "gradientTypeBackground",
+        subKey: null,
+        value: type,
+      }),
+    );
 
     setSettings((prev) => ({
       ...prev,
@@ -401,7 +481,7 @@ const QRCode = ({
         gradient: {
           ...prev.backgroundOptions.gradient,
           type,
-          rotation,
+          rotation: qr_setting["rotation"],
         },
       },
     }));
@@ -565,7 +645,7 @@ const QRCode = ({
                     <input
                       type="radio"
                       value="single"
-                      checked={colorType === "single"}
+                      checked={qr_setting["colorType"] === "single"}
                       onChange={() => handleColorTypeChange("single")}
                       className="mr-1"
                     />
@@ -575,7 +655,7 @@ const QRCode = ({
                     <input
                       type="radio"
                       value="gradient"
-                      checked={colorType === "gradient"}
+                      checked={qr_setting["colorType"] === "gradient"}
                       onChange={() => handleColorTypeChange("gradient")}
                       className="mr-1"
                     />
@@ -583,7 +663,7 @@ const QRCode = ({
                   </label>
                 </div>
 
-                {colorType === "single" && (
+                {qr_setting["colorType"] === "single" && (
                   <>
                     <div className="flex gap-4">
                       <label className="block text-gray-700 font-medium mb-1">Dots Color</label>
@@ -597,7 +677,7 @@ const QRCode = ({
                   </>
                 )}
 
-                {colorType === "gradient" && (
+                {qr_setting["colorType"] === "gradient" && (
                   <>
                     <div className="flex gap-4 my-2">
                       <label className="block font-medium mb-1">Gradient Type</label>
@@ -606,7 +686,7 @@ const QRCode = ({
                           <input
                             type="radio"
                             value="linear"
-                            checked={gradientType === "linear"}
+                            checked={qr_setting["gradientType"] === "linear"}
                             onChange={() => handleGradientTypeChange("linear")}
                             className="mr-1"
                           />
@@ -616,7 +696,7 @@ const QRCode = ({
                           <input
                             type="radio"
                             value="radial"
-                            checked={gradientType === "radial"}
+                            checked={qr_setting["gradientType"] === "radial"}
                             onChange={() => handleGradientTypeChange("radial")}
                             className="mr-1"
                           />
@@ -628,13 +708,13 @@ const QRCode = ({
                       <label className="block font-medium mb-1">Dots Gradient</label>
                       <input
                         type="color"
-                        value={gradientColors.startColor}
+                        value={qr_setting.gradientColors?.startColor}
                         onChange={(e) => handleGradientColorChange("startColor", e.target.value)}
                         className="border-2 border-gray-300 cursor-pointer"
                       />
                       <input
                         type="color"
-                        value={gradientColors.endColor}
+                        value={qr_setting.gradientColors?.endColor}
                         onChange={(e) => handleGradientColorChange("endColor", e.target.value)}
                         className="border-2 border-gray-300 cursor-pointer"
                       />
@@ -643,7 +723,7 @@ const QRCode = ({
                     <label className="block font-medium mb-1">Rotation</label>
                     <input
                       type="number"
-                      value={rotation}
+                      value={qr_setting["rotation"]}
                       onChange={(e) => handleRotationChange(Number(e.target.value))}
                       className="border rounded-lg px-4 py-2 w-full"
                     />
@@ -672,7 +752,7 @@ const QRCode = ({
                     <input
                       type="radio"
                       value="single"
-                      checked={colorTypeCorner === "single"}
+                      checked={qr_setting?.["colorTypeCorner"] === "single"}
                       onChange={() => handleColorTypeChangeCorner("single")}
                       className="mr-1"
                     />
@@ -682,7 +762,7 @@ const QRCode = ({
                     <input
                       type="radio"
                       value="gradient"
-                      checked={colorTypeCorner === "gradient"}
+                      checked={qr_setting?.["colorTypeCorner"] === "gradient"}
                       onChange={() => handleColorTypeChangeCorner("gradient")}
                       className="mr-1"
                     />
@@ -690,7 +770,7 @@ const QRCode = ({
                   </label>
                 </div>
 
-                {colorTypeCorner === "single" && (
+                {qr_setting?.["colorTypeCorner"] === "single" && (
                   <>
                     <div className="flex gap-4">
                       <label className="block text-gray-700 font-medium mb-1">Dots Color</label>
@@ -706,7 +786,7 @@ const QRCode = ({
                   </>
                 )}
 
-                {colorTypeCorner === "gradient" && (
+                {qr_setting?.["colorTypeCorner"] === "gradient" && (
                   <>
                     <div className="flex gap-4 my-2">
                       <label className="block font-medium mb-1">Gradient Type</label>
@@ -715,7 +795,7 @@ const QRCode = ({
                           <input
                             type="radio"
                             value="linear"
-                            checked={gradientTypeCorner === "linear"}
+                            checked={qr_setting["gradientTypeCorner"] === "linear"}
                             onChange={() => handleGradientTypeChangeCorner("linear")}
                             className="mr-1"
                           />
@@ -725,7 +805,7 @@ const QRCode = ({
                           <input
                             type="radio"
                             value="radial"
-                            checked={gradientTypeCorner === "radial"}
+                            checked={qr_setting["gradientTypeCorner"] === "radial"}
                             onChange={() => handleGradientTypeChangeCorner("radial")}
                             className="mr-1"
                           />
@@ -737,7 +817,7 @@ const QRCode = ({
                       <label className="block font-medium mb-1">Dots Gradient</label>
                       <input
                         type="color"
-                        value={gradientColorsCorner.startColor}
+                        value={qr_setting?.gradientColorsCorner?.startColor}
                         onChange={(e) =>
                           handleGradientColorChangeCorner("startColor", e.target.value)
                         }
@@ -745,7 +825,7 @@ const QRCode = ({
                       />
                       <input
                         type="color"
-                        value={gradientColorsCorner.endColor}
+                        value={qr_setting?.gradientColorsCorner?.endColor}
                         onChange={(e) =>
                           handleGradientColorChangeCorner("endColor", e.target.value)
                         }
@@ -756,7 +836,7 @@ const QRCode = ({
                     <label className="block font-medium mb-1">Rotation</label>
                     <input
                       type="number"
-                      value={rotationCorner}
+                      value={qr_setting?.rotationCorner}
                       onChange={(e) => handleRotationChangeCorner(Number(e.target.value))}
                       className="border rounded-lg px-4 py-2 w-full"
                     />
@@ -784,7 +864,7 @@ const QRCode = ({
                     <input
                       type="radio"
                       value="single"
-                      checked={colorTypeCornerDot === "single"}
+                      checked={qr_setting?.colorTypeCornerDot === "single"}
                       onChange={() => handleColorTypeChangeCornerDot("single")}
                       className="mr-1"
                     />
@@ -794,7 +874,7 @@ const QRCode = ({
                     <input
                       type="radio"
                       value="gradient"
-                      checked={colorTypeCornerDot === "gradient"}
+                      checked={qr_setting?.colorTypeCornerDot === "gradient"}
                       onChange={() => handleColorTypeChangeCornerDot("gradient")}
                       className="mr-1"
                     />
@@ -802,7 +882,7 @@ const QRCode = ({
                   </label>
                 </div>
 
-                {colorTypeCornerDot === "single" && (
+                {qr_setting?.colorTypeCornerDot === "single" && (
                   <>
                     <div className="flex gap-4">
                       <label className="block text-gray-700 font-medium mb-1">Dots Color</label>
@@ -818,7 +898,7 @@ const QRCode = ({
                   </>
                 )}
 
-                {colorTypeCornerDot === "gradient" && (
+                {qr_setting?.colorTypeCornerDot === "gradient" && (
                   <>
                     <div className="flex gap-4 my-2">
                       <label className="block font-medium mb-1">Gradient Type</label>
@@ -827,7 +907,7 @@ const QRCode = ({
                           <input
                             type="radio"
                             value="linear"
-                            checked={gradientTypeCornerDot === "linear"}
+                            checked={qr_setting?.gradientTypeCornerDot === "linear"}
                             onChange={() => handleGradientTypeChangeCornerDot("linear")}
                             className="mr-1"
                           />
@@ -837,7 +917,7 @@ const QRCode = ({
                           <input
                             type="radio"
                             value="radial"
-                            checked={gradientTypeCornerDot === "radial"}
+                            checked={qr_setting?.gradientTypeCornerDot === "radial"}
                             onChange={() => handleGradientTypeChangeCornerDot("radial")}
                             className="mr-1"
                           />
@@ -849,7 +929,7 @@ const QRCode = ({
                       <label className="block font-medium mb-1">Dots Gradient</label>
                       <input
                         type="color"
-                        value={gradientColorsCornerDot.startColor}
+                        value={qr_setting?.gradientColorsCornerDot.startColor}
                         onChange={(e) =>
                           handleGradientColorChangeCornerDot("startColor", e.target.value)
                         }
@@ -857,7 +937,7 @@ const QRCode = ({
                       />
                       <input
                         type="color"
-                        value={gradientColorsCornerDot.endColor}
+                        value={qr_setting?.gradientColorsCornerDot.endColor}
                         onChange={(e) =>
                           handleGradientColorChangeCornerDot("endColor", e.target.value)
                         }
@@ -868,7 +948,7 @@ const QRCode = ({
                     <label className="block font-medium mb-1">Rotation</label>
                     <input
                       type="number"
-                      value={rotationCornerDot}
+                      value={qr_setting?.rotationCornerDot}
                       onChange={(e) => handleRotationChangeCornerDot(Number(e.target.value))}
                       className="border rounded-lg px-4 py-2 w-full"
                     />
@@ -883,7 +963,7 @@ const QRCode = ({
                     <input
                       type="radio"
                       value="single"
-                      checked={colorTypeBackground === "single"}
+                      checked={qr_setting?.colorTypeBackground === "single"}
                       onChange={() => handleColorTypeChangeBackground("single")}
                       className="mr-1"
                     />
@@ -893,7 +973,7 @@ const QRCode = ({
                     <input
                       type="radio"
                       value="gradient"
-                      checked={colorTypeBackground === "gradient"}
+                      checked={qr_setting?.colorTypeBackground === "gradient"}
                       onChange={() => handleColorTypeChangeBackground("gradient")}
                       className="mr-1"
                     />
@@ -901,7 +981,7 @@ const QRCode = ({
                   </label>
                 </div>
 
-                {colorTypeBackground === "single" && (
+                {qr_setting?.colorTypeBackground === "single" && (
                   <>
                     <div className="flex gap-4">
                       <label className="block text-gray-700 font-medium mb-1">Dots Color</label>
@@ -917,7 +997,7 @@ const QRCode = ({
                   </>
                 )}
 
-                {colorTypeBackground === "gradient" && (
+                {qr_setting?.colorTypeBackground === "gradient" && (
                   <>
                     <div className="flex gap-4 my-2">
                       <label className="block font-medium mb-1">Gradient Type</label>
@@ -926,7 +1006,7 @@ const QRCode = ({
                           <input
                             type="radio"
                             value="linear"
-                            checked={gradientTypeBackground === "linear"}
+                            checked={qr_setting?.gradientTypeBackground === "linear"}
                             onChange={() => handleGradientTypeChangeBackground("linear")}
                             className="mr-1"
                           />
@@ -936,7 +1016,7 @@ const QRCode = ({
                           <input
                             type="radio"
                             value="radial"
-                            checked={gradientTypeBackground === "radial"}
+                            checked={qr_setting?.gradientTypeBackground === "radial"}
                             onChange={() => handleGradientTypeChangeBackground("radial")}
                             className="mr-1"
                           />
@@ -948,7 +1028,7 @@ const QRCode = ({
                       <label className="block font-medium mb-1">Dots Gradient</label>
                       <input
                         type="color"
-                        value={gradientColorsBackground.startColor}
+                        value={qr_setting?.gradientColorsBackground.startColor}
                         onChange={(e) =>
                           handleGradientColorChangeBackground("startColor", e.target.value)
                         }
@@ -956,7 +1036,7 @@ const QRCode = ({
                       />
                       <input
                         type="color"
-                        value={gradientColorsBackground.endColor}
+                        value={qr_setting?.gradientColorsBackground.endColor}
                         onChange={(e) =>
                           handleGradientColorChangeBackground("endColor", e.target.value)
                         }
@@ -967,7 +1047,7 @@ const QRCode = ({
                     <label className="block font-medium mb-1">Rotation</label>
                     <input
                       type="number"
-                      value={rotationBackground}
+                      value={qr_setting?.rotationBackground}
                       onChange={(e) => handleRotationChangeBackground(Number(e.target.value))}
                       className="border rounded-lg px-4 py-2 w-full"
                     />

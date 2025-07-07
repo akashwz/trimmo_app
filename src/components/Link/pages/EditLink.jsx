@@ -28,6 +28,8 @@ function EditLink() {
   const [settings, setSettings] = useState(null);
   const [isGenerated, setIsGenerated] = useState(false);
 
+  console.log(settings, 'settings=-=-=>>');
+
   const handleGenerateClick = () => {
     setIsGenerated(true);
     setDestination(shortLinkByIdData?.destination);

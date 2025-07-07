@@ -2,7 +2,7 @@
 
 import { forgetPassword } from "@/redux/slices/authSlice";
 import { CircularProgress } from "@mui/material";
-import { getCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import { t } from "i18next";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -48,9 +48,11 @@ const Page = () => {
         }),
       );
 
-      if (response?.success === true) {
+      console.log(response, 'response');
+
+      if (response?.payload?.success === true) {
+        setCookie("forgetPassword", false);
         router.push("/login");
-        getCookie("forgetPassword", false);
       }
     } catch (err) {
       setError("An unexpected error occurred. Please try again.");

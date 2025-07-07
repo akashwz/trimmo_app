@@ -35,7 +35,8 @@ const Page = () => {
 
   const handleEmailLogin = async () => {
     const resetPassword = await dispatch(resetOtp({ identifier: email }));
-    if (resetPassword?.success === true) {
+    console.log(resetPassword, 'resetPassword');
+    if (resetPassword?.payload?.success === true) {
       router.push("/otp-verify");
       localStorage.setItem("resetIdentifier", email);
     }

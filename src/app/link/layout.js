@@ -91,7 +91,7 @@ export default function RootLayout({ children }) {
     >
       {loading && <Loader />}
       {!loading && (
-        <div className="w-full min-w-[260px]">
+        <div className="w-full min-w-[260px] absolute">
           <SidebarContext.Provider value={{ isSidebarOpen, setIsSidebarOpen, toggleSidebar }}>
             <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
               {/* <Header toggleSidebar={toggleSidebar} setIsSidebarOpen={setIsSidebarOpen} /> */}

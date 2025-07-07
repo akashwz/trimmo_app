@@ -7,26 +7,13 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const AboutYourSelf = ({ params }) => {
-  const dispatch = useDispatch();
+const AboutYourSelf = ({ params ,handleContinue,profile,setProfile}) => {
+  
   const router = useRouter();
   const { editData, userData } = useSelector((state) => state?.authSlice);
   const { loader } = useSelector((state) => state.errorReducer);
 
-  const [profile, setProfile] = useState("");
   const profileList = ["Creator", "Business", "Musician", "Real estate", "Personal", "Other"];
-
-  useEffect(() => {
-    if (userData?.data?.designation) {
-      router.push("/bio/edit-profile");
-    }
-  }, []);
-  useEffect(() => {
-    if (editData?.data?.is_verified) {
-      dispatch(clearEditData());
-      router.push("/bio/select-template");
-    }
-  }, [editData, dispatch, router]);
 
   return (
     <div className="flex items-center mb-5 justify-center w-full">
@@ -47,17 +34,11 @@ const AboutYourSelf = ({ params }) => {
             </button>
           ))}
         </div>
-        {/* <button
-          type="button"
-          className="btn-green hover:bg-[#ebff57] hover:!text-[#000] !text-white hover:border-[#ebff57] "
-          onClick={() => dispatch(editUser({ designation: profile }))}
-        >
-          Continue
-        </button> */}
         <button
           type="button"
           disabled={!profile || loader}
-          onClick={() => dispatch(editUser({ designation: profile }))}
+          //   onClick={() => dispatch(editUser({ designation: profile }))}
+          onClick={handleContinue}
           className="w-full mx-auto bg-green-400 hover:bg-[#ebff57] hover:text-[#000] text-white font-medium py-2 px-8 rounded-full shadow-md transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-400 disabled:hover:text-white items-center flex justify-center"
         >
           {t("lang_continue")} &nbsp; {loader && <CircularProgress color="inherit" size={20} />}

@@ -1,16 +1,32 @@
 "use client";
 
-import { Provider } from "react-redux";
-import "./globals.css";
 import { persistor, store } from "@/redux/store";
+import { getCookie } from "cookies-next";
+import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import "../../public/i18n";
 import "../../styles/index.css";
+import "./globals.css";
 import TrimmoAppProvider from "./provider/TrimmoAppProvider";
-import { getCookie } from "cookies-next";
+import { usePathname } from "next/navigation";
+import Sidebar from "@/components/common/Sidebar";
 
 export default function RootLayout({ children }) {
   const token = getCookie("token");
+  const pathname = usePathname();
+
+  console.log("Current Path:", pathname);
+  const hideSidebarRoutes = [
+    "/link",
+    "/bio",
+    "/chat",
+    "/",
+    "/login",
+    "/register",
+    "/reset-password",
+    "/forget-password",
+    "/otp-verify",
+  ];
   return (
     <html lang="en">
       <head>
@@ -67,7 +83,10 @@ export default function RootLayout({ children }) {
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <TrimmoAppProvider>
-              {children}
+              <div className={`${hideSidebarRoutes.includes(pathname) ? "" : "flex w-full"}`}>
+                {!hideSidebarRoutes.includes(pathname) && <Sidebar />}
+                {children}
+              </div>
             </TrimmoAppProvider>
           </PersistGate>
         </Provider>

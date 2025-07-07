@@ -161,12 +161,12 @@ const Register = () => {
           username: userName,
         }),
       );
-
-      if (registerResponse?.success) {
+      console.log(registerResponse, "registerResponse");
+      if (registerResponse?.payload?.success) {
         router.push("/otp-verify");
         localStorage.setItem("resetIdentifier", email);
       } else {
-        console.error("Registration failed:", registerResponse?.message);
+        console.error("Registration failed:", registerResponse?.payload?.message);
       }
     } catch (error) {
       console.error("Error during registration:", error);

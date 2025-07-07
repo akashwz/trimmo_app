@@ -12,7 +12,7 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
       {/* Sidebar Drawer */}
 
       <div
-        className={`fixed left-0 h-full bg-white text-primarycolor border-r border-[#E5E5E5] transition-transform duration-300  ${
+        className={`fixed left-14 h-full bg-white text-primarycolor border-r border-[#E5E5E5] transition-transform duration-300  ${
           isSidebarOpen ? "translate-x-0 " : "-translate-x-full"
         } w-[80%] md:w-[60%] lg:w-[20%] z-20`}
       >

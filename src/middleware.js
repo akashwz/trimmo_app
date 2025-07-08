@@ -19,5 +19,11 @@ export const config = {
     "/bio/analytics",
     "/bio/edit-profile",
     "/bio/appearance",
+    "/bio/setting",
+    "/bio/apps",
+    "/link/home",
+    "/link/analytics",
+    "/link/customizeqr",
+    "/dashboard",
   ],
 };

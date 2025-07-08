@@ -18,7 +18,6 @@ const ProfileViewTheme = ({
   const { bioData } = useSelector((state) => state?.authSlice);
   const [isHovered, setIsHovered] = useState(false);
   const [loading, setLoading] = useState(true);
-  console.log(userData, 'userData');
 
   const foundApp = bioData?.authorize_app?.find((app) => app.name === "Shopeasy");
 

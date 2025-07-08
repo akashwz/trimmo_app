@@ -15,7 +15,6 @@ const ProfileDetails = ({ handleProfileDetail, userDetails, setUserDetails }) =>
     const router = useRouter();
     const { bioData, userData } = useSelector((state) => state?.authSlice);
     const { loader } = useSelector((state) => state.errorReducer);
-    console.log(bioData, 'bioData');
     const [loaderCustom, setLoaderCustom] = useState(false);
 
     useEffect(() => {

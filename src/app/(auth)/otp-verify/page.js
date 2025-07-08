@@ -61,7 +61,6 @@ const OtpVerify = () => {
         otp: enteredOtp,
       }),
     );
-    console.log(otpVerify, 'otpVerify');
     if (getCookie("forgetPassword") === "true") {
       router.push("/forget-password");
     } else if (otpVerify?.payload?.success === true) {

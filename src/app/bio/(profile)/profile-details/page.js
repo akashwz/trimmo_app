@@ -15,7 +15,6 @@ const ProfileDetails = () => {
   const router = useRouter();
   const { bioData, userData } = useSelector((state) => state?.authSlice);
   const { loader } = useSelector((state) => state.errorReducer);
-  console.log(bioData, 'bioData');
 
   const [userDetails, setUserDetails] = useState({
     name: "",

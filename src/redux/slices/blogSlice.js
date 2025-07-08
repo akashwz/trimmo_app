@@ -10,7 +10,6 @@ export const getAllBlogs = createAsyncThunk("getAllBlogs", async (payload, { rej
       `https://be-ad-store.shopeasy.ai/super/admin/se_site/blog/getSEBlogs?page=${page}&limit=${limit}&searchkey=&is_draft=false&published=true`,
     );
     if (apiCall.status === 200 || apiCall.status === 304) {
-      console.log(apiCall, "apiCall");
       const response = decryptDevData(apiCall?.data?.encrypted);
       return response?.data;
     }

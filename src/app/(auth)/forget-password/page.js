@@ -48,8 +48,6 @@ const Page = () => {
         }),
       );
 
-      console.log(response, 'response');
-
       if (response?.payload?.success === true) {
         setCookie("forgetPassword", false);
         router.push("/login");

@@ -17,8 +17,7 @@ function EditLink() {
   const linkId = params?.id;
   const dispatch = useDispatch();
   const router = useRouter();
-  const { shortLinkByIdStatus, shortLinkByIdData, shortLinkByIdError, editShortLinkStatus } =
-    useSelector((state) => state.customSlice);
+  const { shortLinkByIdData, editShortLinkStatus } = useSelector((state) => state.customSlice);
 
   const [destination, setDestination] = useState("");
   const [title, setTitle] = useState("");
@@ -27,8 +26,6 @@ function EditLink() {
   const [error, setError] = useState("");
   const [settings, setSettings] = useState(null);
   const [isGenerated, setIsGenerated] = useState(false);
-
-  console.log(settings, 'settings=-=-=>>');
 
   const handleGenerateClick = () => {
     setIsGenerated(true);
@@ -50,10 +47,9 @@ function EditLink() {
         data: shortLinkByIdData?.shorturl || "",
         ...shortLinkByIdData?.qrcode,
       }));
-      setIsGenerated(shortLinkByIdData?.qrcode)
+      setIsGenerated(shortLinkByIdData?.qrcode);
     }
   }, [shortLinkByIdData]);
-  console.log(shortLinkByIdData, "shortLinkByIdData");
   useEffect(() => {
     if (editShortLinkStatus === "success") {
       router.push("/link/home");
@@ -76,8 +72,7 @@ function EditLink() {
       shortcode,
     };
 
-    const response = await dispatch(editShortLink(payload));
-    console.log(response, "response");
+    await dispatch(editShortLink(payload));
     const payloadData = {
       page: 1,
       limit: "all",

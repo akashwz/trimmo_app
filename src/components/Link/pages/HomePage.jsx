@@ -69,7 +69,6 @@ function HomePage() {
 
   useEffect(() => {
     qrCodeRefs.current = qrCodeRefs.current.slice(0, shortLinkData.length);
-    console.log(qrCodeRefs, "qrCodeRefs");
 
     shortLinkData.forEach((link, index) => {
       if (!qrCodeInstances.current[index]) {
@@ -144,15 +143,18 @@ function HomePage() {
 
   const handleInputChange = (e) => {
     const value = e.target.value;
+    setDestination(value);
 
-    const urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-./?%&=]*)?$/i;
-
-    if (urlPattern.test(value) || value === "") {
-      setDestination(value);
+    if (!value) {
+      setError("");
+      return;
     }
 
-    if (e.key === "Enter" && urlPattern.test(value)) {
-      handleGenerateLink();
+    const urlPattern = /^https?:\/\/[\w.-]+\.[a-z]{2,}([/?].*)?$/i;
+    if (urlPattern.test(value)) {
+      setError("");
+    } else {
+      setError("Enter a valid URL.");
     }
   };
 
@@ -226,7 +228,11 @@ function HomePage() {
                     type="text"
                     value={destination}
                     onChange={handleInputChange}
-                    onKeyDown={handleInputChange}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handleInputChange(e.target.value);
+                      }
+                    }}
                     className="w-full rounded-lg bg-white text-primarycolor p-4 text-sm shadow-sm focus:outline-none pr-24 md:pr-36"
                     placeholder="Example: http://super-long-link.com/shorten-it"
                   />
@@ -234,9 +240,9 @@ function HomePage() {
                   <span className="absolute inset-y-0 end-0 grid place-content-center px-1">
                     <button
                       type="button"
-                      disabled={!destination}
+                      disabled={!destination || error}
                       className={`group inline-block rounded-lg px-1 md:px-5 py-3 text-[10px] md:text-sm font-medium text-white
-            ${destination ? "bg-primarycolor" : "bg-gray-400 cursor-not-allowed"}`}
+            ${destination && !error ? "bg-primarycolor" : "bg-gray-400 cursor-not-allowed"}`}
                       onClick={handleGenerateLink}
                     >
                       <span className="inline-block group-hover:scale-105">Shorten URL</span>
@@ -244,6 +250,7 @@ function HomePage() {
                   </span>
                 </div>
               </div>
+              {error && <p className="text-red-500 text-xs my-1">{error}</p>}
               <div className=" text-sm flex gap-4 items-center text-">
                 <div className="flex flex-wrap gap-1 items-center">
                   <Check2Circle className="h-4 w-4" />

@@ -74,6 +74,7 @@ const Login = () => {
   };
 
   const handleBlur = (e) => {
+    if (email.length === 0) return;
     const validationError = validateEmailOrPhone(email);
     setError(validationError);
     setIsValid(!validationError);
@@ -106,7 +107,7 @@ const Login = () => {
         if (loginData?.template) {
           localStorage.setItem("selectedCard", JSON.stringify(loginData?.template));
         }
-        router.push("/bio");
+        router.push("/dashboard");
       }
       // if (loginData?.username) {
       //   try {
@@ -151,7 +152,7 @@ const Login = () => {
         if (loginData?.template) {
           localStorage.setItem("selectedCard", JSON.stringify(loginData?.template));
         }
-        router.push("/bio");
+        router.push("/dashboard");
       }
       // if (loginData?.username) {
       //   try {
@@ -210,7 +211,7 @@ const Login = () => {
         <h2 className="mb-3">{t("lang_welcome_back")}!</h2>
         <p className="info-text block w-full mx-auto">{t("lang_login_desc")}</p>
         <div className="flex w-[full] flex-col border-opacity-50 gap-4 mt-4 items-center">
-          <div className="relative mb-0 w-full flex flex-col">
+          <div className="relative mb-0 w-full flex flex-col items-center">
             <input
               type="text"
               id="email"
@@ -256,7 +257,7 @@ const Login = () => {
                 </div>
                 <Link
                   href="/reset-password"
-                  className="mt-4 font-medium underline hover:text-[#539568] duration-150"
+                  className="mt-4 font-medium w-max underline hover:text-[#539568] duration-150"
                   onClick={handleForgetPassword}
                 >
                   {t("lang_forget_pwd")}?

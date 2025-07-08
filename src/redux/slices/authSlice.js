@@ -353,15 +353,18 @@ export const deleteBio = createAsyncThunk(
 
 export const clearEditData = createAsyncThunk("auth/clearEditData", async (data) => data);
 
-export const getUser = createAsyncThunk("auth/getUser", async (_, { rejectWithValue }) => {
-  try {
-    const res = await API({ url: `/users`, method: "get" });
-    return res?.data;
-  } catch (error) {
-    ToastNotification.error(error);
-    return rejectWithValue(null);
-  }
-});
+export const getUser = createAsyncThunk(
+  "auth/getUser",
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      const res = await API({ url: `/users`, method: "get" });
+      return res?.data;
+    } catch (error) {
+      ToastNotification.error(error);
+      return rejectWithValue(null);
+    }
+  },
+);
 
 export const deleteAccount = createAsyncThunk(
   "auth/deleteAccount",

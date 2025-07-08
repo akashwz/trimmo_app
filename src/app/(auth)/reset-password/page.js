@@ -28,6 +28,7 @@ const Page = () => {
   };
 
   const handleBlur = () => {
+    if (email.length === 0) return;
     const validationError = validateEmailOrPhone(email);
     setError(validationError);
     setIsValid(!validationError);
@@ -35,7 +36,6 @@ const Page = () => {
 
   const handleEmailLogin = async () => {
     const resetPassword = await dispatch(resetOtp({ identifier: email }));
-    console.log(resetPassword, 'resetPassword');
     if (resetPassword?.payload?.success === true) {
       router.push("/otp-verify");
       localStorage.setItem("resetIdentifier", email);

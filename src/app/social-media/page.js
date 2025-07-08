@@ -58,7 +58,7 @@ export async function metadata() {
 export default function HomePage() {
     return (
       <>
-        <Header socialMedia={true} />
+        <Header />
         <HeroSection />
         <SocialMediaGridSection />
         <CreatorsSection />

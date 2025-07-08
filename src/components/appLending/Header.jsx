@@ -5,11 +5,13 @@ import Button from "../ui/Button";
 import { t } from "i18next";
 import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "@/redux/slices/authSlice";
 
-const Header = ({ bio, link, chat, socialMedia }) => {
+const Header = () => {
   const token = getCookie("token");
   const router = useRouter();
+  const dispatch = useDispatch();
   const [isScrolled, setIsScrolled] = useState(false);
   const { userData } = useSelector((state) => state?.authSlice || {});
 
@@ -25,31 +27,8 @@ const Header = ({ bio, link, chat, socialMedia }) => {
   const mainLink = useMemo(() => {
     if (!token) return "/login";
 
-    if (bio && userData?.data?.template) {
-      return "/bio/edit-profile";
-    } else if (bio) {
-      return "/bio/about-yourself";
-    } else if (link) {
-      return "/link/home";
-    } else if (chat) {
-      return "/chat";
-    } else if (socialMedia) {
-      return "/social-media";
-    } else {
+    if (userData) {
       return "/dashboard";
-    }
-  }, [token, userData]);
-
-  const MainTitle = useMemo(() => {
-    if (!token) return t("lang_login");
-    else if (token) {
-      if (bio && userData?.data?.template) {
-        return t("lang_my_account");
-      } else if (bio) {
-        return t("lang_getting_started");
-      } else {
-        return t("lang_my_account");
-      }
     }
   }, [token, userData]);
 
@@ -118,19 +97,22 @@ const Header = ({ bio, link, chat, socialMedia }) => {
                 onClick={handleClick}
                 className="hidden sm:block text-sm sm:text-base font-polysans font-semibold text-global-6 hover:text-global-9 transition-colors duration-300 cursor-pointer"
               >
-                {MainTitle}
+                {token && userData ? t("lang_my_account") : t("lang_login")}
               </button>
-              {!token && (
-                <Button
-                  onClick={(e) => {
-                    e.stopPropagation();
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (!token && !userData) {
                     router.push("/register");
-                  }}
-                  className="w-[100px] sm:w-[145px] h-[35px] sm:h-[45px] text-xs sm:text-base"
-                >
-                  Free Trial
-                </Button>
-              )}
+                  } else {
+                    dispatch(logOut());
+                    window.location.href = "/";
+                  }
+                }}
+                className="w-[100px] sm:w-[145px] h-[35px] sm:h-[45px] text-xs sm:text-base"
+              >
+                {!token && !userData ? "Free Trial" : "Logout"}
+              </Button>
             </div>
           </div>
         </div>

@@ -61,6 +61,7 @@ const Register = () => {
 
   const handleBlurUsername = async (e) => {
     const value = e.target.value;
+    if (value.length === 0) return;
     if (userNameRegex.test(value)) {
       setUserNameError(false);
       setUserNameErrorContent(userNames?.data?.message);
@@ -104,6 +105,7 @@ const Register = () => {
   }, []);
 
   const handleBlur = async () => {
+    if (email.length === 0) return;
     if (!email.trim()) {
       setError("Email or phone number is required.");
       setIsValid(false);
@@ -161,7 +163,6 @@ const Register = () => {
           username: userName,
         }),
       );
-      console.log(registerResponse, "registerResponse");
       if (registerResponse?.payload?.success) {
         router.push("/otp-verify");
         localStorage.setItem("resetIdentifier", email);

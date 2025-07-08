@@ -36,7 +36,6 @@ export const customizeQR = createAsyncThunk(
         method: "post",
         data,
       });
-      console.log(apiCall, "apiCall");
       if (apiCall.status === 201 || apiCall.status === 304) {
         ToastNotification.success(apiCall?.data?.message || "Customize QR created successfully");
         return apiCall?.data?.data;
@@ -60,7 +59,6 @@ export const getCustomizeQR = createAsyncThunk(
         method: "get",
         params,
       });
-      console.log(apiCall?.data?.data, "apiCall?.data?.data");
       if (apiCall.status === 200 || apiCall.status === 304) {
         // toast.success(apiCall?.data?.message || "Customize QR get successfully");
         return { response: apiCall?.data?.data, isDefault: payload?.is_default };
@@ -313,7 +311,6 @@ export const customSlice = createSlice({
     },
     updateQrSetting: (state, action) => {
       const { parentKey, subKey, value } = action.payload;
-      console.log(parentKey, subKey, value, "parentKey, subKey, value");
       if (subKey) {
         // Update a nested key
         if (state.qr_setting[parentKey]) {

@@ -30,8 +30,6 @@ const SelectTemplate = () => {
     try {
       const data = await dispatch(getTheme());
 
-      // setImageData(data.slice(0, 3));
-      console.log(data, 'data');
       setImageData(data?.payload);
     } catch (error) {
       console.error("Error fetching theme:", error);

@@ -18,17 +18,22 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 function Analytics() {
   const dispatch = useDispatch();
-  const { analyticsStatus, analyticsData, analyticsError } = useSelector(
-    (state) => state.customSlice,
-  );
-  const [fromDate, setFromDate] = useState("2020-01-25");
+  const { analyticsData } = useSelector((state) => state.customSlice);
+  const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0]; // Format: YYYY-MM-DD
-    setToDate(formattedDate);
+
+    // Set toDate (today)
+    const to = today.toISOString().split("T")[0];
+    setToDate(to);
+
+    // Set fromDate (7 days ago)
+    const sevenDaysAgo = new Date(today);
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    const from = sevenDaysAgo.toISOString().split("T")[0];
+    setFromDate(from);
   }, []);
 
   useEffect(() => {
@@ -45,16 +50,16 @@ function Analytics() {
     labels: analyticsData.map((item) => item.date), // Dates (X-axis)
     datasets: [
       {
-        label: "Clicks",
-        data: analyticsData.map((item) => item.clicks), // Clicks (Y-axis)
+        label: "Total Clicks",
+        data: analyticsData.map((item) => item.totalClicks), // Clicks (Y-axis)
         borderColor: "#10B981", // Tailwind green-500
         backgroundColor: "rgba(16, 185, 129, 0.2)",
         tension: 0.4, // Curved lines
         fill: true, // Make it filled under the curve
       },
       {
-        label: "Scans",
-        data: analyticsData.map((item) => item.scans), // Scans (Y-axis)
+        label: "Unique Clicks",
+        data: analyticsData.map((item) => item.uniqueClicks), // Scans (Y-axis)
         borderColor: "#3B82F6", // Tailwind blue-500
         backgroundColor: "rgba(59, 130, 246, 0.2)",
         tension: 0.4, // Curved lines
@@ -77,7 +82,6 @@ function Analytics() {
     const filtered = analyticsData.filter(
       (item) => (fromDate ? item.date >= fromDate : true) && (toDate ? item.date <= toDate : true),
     );
-    setFilteredData(filtered);
   };
 
   useEffect(() => {

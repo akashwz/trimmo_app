@@ -17,10 +17,7 @@ const QRCode = ({
   const qrCodeRef = useRef(null);
   const qrCodeInstance = useRef(null);
   const dispatch = useDispatch();
-  console.log(settings, "settings");
   const { customizeQRList, qr_setting } = useSelector((state) => state.customSlice);
-  console.log(customizeQRList, "customizeQRList");
-  console.log("qr_setting-=-=", qr_setting);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -46,7 +43,6 @@ const QRCode = ({
   const handleSeleteQR = (e) => {
     const selectedId = e.target.value;
     const selectedItem = customizeQRList.find((item) => item._id === selectedId);
-    console.log(selectedItem, "selectedItem");
     setSettings(selectedItem?.customize);
   };
 
@@ -160,7 +156,6 @@ const QRCode = ({
   };
 
   const handleGradientTypeChange = (type) => {
-    console.log(type, "type=-=>");
     dispatch(
       updateQrSetting({
         parentKey: "gradientType",

@@ -371,7 +371,7 @@ export default function LandingPage() {
           </div>
         </section>
         <Footer /> */}
-        <Header link={true} />
+        <Header />
         <HeroSection />
         <ConnectionsPlatform />
         <CreatorsSection />

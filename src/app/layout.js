@@ -12,10 +12,8 @@ import { usePathname } from "next/navigation";
 import Sidebar from "@/components/common/Sidebar";
 
 export default function RootLayout({ children }) {
-  const token = getCookie("token");
   const pathname = usePathname();
 
-  console.log("Current Path:", pathname);
   const hideSidebarRoutes = [
     "/link",
     "/bio",

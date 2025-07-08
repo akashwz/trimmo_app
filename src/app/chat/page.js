@@ -58,7 +58,7 @@ export async function metadata() {
 export default function HomePage() {
     return (
       <>
-        <Header chat={true} />
+        <Header />
         <HeroSection />
         <FeatureCardSection />
         <CreatorsSection />

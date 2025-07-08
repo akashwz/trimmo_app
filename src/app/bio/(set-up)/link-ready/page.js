@@ -49,7 +49,6 @@ const LinkReady = () => {
     const getCardIndex = localStorage.getItem("selectedCard");
     if (getCardIndex) {
       const data = await dispatch(getSingleThemeData(JSON.parse(getCardIndex)));
-      console.log(data, 'data');
       setImageData(data?.payload?.image);
     }
   };

@@ -113,7 +113,6 @@ function CreateLink({
       data: shortUrl,
     }));
   }, [shortUrl]);
-  console.log(shortUrl, "shortUrl");
   useEffect(() => {
     setShortUrl(`${domain}/${shortCode}`);
   }, [shortCode, domain]);

@@ -1,0 +1,136 @@
+"use client";
+
+import ProfileViewTheme from "@/components/Bio/profile-preview/ProfileViewTheme";
+import { addBio, getAllPlateform } from "@/redux/slices/authSlice";
+import { CircularProgress } from "@mui/material";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+const SelectPlateForm = ({handleSubmit,platform,setPlatform,socialMedia,setSocialMedia}) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { bioData, userData, allPlateformItems } = useSelector((state) => state?.authSlice);
+  const [cardImage, setCardImage] = useState(null);
+  const { loader } = useSelector((state) => state.errorReducer);
+
+  const selectPlateform = async (value) => {
+    const exists = platform?.some((v) => v._id === value._id);
+
+    if (exists) {
+      const updatedPlatform = platform?.filter((v) => v._id !== value._id);
+      setPlatform(updatedPlatform);
+    } else {
+      setPlatform([...platform, value]);
+    }
+  };
+
+  const handleSocialMedia = (e, elem) => {
+    const updatedValue = e.target.value;
+    const updatedSocialMedia = socialMedia.map((item) =>
+      item.name === elem.name ? { ...item, url: updatedValue } : item,
+    );
+    if (!socialMedia.some((item) => item.name === elem.name)) {
+      updatedSocialMedia.push({
+        name: elem?.name,
+        initUrl: elem?.initUrl,
+        url: updatedValue,
+        logo: elem?.logo,
+      });
+    }
+    setSocialMedia(updatedSocialMedia);
+  };
+  
+//   useEffect(() => {
+//     if (bioData?.social_media?.length > 0) {
+//       // setPlatform(bioData?.social_media);
+//       setSocialMedia(bioData?.social_media);
+//       router.push("/bio/edit-profile");
+//     }
+//     if (bioData?.user) {
+//       setSocialMedia([]);
+//       router?.push("/bio/profile-details");
+//     }
+//   }, [bioData]);
+
+  useEffect(() => {
+    const getCardIndex = JSON.parse(localStorage.getItem("selectedCard"));
+    setCardImage(getCardIndex);
+    dispatch(getAllPlateform(["social media"]));
+  }, []);
+
+  return (
+    <div className="w-full lg:flex m-auto 2xl:me-auto 2xl:w-[70%] text-center items-center">
+      <div>
+        <h3 className="mb-2 mt-5 text-xl md:text-3xl">Which Platforms are you on?</h3>
+        <p className="info-text block">Select Profile Image</p>
+        <div className="flex flex-wrap items-center justify-center mt-4 gap-4">
+          {allPlateformItems &&
+            allPlateformItems?.map((elem, index) => (
+              <div
+                key={index}
+                className={`${
+                  platform?.find((x) => x.name === elem?.name)
+                    ? "border-2 rounded-lg border-black"
+                    : "border border-transparent"
+                } w-[80px] h-[80px]  md:w-[100px] md:h-[100px] flex items-center justify-center flex-col rounded-[10px] bg-[#000000] bg-opacity-5 hover:border-gray-400 cursor-pointer`}
+                onClick={() => selectPlateform({ ...elem, layout_setting: elem?.default_layout })}
+              >
+                <Image
+                  src={elem?.svg}
+                  height={45}
+                  width={45}
+                  className="w-[30px] object-contain h-[30px] md:w-[45px] md:h-[45px]"
+                  alt={elem?.name}
+                />
+                <span className="text-xs md:text-sm mt-1">{elem?.name}</span>
+              </div>
+            ))}
+        </div>
+        <div>
+          {platform?.map((elem, index) => (
+            <div key={index} className="flex items-center mt-4 w-full gap-2">
+              <Image
+                src={elem?.svg}
+                height={35}
+                width={35}
+                alt={elem?.name}
+                className="inline-block max-w-full"
+              />
+              {/* <span>{elem?.initUrl}</span> */}
+              <div className="flex username grow bg-[#29292B] text-[#29292B] text-left bg-opacity-10 px-4 py-2.5 text-sm rounded-md">
+                <input
+                  type="text"
+                  placeholder={`${elem?.placeholder}`}
+                  // value={elem?.url || ""}
+                  className="w-full border-0 outline-none bg-transparent peer"
+                  onBlur={(e) => handleSocialMedia(e, elem)}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+        <button
+          type="button"
+          className="w-full bg-green-400 hover:bg-[#ebff57] hover:text-[#000] text-white cursor-pointer font-medium py-2 px-8 rounded-full shadow-md transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-400 disabled:hover:text-white mt-5 items-center flex justify-center"
+          disabled={platform?.length <= 0 || loader}
+          onClick={handleSubmit}
+        >
+          Continue &nbsp; {loader && <CircularProgress color="inherit" size={20} />}
+        </button>
+      </div>
+      {/* <div className="w-full flex flex-col lg:flex-row gap-8 mt-8 justify-center">
+        <ProfileViewTheme
+          changeAppearanceData={bioData?.customize_theme}
+          socialMedia={socialMedia}
+          userData={userData}
+          // shopData={platform}
+          activeTabPreview={"Links"}
+        />
+      </div> */}
+    </div>
+  );
+};
+
+export default SelectPlateForm;
